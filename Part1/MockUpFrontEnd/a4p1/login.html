@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Assignment 4</title>
+    <title>Login</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css" media="screen">
 </head>
@@ -40,6 +40,13 @@
             </ul>
           </li>
         </ul>
+        <!--Search button-->
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+	        <button class="btn btn-default btn-sm" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+          </div>
+        </form>
         <!--Right side buttons (signup/login/help)-->
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">Sign Up</a></li>
@@ -50,24 +57,28 @@
     </div><!-- /.container-fluid -->
   </nav>
   <div class="jumbotron">
-    <h1 class="text-center">Yum In The Tum</h1>
-    <div class="row search">
-      <div class="col-sm-8 col-sm-offset-2">
+  <h1 class="text-center">Yum In The Tum</h1>
+
+    <div class="row login">
+      <div class="col-md-2 col-md-offset-5">
         <form role="form">
-          <div class="input-group">
-		    <input type="text" class="form-control input-sm" placeholder="Type in a restaurant or food">
-            <span class="input-group-btn">
-              <button class="btn btn-default btn-sm" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-            </span>
-          </div>
-        </form>
+	      <div class="input-group">
+	        <input type="text" class="form-control input-sm" placeholder="Username">
+	      </div>
+	    </form>
+
+        <form role="form">
+	      <div class="input-group">
+	        <input type="text" class="form-control input-sm" placeholder="Password">
+	      </div>
+	    </form>
+	    <button type="submit" class="btn btn-block">Log In</button>
       </div>
     </div>
   </div>
   
 
   <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
-
 </body>
 </html>
 

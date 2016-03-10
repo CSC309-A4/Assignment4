@@ -57,6 +57,17 @@ body{ /*hides horizontal scroll bar -- cause unknown*/
 
 }
 
+/*Help*/
+
+.helpBody {
+  padding-top: 250px;
+  padding-bottom: 25px;
+}
+
+#interactions {
+  padding-top: 200px;
+}
+
 /* Navigation bar */
 .navbar-custom {
   background-color: #ee7600;

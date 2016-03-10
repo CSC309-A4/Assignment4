@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Delivery Sign Up</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+
+    <link rel="stylesheet" type="text/css" href="deliverySignUp.css" media="screen">
+</head>
+<body>
+
+  <div class="container" id="navigationBar">
+    <nav class="navbar navbar-custom navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand button (top left) -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">YITT</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <!--Right side buttons (signup/login/help)-->
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sign In<b class="caret"></b></a>
+              <ul class="dropdown-menu" id="menu1">
+                <li class="dropdown-header">Sign in as a:</li>
+                <li><a href="#">User</a></li>
+                <li><a href="#">Deliverer</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Log In</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+     </div><!-- /.container-fluid -->
+    </nav>
+  </div>
+
+
+  <div id="main-content">
+    <form>
+      <h1>Signing up as a delivery person is quick and easy!</h1>
+
+      <label for="name">Name:</id></br>
+      <input id="name" type="text"></input></br>
+      <label for="password">Password:</label></br>
+      <input id="password" type="password"></input></br>
+      <label for="password_repeat">Re-enter Password:</label></br>
+      <input id="password_repeat" type="password"></input></br>
+
+      <label for="email">Email Address:</label></br>
+      <input id="email" type="email"></input></br>
+
+      <label for="phone_num">Phone Number:</label></br>
+      <input id="phone_num" type="tel"></input></br>
+
+      <label for="address">Address:</label></br>
+      <input id="address" type="text"></input></br>
+
+      <label for="city">City:</label></br>
+      <input id="city" type="text"></input></br>
+
+
+      <label for="transport">Preferred Transportation Method:</label></br>
+      <select class="form-control" id="transport">
+        <option value="Car">Car</option>
+        <option value="Foot">Foot</option>
+        <option value="Bicycle">Bicycle</option>
+        <option value="Public Transportation">Public Transportation</option>
+      </select>
+      </br>
+
+      <label for="credit">Credit Card Number:</label></br>
+      <input id="credit" type="text"></input></br>
+
+      <input type="submit" value="Sign Up!"></input>
+
+    </form>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>

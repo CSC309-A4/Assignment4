@@ -1,7 +1,10 @@
 #main-content {
-  background-color: white;
   padding: 10px;
   border: 1px solid orange;
+  margin-top: 150px;
+  margin-left: 10px;
+  margin-right: 10px;
+	width: 90%;
 
 }
 

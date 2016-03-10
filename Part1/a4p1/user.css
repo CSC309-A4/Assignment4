@@ -1,35 +1,41 @@
 .form {
   padding: 40px;
   max-width:600px;
-  margin:40px auto;
+  margin:80px auto;
+  background-color: #ee7600;
+  border-radius: 25px;
+  border-color: #cd6600;
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#ff9022), to(#ee7600));
+  background-image: -webkit-linear-gradient(top, #ff9022, 0%, #ee7600, 100%);
+  background-image: -moz-linear-gradient(top, #ff9022 0%, #ee7600 100%);
+  background-image: linear-gradient(to bottom, #ff9022 0%, #ee7600 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff9022', endColorstr='#ffee7600', GradientType=0);
 }
 
-
-/* > is a selector that refers to immediate children */
 .tab-content > div:last-child { 
   display:none;
 }
 
 
 h1 {
-  text-align:center;
-  color:$white;
-  font-weight:$thin;
-  margin:0 0 40px;
+  text-align: center;
+  margin:20px 0 40px;
 }
+
 
 label {
   position:absolute;
   transform:translateY(6px);
   left:13px;
-  color:rgba($white,.5);
+  color:rgba(white,.5);
   transition:all 0.25s ease;
 
   pointer-events: none;
   font-size:22px;
   .req {
     margin:2px;
-    color:$main;
+    color:main;
   }
 }
 
@@ -50,32 +56,31 @@ input, textarea {
   padding:5px 10px;
   background:none;
   background-image:none;
-  border:1px solid $gray-light;
-  color:$white;
+  border:1px solid gray-light;
+  color:white;
   border-radius:0;
   transition:border-color .25s ease, box-shadow .25s ease;
-  &:focus {
-    outline:0;
-    border-color:$main;
-  }
 }
 
 textarea {
-  border:2px solid $gray-light;
+  border:2px solid gray-light;
   resize: vertical;
 }
 
 .field-wrap {
   position:relative;
   margin-bottom:40px;
+  background-color: #b3b3b3;
 }
 
 .button {
   border:0;
+  border-radius: 10px;
+  background-color: orange;
   outline:none;
   padding:15px 0;
   font-size:2rem;
-  font-weight:$bold;
+  font-weight:bold;
   text-transform:uppercase;
   letter-spacing:.1em;
 }
@@ -87,4 +92,48 @@ textarea {
 
 .forgot {
   text-align:right;
+}
+
+
+
+ 
+ul.tab-group {
+  overflow: auto;
+  list-style-type: none;
+}
+ 
+li.tab2{
+  height: 25px;
+  float: left;
+  margin-right: 0px;
+  border-right: 1px solid #aaa;
+  padding: 0 20px;
+}
+ 
+ 
+li.tab2:last-child {
+  border-right: none;
+}
+ 
+
+li.tab2 a {
+  text-decoration: none;
+  color: #ccc;
+  font: Helvetica, Verdana, sans-serif;
+  text-transform: uppercase;
+ 
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+ 
+li.tab2 a:hover {
+  color: #666;
+}
+ 
+li.tab2.active a {
+  font-weight: bold;
+  color: #333;
 }

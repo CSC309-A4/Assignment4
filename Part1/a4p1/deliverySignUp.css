@@ -1,7 +1,8 @@
 #main-content {
-  background-color: white;
   padding: 10px;
   border: 1px solid orange;
+  width: 90%;
+  margin-top: 100px;
 
 }
 

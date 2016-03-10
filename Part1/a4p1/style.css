@@ -37,12 +37,13 @@ body{ /*hides horizontal scroll bar -- cause unknown*/
   background-size:100% auto; /*full width background*/
 }
 
-.jumbotron {
+
+/*.jumbotron {
   height: 500px;
   color: white;
   text-shadow: #444 0 1px 1px;
   background:transparent;
-}
+}*/
 
 /*Background for sections*/
  #first {

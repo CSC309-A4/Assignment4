@@ -21,15 +21,21 @@ body{ /*hides horizontal scroll bar -- cause unknown*/
   height: 550px;
 }
 
+p{
+	color: black;
+}
+b{
+	color: black;
+}
 .bg {
   background: url('burger.jpg') no-repeat center center;
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   top:0;
   left:0;
   z-index: -1;
-  background-size:100% auto; /*full width background*/
+  background-size:100% 100%; /*full width background*/
 }
 
 .jumbotron {

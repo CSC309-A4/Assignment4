@@ -21,6 +21,11 @@ body{ /*hides horizontal scroll bar -- cause unknown*/
   height: 550px;
 }
 
+.infoBody {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
 .bg {
   background: url('food-server.jpg') no-repeat center center;
   position: absolute;
@@ -29,7 +34,7 @@ body{ /*hides horizontal scroll bar -- cause unknown*/
   top:0;
   left:0;
   z-index: -1;
-  /*background-size:100% auto; /*full width background*/
+  background-size:100% auto; /*full width background*/
 }
 
 .jumbotron {

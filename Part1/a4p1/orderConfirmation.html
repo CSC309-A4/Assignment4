@@ -3,6 +3,9 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Assignment 4</title>
+    <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styleOrder.css" media="screen">
 </head>
@@ -29,12 +32,12 @@
               <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sign In<b class="caret"></b></a>
               <ul class="dropdown-menu" id="menu1">
                 <li class="dropdown-header">Sign in as a:</li>
-                <li><a href="#">User</a></li>
-                <li><a href="#">Deliverer</a></li>
+                <li><a href="user.html">User</a></li>
+                <li><a href="deliverySignUp.html">Deliverer</a></li>
               </ul>
             </li>
-            <li><a href="#">Log In</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="help.html">Help</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
      </div><!-- /.container-fluid -->
@@ -62,12 +65,12 @@
 		<br></br>
 		<p>Order Number</p>
 		<p>Will generate random number here to store order information</p>
-		<button type="button" class="btn btn-default">Confirm Order</button>
+    <form method="get" action="orderForm.html">
+		  <button class="button"><h5>Confirm Order</h5></button>
+    </form>
 	</div>
 	</div>
-  <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
 
 </body>
 </html>

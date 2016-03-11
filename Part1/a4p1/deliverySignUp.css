@@ -3,10 +3,9 @@
   border: 1px solid orange;
   width: 90%;
   margin-top: 100px;
-<<<<<<< HEAD
-	margin-bottom: 50px;
-	margin-left: auto;
-	margin-right: auto;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
 
 }
 
@@ -28,16 +27,16 @@ input {
   font-size: 24px;
   height: 36px;
   border-radius: 5px;
-	color: blue;
+  color: blue;
 	
 }
 
 
 #submit-button {
-	margin: 20px 0 0;
+  margin: 20px 0 0;
   background-color: orange;
   color: blue;
-=======
+
 
 }
 
@@ -47,7 +46,7 @@ input {
 
 
 button {
-	margin: 20px 0 0;
+  margin: 20px 0 0;
   background-color: orange;
->>>>>>> upstream/master
+
 }

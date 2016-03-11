@@ -1,10 +1,19 @@
 #main-content {
   padding: 10px;
   border: 1px solid orange;
+<<<<<<< HEAD
+  width: 90%;
+  margin-top: 100px;
+	margin-bottom: 50px;
+	margin-left: auto;
+	margin-right: auto;
+
+=======
   margin-top: 150px;
   margin-left: 10px;
   margin-right: 10px;
 	width: 90%;
+>>>>>>> upstream/master
 
 }
 
@@ -25,10 +34,19 @@ input {
 	margin-bottom:20px;
 
 	width: 100px;
+<<<<<<< HEAD
+	height: 34px;
+	background-color: orange;
+	font-size: 24px;
+	border-radius: 5px;
+	text-align: center;
+	cursor: pointer;
+=======
 	height: 60px;
 	background-color: orange;
 	font-size: 24px;
 	border-radius: 5px;
+>>>>>>> upstream/master
 }
 
 #display-orders {
@@ -37,11 +55,17 @@ input {
 	border: 1px solid orange;
 	padding: 10px;
 
+<<<<<<< HEAD
+}
+
+/* Prevents clickability/draggability */
+=======
 
 }
 
 
 
+>>>>>>> upstream/master
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
@@ -52,3 +76,7 @@ input {
                                   not supported by any browser */
 }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> upstream/master

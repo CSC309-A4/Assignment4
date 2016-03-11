@@ -1,0 +1,17 @@
+#main-content {
+  padding: 10px;
+  border: 1px solid orange;
+  width: 90%;
+  margin-top: 100px;
+
+}
+
+input {
+  background-color: orange;
+}
+
+
+button {
+	margin: 20px 0 0;
+  background-color: orange;
+}

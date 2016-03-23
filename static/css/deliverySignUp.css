@@ -28,7 +28,6 @@ input {
   height: 36px;
   border-radius: 5px;
   color: blue;
-	
 }
 
 
@@ -36,8 +35,6 @@ input {
   margin: 20px 0 0;
   background-color: orange;
   color: blue;
-
-
 }
 
 input {
@@ -49,4 +46,10 @@ button {
   margin: 20px 0 0;
   background-color: orange;
 
+}
+
+#output {
+  margin-top: 20px;
+  font-size: 24px;
+  color: rgba(240, 200, 230, 0.9);
 }

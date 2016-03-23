@@ -21,6 +21,10 @@ input {
 
 }
 
+#order-selection {
+	width: 25%;
+}
+
 #search-orders {
 	margin-top: 20px;
 	margin-bottom:20px;
@@ -32,11 +36,12 @@ input {
 	border-radius: 5px;
 	text-align: center;
 	cursor: pointer;
-	height: 60px;
+	height: 40px;
 	background-color: orange;
 	font-size: 24px;
 	border-radius: 5px;
 }
+
 
 #display-orders {
 	margin-top: 20px;
@@ -45,7 +50,6 @@ input {
 	padding: 10px;
 
 }
-
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */

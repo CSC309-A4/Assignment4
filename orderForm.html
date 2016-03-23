@@ -2,15 +2,13 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Delivery Person Profile</title>
+    <title>Assignment 4</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
-
-    <link rel="stylesheet" type="text/css" href="deliveryProfile.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="static/css/styleOrder.css" media="screen">
 </head>
 <body>
 
-    <div class="container" id="navigationBar">
+  <div class="container">
     <nav class="navbar navbar-custom navbar-fixed-top">
       <div class="container-fluid">
         <!-- Brand button (top left) -->
@@ -28,18 +26,14 @@
           <!--Right side buttons (signup/login/help)-->
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sign Up<b class="caret"></b></a>
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sign In<b class="caret"></b></a>
               <ul class="dropdown-menu" id="menu1">
-                <li class="dropdown-header">Sign up as a:</li>                
+                <li class="dropdown-header">Sign in as a:</li>
                 <li><a href="user.html">User</a></li>
                 <li><a href="deliverySignUp.html">Deliverer</a></li>
               </ul>
             </li>
-
-            <!-- Don't need this here
             <li><a href="login.html">Log In</a></li>
-            -->
-
             <li><a href="help.html">Help</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
@@ -47,40 +41,34 @@
     </nav>
   </div>
 
+	<div class="jumbotron">
+    <h1 class="text-center">Order Number (Get order number from orderField)</h1>
 
+		<p>Order Progess : ????</p>
+		<br></br>
+		<p>Deliverer Name : ????</p>
+		<br></br>
+		<p>Deliverer's Contact Information : ????</p>
+		<br></br>
+		<p>Has the Food Been Picked Up : ????</p>
+		<br></br>
+		<p>Amount Paid : ????</p>
+		<br></br>
+		<p>Address to be Delivered to : ????</p>
+		<br></br>
+		<p>Store : ????</p>
+		<br></br>
+		<p>What is going to be picked up : ????</p>
+		<br></br>
 
-  <div id="main-content">
-    <h1>Your Profile</h1>
-
-    <div class="center" id="deliverer-info">
-      This area will contain information about the specified delivery person.
-    </div>
-
-
-    <h4>Want to make a delivery? Check out all the starving people who need your delivery services!</h4>
-    <div class="vertical-space"></div>
-
-    <p>Search orders by:</p>
-    <select class="form-control" id="order-selection">
-      <option value="store_name">Store Name</option>
-      <option value="near_me">Near Me</option>
-      <option value="list_all">List All</option>
-    </select>
-
-
-    <!-- User clicks this button to search for all the orders available. 
-    ie) Retrieve appropriate order data from the database. -->
-    <div id="search-orders" class="noselect"><span>Search!</span></div>
-
-
-    <!-- Orders will be displayed in here. -->
-    <div id="display-orders">
-      This is where search results will be displayed.
-    </div>
-
+		<button type="button" class="btn btn-default">Cancel Order</button>
+		<p><font color = "red">Please note, you will not be able to cancel your order after confirmation that your item has been picked up.</font></p>
+		<a href="order.html" role="button" class="btn btn-default">Back</a>
   </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
 </body>
 </html>

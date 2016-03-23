@@ -3,8 +3,13 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Assignment 4</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="styleOrder.css" media="screen">
+    
+    <link rel="stylesheet" type="text/css" href="static/css/styleOrder.css" media="screen">
 </head>
 <body>
 
@@ -39,34 +44,38 @@
         </div><!-- /.navbar-collapse -->
      </div><!-- /.container-fluid -->
     </nav>
-	<div class="jumbotron">
-    <h1 class="text-center">Order Number (Get order number from orderField)</h1>
-	<br></br>
-		<p>Order Progess : ????</p>
+	<div class ="jumbotron">
+		<h1 class="text-center"><b>Confirmation Form</b></h1>
 		<br></br>
-		<p>Deliverer Name : ????</p>
+		<p>Delivery Address</p>
+		<p>Get Address From Text Field addressField</p>
 		<br></br>
-		<p>Deliverer's Contact Information : ????</p>
+		<p>Store Name</p>
+		<p>Get Store Name From Text Field storeField</p>
 		<br></br>
-		<p>Has the Food Been Picked Up : ????</p>
+		<p>Food Description</p>
+		<p>Get Food Details From Text Field foodField</p>
 		<br></br>
-		<p>Amount Paid : ????</p>
+		<p>Email</p>
+		<p>Get Email From Text Field emailField</p>
 		<br></br>
-		<p>Address to be Delivered to : ????</p>
+		<p>Phone Number</p>
+		<p>Get Phone Number From Text Field phoneField</p>
 		<br></br>
-		<p>Store : ????</p>
+		<p>Credit Card</p>
+		<p>Get Credit Card From Text Field creditField</p>
 		<br></br>
-		<p>What is going to be picked up : ????</p>
-		<br></br>
+		<p>Order Number</p>
+		<p>Will generate random number here to store order information</p>
 
-		<button type="button" class="btn btn-default">Cancel Order</button>
-		<p><font color = "red">Please note, you will not be able to cancel your order after confirmation that your item has been picked up.</font></p>
-		<a href="order.html" role="button" class="btn btn-default">Back</button>
-</div>
+    <form method="get" action="orderForm.html">
+		  <button class="button"><h5>Confirm Order</h5></button>
+    </form>
+    
 	</div>
-  <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	</div>
+
+
 
 </body>
 </html>

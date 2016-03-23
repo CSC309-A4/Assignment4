@@ -64,16 +64,61 @@ var delivererSchema = new mongoose.Schema({
 			madeBy: String,
 			msg: String
 		}
+	],
+	acceptedOrders: [
+		order: ObjectId
 	]
-
 }, 
 {
 	collection: "deliverers"
 });
 
-// Model for the deliverer schema
-var Deliverer = mongoose.model("Deliverer", delivererSchema);
+var userSchema = new mongoose.Schema({
+	name: String,
+	password: String,
+	email: String,
+	phone: String,
+	address: String,
+	city: String,
+	transportation: String,
+	creditCardNum: String,
+	feedback: [
+		{
+			rating: Number,
+			madeBy: String,
+			msg: String
+		}
+	],
+	savedFood: [
+		food: String
+	],
+	orderHistory: [
+		order: ObjectId
+	]
+},
+{
+	collection: "users"
+});
 
+var orderSchema = new mongoose.Schema({
+	orderStatus: String,
+	foodStatus: String,
+	delivererID: ObjectId,
+	userID: ObjectId,
+	store: String,
+	food: String,
+	date: Date,
+	userLocation: String,
+	amount: Number
+},
+{
+	collection: "orders"
+});
+
+// Models
+var Deliverer = mongoose.model("Deliverer", delivererSchema);
+var User = mongoose.model("User", userSchema);
+var Order = mongoose.model("Order", orderSchema);
 
 //----------------------------------------------------------
 /* HTTP Requests for the static html, css, js, image files */

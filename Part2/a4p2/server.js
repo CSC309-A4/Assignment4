@@ -1,5 +1,5 @@
 /* This file contains all the main server / database code. 
-Sets up a connection the database, listens for incoming connections.
+Sets up a connection the database, listens for incoming connections, etc.
 
 */
 
@@ -11,6 +11,10 @@ Sets up a connection the database, listens for incoming connections.
 // Express dependencies
 var express = require("express");
 var app = express();
+
+// For parsing cookies
+var cookieParser = require('cookie-parser')
+app.use(cookieParser())
 
 // Need for populating req.body in POST requests
 var bodyParser = require('body-parser');
@@ -148,9 +152,6 @@ app.get("/admin.html", function (req, res) {
 
 app.get("/deliveryProfile.html", function (req, res) {
 	// if user not logged in don't send file
-	if (1 == 2) {
-		res.send("error");
-	}
 
 	res.sendFile(__dirname + "/deliveryProfile.html");
 	console.log("Sent deliveryProfile.html");

@@ -24,9 +24,10 @@ form.submit(function(e) {
 		success: function(data) {
 			// Go to profile page if success
 
+			output.html("");
 			// data should the ObjectId of the deliverer that we just successfully added
 			var id = data;
-			console.log(data);
+			console.log(id);
 			
 			/*
 			$.ajax({

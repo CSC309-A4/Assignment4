@@ -1,5 +1,5 @@
 /* This file contains all the main server / database code. 
-Sets up a connection the database, listens for incoming connections.
+Sets up a connection the database, listens for incoming connections, etc.
 
 */
 
@@ -11,6 +11,10 @@ Sets up a connection the database, listens for incoming connections.
 // Express dependencies
 var express = require("express");
 var app = express();
+
+// For parsing cookies
+var cookieParser = require('cookie-parser')
+app.use(cookieParser())
 
 // Need for populating req.body in POST requests
 var bodyParser = require('body-parser');
@@ -66,7 +70,7 @@ var delivererSchema = new mongoose.Schema({
 		}
 	],
 	acceptedOrders: [
-		order: ObjectId
+		mongoose.Types.ObjectId
 	]
 }, 
 {
@@ -90,10 +94,10 @@ var userSchema = new mongoose.Schema({
 		}
 	],
 	savedFood: [
-		food: String
+		String
 	],
 	orderHistory: [
-		order: ObjectId
+		mongoose.Types.ObjectId
 	]
 },
 {
@@ -103,8 +107,8 @@ var userSchema = new mongoose.Schema({
 var orderSchema = new mongoose.Schema({
 	orderStatus: String,
 	foodStatus: String,
-	delivererID: ObjectId,
-	userID: ObjectId,
+	delivererID: mongoose.Schema.ObjectId, 
+	userID: mongoose.Schema.ObjectId,
 	store: String,
 	food: String,
 	date: Date,
@@ -139,11 +143,16 @@ app.get("/index.html", function (req, res) {
 });
 
 app.get("/admin.html", function (req, res) {
+	// only send file back if user is authorized to access this page
+	// incomplete
+
 	res.sendFile(__dirname + "/admin.html");
 	console.log("Sent admin.html");
 });
 
 app.get("/deliveryProfile.html", function (req, res) {
+	// if user not logged in don't send file
+
 	res.sendFile(__dirname + "/deliveryProfile.html");
 	console.log("Sent deliveryProfile.html");
 });

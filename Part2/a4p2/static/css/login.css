@@ -1,0 +1,41 @@
+.form {
+  padding: 40px;
+  max-width:600px;
+  margin:80px auto;
+  background-color: #ee7600;
+  border-radius: 25px;
+  border-color: #cd6600;
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#ff9022), to(#ee7600));
+  background-image: -webkit-linear-gradient(top, #ff9022, 0%, #ee7600, 100%);
+  background-image: -moz-linear-gradient(top, #ff9022 0%, #ee7600 100%);
+  background-image: linear-gradient(to bottom, #ff9022 0%, #ee7600 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff9022', endColorstr='#ffee7600', GradientType=0);
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  width: 90%;
+  margin: auto;
+}
+
+#loginForm input {
+  width: 90%;
+  height: 40px;
+  background-color: #61933a;
+  font-size: 24px;
+
+}
+
+#loginForm label {
+  margin-top: 5px;
+}
+
+#loginForm #submit-button {
+  height: 50px;
+  margin-top: 20px;
+}
+

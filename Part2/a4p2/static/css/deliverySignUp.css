@@ -1,0 +1,56 @@
+.form {
+  padding: 40px;
+  max-width:600px;
+  margin:80px auto;
+  background-color: #ee7600;
+  border-radius: 25px;
+  border-color: #cd6600;
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#ff9022), to(#ee7600));
+  background-image: -webkit-linear-gradient(top, #ff9022, 0%, #ee7600, 100%);
+  background-image: -moz-linear-gradient(top, #ff9022 0%, #ee7600 100%);
+  background-image: linear-gradient(to bottom, #ff9022 0%, #ee7600 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff9022', endColorstr='#ffee7600', GradientType=0);
+}
+
+#main-content {
+  padding: 5px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+	text-align: center;
+}
+
+form {
+	margin: auto;
+	width: 90%;
+}
+
+label {
+	margin-top: 10px;
+}
+
+input {
+  width: 80%;
+  height: 36px;
+  background-color: #61933a;
+  font-size: 24px;
+  border-radius: 5px;
+}
+
+#transport {
+  width: 80%;
+}
+
+#submit-button {
+  margin-top: 20px;
+}
+
+#output {
+  margin-top: 20px;
+  font-size: 24px;
+  color: rgba(240, 200, 230, 0.9);
+}

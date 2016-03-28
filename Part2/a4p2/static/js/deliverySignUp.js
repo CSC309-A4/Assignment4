@@ -22,31 +22,20 @@ form.submit(function(e) {
 		url: "submit_delivery_form",
 		data: formData,
 		success: function(data) {
-			// Go to profile page if success
-
-			output.html("");
-			// data should the ObjectId of the deliverer that we just successfully added
-			var id = data;
-			console.log(id);
-			
-			/*
-			$.ajax({
-			  url: "deliveryProfile.html";
-			  data: data,
-			  success: null,
-			});
-			*/
-			
-			// window.location.href = "deliveryProfile.html";
+			// I'm just going to force the user to go to the login page...
+			output.html("Successfully signed up. To log in, go to the login page.");
+			window.location = "login.html";
+		
 		},
+		
 		error: function(jqXHR, textStatus, errorThrown) {
 			output.html(jqXHR.responseText);
     }
 
 	});
 
+	// Prevent page change
 	return false;
-
 });
 
 

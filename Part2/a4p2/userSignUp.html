@@ -2,12 +2,16 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Order Confirmation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="static/css/style.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="static/css/userSignUp.css" media="screen">
 </head>
+<body>
 
 <body>
+
   <div class="container" id="navigationBar">
     <nav class="navbar navbar-custom navbar-fixed-top">
       <div class="container-fluid">
@@ -41,37 +45,46 @@
      </div><!-- /.container-fluid -->
     </nav>
   </div>
+  
+  <div id="main-content">
+    <div class="form">
+      <h1>Quick food delivery is only 1 step away, sign up now!</h1>
 
+      <form id="userForm" autocomplete="off">
+        <label for="name">Name:</label></br>
+        <input id="name" type="text" name="name"></input></br>
 
-	<div class ="jumbotron">
-		<h1 class="text-center"><b>Confirmation Form</b></h1>
-		<br></br>
-		<p>Delivery Address</p>
-		<p>Get Address From Text Field addressField</p>
-		<br></br>
-		<p>Store Name</p>
-		<p>Get Store Name From Text Field storeField</p>
-		<br></br>
-		<p>Food Description</p>
-		<p>Get Food Details From Text Field foodField</p>
-		<br></br>
-		<p>Email</p>
-		<p>Get Email From Text Field emailField</p>
-		<br></br>
-		<p>Phone Number</p>
-		<p>Get Phone Number From Text Field phoneField</p>
-		<br></br>
-		<p>Credit Card</p>
-		<p>Get Credit Card From Text Field creditField</p>
-		<br></br>
-		<p>Order Number</p>
-		<p>Will generate random number here to store order information</p>
+        <label for="password">Password:</label></br>
+        <input id="password" type="password" name="password"></input></br>
 
-	  <button class="button"><a href="orderForm.html">Confirm Order</a></button>
-    
-	</div>
+        <label for="password_repeat">Re-enter Password:</label></br>
+        <input id="password_repeat" type="password" name="password_repeat"></input></br>
+
+        <label for="email">Email Address:</label></br>
+        <input id="email" type="email" name="email"></input></br>
+
+        <label for="phone_num">Phone Number:</label></br>
+        <input id="phone_num" type="tel" name="telephone"></input></br>
+
+        <label for="address">Address:</label></br>
+        <input id="address" type="text" name="address"></input></br>
+
+        <label for="city">City:</label></br>
+        <input id="city" type="text" name="city"></input></br>
+
+        <label for="credit">Credit Card Number:</label></br>
+        <input id="credit" type="text" name="creditcard"></input></br>
+
+        <input id="submit-button" type="submit" value="Sign Up!">
+      </form>
+
+    </div> 
+  </div> 
+  
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="static/js/userSignUp.js"></script>
 
 </body>
 </html>
+

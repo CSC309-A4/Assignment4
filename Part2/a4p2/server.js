@@ -84,7 +84,6 @@ var userSchema = new mongoose.Schema({
 	phone: String,
 	address: String,
 	city: String,
-	transportation: String,
 	creditCardNum: String,
 	feedback: [
 		{
@@ -187,14 +186,17 @@ app.get("/orderForm.html", function (req, res) {
 	console.log("Sent orderForm.html");
 });
 
-app.get("/user.html", function (req, res) {
-	res.sendFile(__dirname + "/user.html");
-	console.log("Sent orderForm.html");
+app.get("/userSignUp.html", function (req, res) {
+	res.sendFile(__dirname + "/userSignUp.html");
+	console.log("Sent userSignUp.html");
 });
 
 app.get("/userProfile.html", function (req, res) {
+	// if user not logged in don't send file
+
+
 	res.sendFile(__dirname + "/userProfile.html");
-	console.log("Sent orderForm.html");
+	console.log("Sent userProfile.html");
 });
 
 
@@ -253,7 +255,7 @@ app.post("/submit_delivery_form", function (req, res) {
 		if (err) {
 			console.log(err);
 			res.status(400);
-			res.send("error");
+			res.send("saving to database error");
 			return;
 		}
 		

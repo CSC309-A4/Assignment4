@@ -1,8 +1,19 @@
-
-h1,h2,h3,h4,h5,h6,p,form,fieldset {
-  border:0 none;
-  margin:0;
-  padding:10px;
-  color: black;
-  text-shadow: none;
+.jumbotron h1, h2, p, div, label, input {
+	color: black;
+	margin: 0px;
 }
+
+.jumbotron .container-fluid {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+
+}
+
+img {
+	float: right;
+	display: block;
+}
+
+

@@ -1,12 +1,15 @@
 #main-content {
   padding: 10px;
-  border: 1px solid orange;
   width: 90%;
   margin-top: 100px;
   margin-bottom: 50px;
   margin-left: auto;
   margin-right: auto;
   width: 90%;
+}
+
+h1, h2, h3, h4, h5, h6, p, div, label, input {
+  color: black;
 }
 
 input {
@@ -16,8 +19,8 @@ input {
 #deliverer-info {
 	margin-top: 20px;
 	margin-bottom: 20px;
-	border: 1px solid orange;
 	padding: 10px;
+  color: black;
 
 }
 
@@ -62,6 +65,23 @@ input {
   margin-top: 15px;
   margin-bottom: 15px;
   border: 1px orange;
+  width: 100px;
+  background-color: rgba(150, 230, 220, 0.8);
+  text-align: center;
+  cursor: pointer;
 }
 
+#logout:hover {
+  background-color: rgba(150, 100, 150, 0.8);
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
 

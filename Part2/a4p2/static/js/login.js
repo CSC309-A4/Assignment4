@@ -32,6 +32,14 @@ form.submit(function(e) {
 			} 
 			else {
 				// request for profile page
+				$.ajax({
+					type: "GET",
+					url: "userProfile.html",
+					data: cookie,
+					success: function(data, textStatus, jqXHR) {
+						window.location = "userProfile.html";
+					}
+				});
 			}
 
 		},

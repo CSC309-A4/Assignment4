@@ -1,7 +1,6 @@
 // As soon as the profile page is loaded, I can display information about them using
 // their cookie
-var delivererInfo = $("#deliverer-info");
-var displayOrders = $("#display-orders"); 
+var userInfo = $("#user-info");
 var logout = $("#logout");
 
 var cookie = document.cookie;
@@ -9,24 +8,24 @@ console.log(cookie);
 
 $.ajax({
 	type: "GET",
-	url: "get_deliverer_info",
+	url: "get_user_info",
 	data: cookie,
 	success: function(data, textStatus, jqXHR) {
 		// Data is an object, get its fields and output to html
 		console.log(data);
 		var html = "";
-		html += "<h1>User: " + data.name + "</h1>";
+		html += "<h2>User: " + data.name + "</h2>";
 		html += "<p>Email: " + data.email + ", Phone: " + data.phone + "</p>";
-		html += "<p>Address: " + data.address + ", City: " + data.email + "</p>";
-		html += "<p>Transportation: " + data.transportation + "</p>";
+		html += "<p>Address: " + data.address + ", City: " + data.city + "</p>";
 		// still need feedback stuff here
+		// also need order history, saved food
 
-		delivererInfo.html(html);
+		userInfo.html(html);
 	}
 });
 
 logout.click(function (e) {
-	delete_cookie("loginDeliverer");
+	delete_cookie("loginUser");
 	window.location = "index.html";
 });
 

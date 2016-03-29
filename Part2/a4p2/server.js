@@ -221,14 +221,48 @@ app.get("/userProfile.html", function (req, res) {
 
 
 
-//-------------------
+//---------------------------
 /* Other HTTP Requests */
-//-------------------
+//---------------------------
+
+/* Function that checks if a name exists in a particular collection with name dbname. 
+For example if the username "Bob" exists in the users collection then don't allow
+any new users named "Bob" from signing up. */
+function checkNameExists (name, dbname) {
+	var query = {"name": name};
+	if (dbname == "deliverer") {
+		Deliverer.findOne(query, function (err, data) {
+			console.log(data);
+			if (err) {
+				console.log("error");
+				return true;
+			}
+			if (!data) {
+				return false;
+			}
+			return true;
+
+		});
+	}
+	else if (dbname == "user") {
+		User.findOne(query, function (err, data) {
+			if (err) {
+				console.log("error");
+				return true;
+			}
+			if (!data) {
+				return false;
+			}
+			return true;
+		});
+	}
+}
+
 
 // User POSTs (submits) delivery sign up form (deliverySignUp.html)
 app.post("/submit_delivery_form", function (req, res) {
 
-	console.log(req.body);
+	console.log("Request fields:"); console.log(req.body);
 	// Validation for form fields
 	var regex = /[a-z\d\-_\s]+/i;  // only alphanumeric and space
 	req.checkBody("name", "Enter a valid name!").matches(regex); 
@@ -258,8 +292,18 @@ app.post("/submit_delivery_form", function (req, res) {
 		return;
 	} 
 
-	// Now we can create the new deliverer, add them to the database
 	var fields = req.body;
+	/* Problem: Have to make the rest of the code a callback since this returns prematurely (???)
+	// Does user exist already?
+	if (checkNameExists(fields.name, "deliverer")) {
+		console.log("Deliverer name exists already");
+		res.status(400);
+		res.send("Deliverer name exists already, try again");
+		return;
+	}
+	*/
+
+	// Now we can create the new deliverer, add them to the database
 	var deliverer = new Deliverer({
 		name: fields.name,
 		password: fields.password,
@@ -289,6 +333,70 @@ app.post("/submit_delivery_form", function (req, res) {
 });
 
 
+
+
+// User POSTs (submits) user sign up form (userSignUp.html)
+app.post("/submit_user_form", function (req, res) {
+	console.log("Request fields:"); console.log(req.body);
+	// Validation for form fields
+	var regex = /[a-z\d\-_\s]+/i;  // only alphanumeric and space
+	req.checkBody("name", "Enter a valid name!").matches(regex); 
+	req.checkBody("password", 'Password: 6 to 20 characters required').len(6, 20);
+	req.checkBody("password", "Passwords do not match").equals(req.body.password_repeat);
+	req.checkBody("email", "Enter a valid email!").isEmail();
+	req.checkBody("phone", "Enter a valid phone number").notEmpty(); // not sure how to validate phone
+	req.checkBody("address", "Enter a valid address").matches(regex); // only alphanumeric and space
+	req.checkBody("city", "Enter a valid city").matches(regex);
+	req.checkBody("credit", "Enter a valid credit card number").isInt();
+
+	// Check for any errors. If so, inform requester and stop execution
+	var errors = req.validationErrors();
+	if (errors) {
+		// errors is a list of objects, or null if no errors found
+		console.log("Errors:");
+		console.log(errors);
+		// Send error and message to client
+		res.status(400);
+		var toSend = "<p>Errors:</p>";
+		for (var i = 0; i < errors.length; i++) {
+			toSend += "<p>" + errors[i].msg + "</p>";
+		}
+		res.send(toSend);
+		return;
+	} 
+
+	// Now we can create the new deliverer, add them to the database
+	var fields = req.body;
+	var user = new User({
+		name: fields.name,
+		password: fields.password,
+		email: fields.email,
+		phone: fields.phone,
+		address: fields.address,
+		city: fields.city,
+		credit: fields.credit,
+		feedback: [],
+		savedFood: [],
+		orderHistory: []
+	});
+
+	user.save(function (err, data) {
+		if (err) {
+			console.log(err);
+			res.status(400);
+			res.send("saving to database error");
+			return;
+		}
+		
+		// Everything was successful	
+		res.status(200);
+		res.end();
+		console.log("User sign up successful");
+	});
+
+});
+
+
 // Handle the login form
 app.post("/login", function (req, res) {
 	console.log("Login Request");
@@ -310,11 +418,10 @@ app.post("/login", function (req, res) {
 			}
 			// Entry found in database, return successful result
 			res.status(200);
-			res.cookie("loginDeliverer", data._id, { expires: new Date(Date.now() + 10000000)});
+			res.cookie("loginDeliverer", data._id, { expires: new Date(Date.now() + 600000)});
 			res.send("Deliverer Success");
 		});
 	}
-	/*
 	else {
 		var query = {"name": name, "password": password};
 
@@ -326,26 +433,16 @@ app.post("/login", function (req, res) {
 			}
 			// Entry found in database, return successful result
 			res.status(200);
-			res.cookie("login", data._id, { expires: new Date(Date.now() + 10000000)});
+			res.cookie("loginUser", data._id, { expires: new Date(Date.now() + 600000)});
 			res.send("Successful Login");
 		});
 	}	
-	*/
-
-	// temp
-	else {
-		res.status(400);
-		res.end();
-	}
-
 });
 
 
-// User requests for deliverer info. Return in nice html format
+// User requests for deliverer info. Return document object.
 app.get("/get_deliverer_info", function (req, res) {
 	var id = req.cookies.loginDeliverer;
-	console.log(id);
-
 	Deliverer.findById(id, function (err, data) {
 		if (err || !data) {
 			console.log(err);
@@ -353,18 +450,24 @@ app.get("/get_deliverer_info", function (req, res) {
 			res.send("Error in retrieving deliverer data");
 			return;
 		}
-		
-		// Prettify output
-		var html = "";
-		html += "<p>Name: " + data.name + "</p>";
-		html += "<p>City: " + data.city + ", Address: " + data.address + "</p>";
-		html += "<p>Phone Number: " + data.phone + ", Email: " + data.email + "</p>";
-		html += "<p>Transportation: " + data.transportation + "</p>";
-		// Put comments here later
-
 		res.status(200);
-		res.send(html);
+		res.send(data);
 	});
-
-
 });
+
+// User requests for user info. Return document object.
+app.get("/get_user_info", function (req, res) {
+	var id = req.cookies.loginUser;
+	User.findById(id, function (err, data) {
+		if (err || !data) {
+			console.log(err);
+			res.status(400);
+			res.send("Error in retrieving deliverer data");
+			return;
+		}		
+		res.status(200);
+		res.send(data);
+	});
+});
+
+

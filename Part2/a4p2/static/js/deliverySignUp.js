@@ -21,11 +21,11 @@ form.submit(function(e) {
 		type: "POST",
 		url: "submit_delivery_form",
 		data: formData,
-		success: function(data) {
+		success: function(data, textStatus, jqXHR) {
 			// I'm just going to force the user to go to the login page...
 			output.html("Successfully signed up. To log in, go to the login page.");
+			console.log(document.cookie);
 			window.location = "login.html";
-		
 		},
 		
 		error: function(jqXHR, textStatus, errorThrown) {
@@ -37,6 +37,10 @@ form.submit(function(e) {
 	// Prevent page change
 	return false;
 });
+
+
+
+
 
 
 

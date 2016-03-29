@@ -142,18 +142,36 @@ app.get("/index.html", function (req, res) {
 });
 
 app.get("/admin.html", function (req, res) {
-	// only send file back if user is authorized to access this page
-	// incomplete
+	var id = req.cookies.loginDeliverer;
+	Deliverer.findById(id, function (err, data) {
+		if (!data || data.name != "Admin Bob") {
+			// No match
+			res.status(400);
+			res.send("You cannot access this page");
+			return;
+		}
 
-	res.sendFile(__dirname + "/admin.html");
-	console.log("Sent admin.html");
+		// Entry exists in db, authorized
+		res.sendFile(__dirname + "/admin.html");
+		console.log("Sent admin.html");
+	});
+
 });
 
 app.get("/deliveryProfile.html", function (req, res) {
-	// if user not logged in don't send file
-
-	res.sendFile(__dirname + "/deliveryProfile.html");
-	console.log("Sent deliveryProfile.html");
+	// if user not logged in don't send file	
+	var id = req.cookies.loginDeliverer;
+	Deliverer.findById(id, function (err, data) {
+		if (!data) {
+			// No match
+			res.status(400);
+			res.send("You cannot access this page");
+			return;
+		}
+		// Entry exists in db, authorized
+		res.sendFile(__dirname + "/deliveryProfile.html");
+		console.log("Sent deliveryProfile.html");
+	});
 });
 
 app.get("/deliverySignUp.html", function (req, res) {
@@ -193,11 +211,12 @@ app.get("/userSignUp.html", function (req, res) {
 
 app.get("/userProfile.html", function (req, res) {
 	// if user not logged in don't send file
-
+	// incomplete
 
 	res.sendFile(__dirname + "/userProfile.html");
 	console.log("Sent userProfile.html");
 });
+
 
 
 //-------------------
@@ -261,12 +280,61 @@ app.post("/submit_delivery_form", function (req, res) {
 		
 		// Everything was successful	
 		res.status(200);
-		// Sends the object id of the database entry of this new delivery person back to client
-		res.send(data._id);
+		res.end();
 		console.log("Deliverer sign up successful");
 	});
 
 });
 
 
+// Handle the login form
+app.post("/login", function (req, res) {
+	console.log("Login Request");
+
+	// Get form fields
+	var name = req.body.name;
+	var password = req.body.password;
+	var isDeliverer = req.body.isDeliverer;
+
+	// Check if name and password are in the database
+	// Look in deliverers collection or the users collection depending on isDeliverer
+	if (isDeliverer == "true") {
+		var query = {"name": name, "password": password};
+		Deliverer.findOne(query, function (err, data) {
+			if (err || !data) {
+				res.status(400);
+				res.send("Error: Incorrect name / password");
+				return;
+			}
+			// Entry found in database, return successful result
+			res.status(200);
+			res.cookie("loginDeliverer", data._id, { expires: new Date(Date.now() + 10000000)});
+			res.send("Deliverer Success");
+		});
+	}
+	/*
+	else {
+		var query = {"name": name, "password": password};
+
+		User.findOne(query, function (err, data) {
+			if (err || !data) {
+				res.status(400);
+				res.send("Error: Incorrect name / password");
+				return;
+			}
+			// Entry found in database, return successful result
+			res.status(200);
+			res.cookie("login", data._id, { expires: new Date(Date.now() + 10000000)});
+			res.send("Successful Login");
+		});
+	}	
+	*/
+
+	// temp
+	else {
+		res.status(400);
+		res.end();
+	}
+
+});
 

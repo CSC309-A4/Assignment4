@@ -49,7 +49,6 @@
   <div class="main-content">
     <div class="form">
       <h1>Log In</h1>
-
       <!-- This form will go to a different page depending on whether the user is a user or deliverer -->
       <form id="loginForm" autocomplete="off">
 
@@ -59,15 +58,19 @@
         <label for="password">Password:</label></br>
         <input id="password" type="password" name="password"></input></br>
 
+        <label for="isDeliverer">Login as deliverer?</label>
+        <input id="isDeliverer" type="checkbox" name="isDeliverer"></input></br>
+
         <input id="submit-button" type="submit" value="Log In!"></input>
       </form>
 
+      <div id="output"></div>
     </div>
   </div>
   
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="static/js/userSignUp.js"></script>
+<script src="static/js/login.js"></script>
 
 </body>
 </html>

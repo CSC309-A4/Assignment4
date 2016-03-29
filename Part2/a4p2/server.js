@@ -161,6 +161,7 @@ app.get("/admin.html", function (req, res) {
 app.get("/deliveryProfile.html", function (req, res) {
 	// if user not logged in don't send file	
 	var id = req.cookies.loginDeliverer;
+	console.log(id);
 	Deliverer.findById(id, function (err, data) {
 		if (!data) {
 			// No match
@@ -168,6 +169,7 @@ app.get("/deliveryProfile.html", function (req, res) {
 			res.send("You cannot access this page");
 			return;
 		}
+
 		// Entry exists in db, authorized
 		res.sendFile(__dirname + "/deliveryProfile.html");
 		console.log("Sent deliveryProfile.html");
@@ -338,3 +340,31 @@ app.post("/login", function (req, res) {
 
 });
 
+
+// User requests for deliverer info. Return in nice html format
+app.get("/get_deliverer_info", function (req, res) {
+	var id = req.cookies.loginDeliverer;
+	console.log(id);
+
+	Deliverer.findById(id, function (err, data) {
+		if (err || !data) {
+			console.log(err);
+			res.status(400);
+			res.send("Error in retrieving deliverer data");
+			return;
+		}
+		
+		// Prettify output
+		var html = "";
+		html += "<p>Name: " + data.name + "</p>";
+		html += "<p>City: " + data.city + ", Address: " + data.address + "</p>";
+		html += "<p>Phone Number: " + data.phone + ", Email: " + data.email + "</p>";
+		html += "<p>Transportation: " + data.transportation + "</p>";
+		// Put comments here later
+
+		res.status(200);
+		res.send(html);
+	});
+
+
+});

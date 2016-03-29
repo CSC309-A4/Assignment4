@@ -51,8 +51,3 @@ form.submit(function(e) {
 
 
 
-
-// Function that deletes a cookie. Here just for reference / in case I need it for something later on
-var delete_cookie = function(name) {
-    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-};

@@ -80,4 +80,10 @@ input {
                                   not supported by any browser */
 }
 
+#logout {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border: 1px orange;
+}
+
 

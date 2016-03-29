@@ -22,7 +22,9 @@ form {
   margin: auto;
 }
 
-#loginForm input {
+
+
+#loginForm input:not(#isDeliverer) {
   width: 90%;
   height: 40px;
   background-color: #61933a;
@@ -37,5 +39,21 @@ form {
 #loginForm #submit-button {
   height: 50px;
   margin-top: 20px;
+}
+
+#output {
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+#isDeliverer {
+  width: 30px ; 
+  height: 30px;
+  
+}
+
+#logout {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 

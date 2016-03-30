@@ -57,12 +57,16 @@
 
     <div class="container-fluid well span6">
       <h2>Make an order!</h2>
+      <p>For example, Food: McLobster, Store: McDicks, Location: UofT right outside the doors of SS2173</p>
   
-      <!-- Incomplete: this should be the location fo the order form -->
       <form id="order-form">
-        <label for="food">Food</label>
-        <input id="food" type="text" name="food"></input>
-
+        <label for="food">Food:</label></br>
+        <input id="food" type="text" name="food"></input></br>
+        <label for="store">Store:</label></br>
+        <input id="store" type="text" name="store"></input></br>
+        <label for="userLocation">Where should this order be delivered to? (Enter a location):</label></br>
+        <input id="userLocation" type="text" name="userLocation"></input></br>
+        <input id="submit-button" type="submit" value="Place Order!"></input>
       </form>
 
     </div> <!-- end of order panel -->
@@ -73,19 +77,18 @@
       <h2>Order History</h2>
        
       <div id="order-history">
-
         <div class="col-xs-12">    
-            <div id="panel1" class="panel panel-primary">
-                <div class="panel-heading">Order 1</div>
-                <div class="panel-body"><h5>MUCH BURGER</h5></div>
-            </div>
+          <div id="panel1" class="panel panel-primary">
+            <div class="panel-heading">Order 1</div>
+            <div class="panel-body"><h5>MUCH BURGER</h5></div>
+          </div>
         </div>
 
         <div class="col-xs-12">    
-            <div id="panel2" class="panel panel-primary">
-                <div class="panel-heading">Order 2</div>
-                <div class="panel-body"><h5>SUCH PANCAKES</h5></div>
-            </div>
+          <div id="panel2" class="panel panel-primary">
+            <div class="panel-heading">Order 2</div>
+            <div class="panel-body"><h5>SUCH PANCAKES</h5></div>
+          </div>
         </div>
 
       </div>

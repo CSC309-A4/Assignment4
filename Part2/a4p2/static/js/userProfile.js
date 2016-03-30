@@ -2,9 +2,9 @@
 // their cookie
 var userInfo = $("#user-info");
 var logout = $("#logout");
+var orderForm = $("#order-form")
 
 var cookie = document.cookie;
-console.log(cookie);
 
 $.ajax({
 	type: "GET",
@@ -29,8 +29,49 @@ logout.click(function (e) {
 	window.location = "index.html";
 });
 
-// Function that deletes a cookie. Here just for reference / in case I need it for something later on
+// Function that deletes a cookie. 
 var delete_cookie = function(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 };
+
+
+/* Handlers */
+
+// Handle order form submission
+orderForm.submit(function (e) {
+	// If user is currently logged out (for whatever reason) don't continue
+	if (document.cookie.indexOf("loginUser") < 0) {
+		console.log("No");
+		return false;
+	}
+
+	// Otherwise submit the order form
+
+	// Get form fields (all input fields except the submit)
+  var inputs = $("#order-form input").not(":input[type=submit]");
+  var orderFields = {};
+  inputs.each(function() {
+  	orderFields[this.name] = $(this).val();
+  });
+  // Also need to send cookie with this request...
+
+  //...
+  //...
+
+	$.ajax({
+		type: "POST",
+		url: "make_order",
+		data: null,
+		success: function(data, textStatus, jqXHR) {
+			console.log(data);
+		}
+
+	});
+
+
+	// Prevent page change
+	return false;
+});
+
+
 

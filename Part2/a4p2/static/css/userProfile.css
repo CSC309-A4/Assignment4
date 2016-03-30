@@ -16,4 +16,36 @@ img {
 	display: block;
 }
 
+#logout {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border: 1px orange;
+  width: 100px;
+  background-color: rgba(150, 230, 220, 0.8);
+  text-align: center;
+  cursor: pointer;
+}
+
+#logout:hover {
+  background-color: rgba(150, 100, 150, 0.8);
+}
+
+#submit-button {
+	margin-top: 10px;
+	background-color: rgba(150, 230, 220, 0.8);
+}
+
+#submit-button:hover {
+	background-color: rgba(150, 100, 150, 0.8);
+}
+
+#order-form input {
+	width: 50%;
+}
+
+
+
+
+
+
 

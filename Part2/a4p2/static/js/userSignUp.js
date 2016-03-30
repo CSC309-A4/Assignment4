@@ -21,10 +21,9 @@ form.submit(function(e) {
 		url: "submit_user_form",
 		data: formData,
 		success: function(data, textStatus, jqXHR) {
-			// I'm just going to force the user to go to the login page...
-			output.html("Successfully signed up. To log in, go to the login page.");
 			console.log(document.cookie);
-			window.location = "login.html";
+			output.html("Successfully signed up. To log in, go to the login page.");
+			form[0].reset(); // Clears form fields
 		},
 		
 		error: function(jqXHR, textStatus, errorThrown) {

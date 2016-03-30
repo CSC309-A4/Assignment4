@@ -3,7 +3,6 @@ var output = $("#output");
 
 form.submit(function(e) {
 	var inputs = $("#loginForm input");
-
 	var loginData = {
 		name: inputs[0].value,
 		password: inputs[1].value,

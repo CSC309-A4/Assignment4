@@ -104,15 +104,17 @@ var userSchema = new mongoose.Schema({
 });
 
 var orderSchema = new mongoose.Schema({
-	orderStatus: String,
-	foodStatus: String,
-	delivererID: mongoose.Schema.ObjectId, 
-	userID: mongoose.Schema.ObjectId,
 	store: String,
 	food: String,
-	date: Date,
 	userLocation: String,
-	amount: Number
+	amount: Number,
+
+	date: Date,
+	orderStatus: String,
+	foodStatus: String,
+
+	delivererID: mongoose.Schema.ObjectId, 
+	userID: mongoose.Schema.ObjectId
 },
 {
 	collection: "orders"
@@ -191,21 +193,6 @@ app.get("/login.html", function (req, res) {
 	console.log("Sent login.html");
 });
 
-app.get("/order.html", function (req, res) {
-	res.sendFile(__dirname + "/order.html");
-	console.log("Sent order.html");
-});
-
-app.get("/orderConfirmation.html", function (req, res) {
-	res.sendFile(__dirname + "/orderConfirmation.html");
-	console.log("Sent order.html");
-});
-
-app.get("/orderForm.html", function (req, res) {
-	res.sendFile(__dirname + "/orderForm.html");
-	console.log("Sent orderForm.html");
-});
-
 app.get("/userSignUp.html", function (req, res) {
 	res.sendFile(__dirname + "/userSignUp.html");
 	console.log("Sent userSignUp.html");
@@ -225,40 +212,6 @@ app.get("/userProfile.html", function (req, res) {
 /* Other HTTP Requests */
 //---------------------------
 
-/* Function that checks if a name exists in a particular collection with name dbname. 
-For example if the username "Bob" exists in the users collection then don't allow
-any new users named "Bob" from signing up. */
-function checkNameExists (name, dbname) {
-	var query = {"name": name};
-	if (dbname == "deliverer") {
-		Deliverer.findOne(query, function (err, data) {
-			console.log(data);
-			if (err) {
-				console.log("error");
-				return true;
-			}
-			if (!data) {
-				return false;
-			}
-			return true;
-
-		});
-	}
-	else if (dbname == "user") {
-		User.findOne(query, function (err, data) {
-			if (err) {
-				console.log("error");
-				return true;
-			}
-			if (!data) {
-				return false;
-			}
-			return true;
-		});
-	}
-}
-
-
 // User POSTs (submits) delivery sign up form (deliverySignUp.html)
 app.post("/submit_delivery_form", function (req, res) {
 
@@ -275,7 +228,6 @@ app.post("/submit_delivery_form", function (req, res) {
 	req.checkBody("transportation", "Enter a valid form of transportation").matches(regex);
 	req.checkBody("credit", "Enter a valid credit card number").isInt();
 	
-
 	// Check for any errors. If so, inform requester and stop execution
 	var errors = req.validationErrors();
 	if (errors) {
@@ -293,45 +245,44 @@ app.post("/submit_delivery_form", function (req, res) {
 	} 
 
 	var fields = req.body;
-	/* Problem: Have to make the rest of the code a callback since this returns prematurely (???)
-	// Does user exist already?
-	if (checkNameExists(fields.name, "deliverer")) {
-		console.log("Deliverer name exists already");
-		res.status(400);
-		res.send("Deliverer name exists already, try again");
-		return;
-	}
-	*/
-
-	// Now we can create the new deliverer, add them to the database
-	var deliverer = new Deliverer({
-		name: fields.name,
-		password: fields.password,
-		email: fields.email,
-		phone: fields.phone,
-		address: fields.address,
-		city: fields.city,
-		transportation: fields.transportation,
-		credit: fields.credit,
-		feedback: []
-	});
-
-	deliverer.save(function (err, data) {
-		if (err) {
-			console.log(err);
+	// first check if someone with this username already exists, otherwise run callback
+	Deliverer.findOne({"name": fields.name}, function (err, data) {
+		if (err || data) {
+			console.log("Name already exists!");
 			res.status(400);
-			res.send("saving to database error");
+			res.send("Name already exists!");
 			return;
 		}
-		
-		// Everything was successful	
-		res.status(200);
-		res.end();
-		console.log("Deliverer sign up successful");
+
+		// Now we can create the new deliverer, add them to the database
+		var deliverer = new Deliverer({
+			name: fields.name,
+			password: fields.password,
+			email: fields.email,
+			phone: fields.phone,
+			address: fields.address,
+			city: fields.city,
+			transportation: fields.transportation,
+			credit: fields.credit,
+			feedback: []
+		});
+
+		deliverer.save(function (err, data) {
+			if (err) {
+				console.log(err);
+				res.status(400);
+				res.send("saving to database error");
+				return;
+			}
+			
+			// Everything was successful	
+			res.status(200);
+			res.end();
+			console.log("Deliverer sign up successful");
+		});
 	});
 
 });
-
 
 
 
@@ -365,35 +316,45 @@ app.post("/submit_user_form", function (req, res) {
 		return;
 	} 
 
-	// Now we can create the new deliverer, add them to the database
 	var fields = req.body;
-	var user = new User({
-		name: fields.name,
-		password: fields.password,
-		email: fields.email,
-		phone: fields.phone,
-		address: fields.address,
-		city: fields.city,
-		credit: fields.credit,
-		feedback: [],
-		savedFood: [],
-		orderHistory: []
-	});
-
-	user.save(function (err, data) {
-		if (err) {
-			console.log(err);
+	// first check if someone with this username already exists, otherwise run callback
+	User.findOne({"name": fields.name}, function (err, data) {
+		if (err || data) {
+			console.log("Name already exists!");
 			res.status(400);
-			res.send("saving to database error");
+			res.send("Name already exists!");
 			return;
 		}
-		
-		// Everything was successful	
-		res.status(200);
-		res.end();
-		console.log("User sign up successful");
-	});
 
+		// Now we can create the new deliverer, add them to the database
+		var user = new User({
+			name: fields.name,
+			password: fields.password,
+			email: fields.email,
+			phone: fields.phone,
+			address: fields.address,
+			city: fields.city,
+			credit: fields.credit,
+			feedback: [],
+			savedFood: [],
+			orderHistory: []
+		});
+
+		user.save(function (err, data) {
+			if (err) {
+				console.log(err);
+				res.status(400);
+				res.send("saving to database error");
+				return;
+			}
+			
+			// Everything was successful	
+			res.status(200);
+			res.end();
+			console.log("User sign up successful");
+		});
+
+	});
 });
 
 
@@ -471,3 +432,10 @@ app.get("/get_user_info", function (req, res) {
 });
 
 
+// A user submits the order form
+app.post("/make_order", function (req, res) {
+
+	res.status(200);
+	res.send("Nothing");
+
+});

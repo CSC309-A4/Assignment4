@@ -5,7 +5,6 @@ var displayOrders = $("#display-orders");
 var logout = $("#logout");
 
 var cookie = document.cookie;
-console.log(cookie);
 
 $.ajax({
 	type: "GET",
@@ -30,7 +29,7 @@ logout.click(function (e) {
 	window.location = "index.html";
 });
 
-// Function that deletes a cookie. Here just for reference / in case I need it for something later on
+// Function that deletes a cookie.
 var delete_cookie = function(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 };

@@ -104,15 +104,17 @@ var userSchema = new mongoose.Schema({
 });
 
 var orderSchema = new mongoose.Schema({
-	orderStatus: String,
-	foodStatus: String,
-	delivererID: mongoose.Schema.ObjectId, 
-	userID: mongoose.Schema.ObjectId,
 	store: String,
 	food: String,
-	date: Date,
 	userLocation: String,
-	amount: Number
+	amount: Number,
+
+	date: Date,
+	orderStatus: String,
+	foodStatus: String,
+
+	delivererID: mongoose.Schema.ObjectId, 
+	userID: mongoose.Schema.ObjectId
 },
 {
 	collection: "orders"
@@ -191,21 +193,6 @@ app.get("/login.html", function (req, res) {
 	console.log("Sent login.html");
 });
 
-app.get("/order.html", function (req, res) {
-	res.sendFile(__dirname + "/order.html");
-	console.log("Sent order.html");
-});
-
-app.get("/orderConfirmation.html", function (req, res) {
-	res.sendFile(__dirname + "/orderConfirmation.html");
-	console.log("Sent order.html");
-});
-
-app.get("/orderForm.html", function (req, res) {
-	res.sendFile(__dirname + "/orderForm.html");
-	console.log("Sent orderForm.html");
-});
-
 app.get("/userSignUp.html", function (req, res) {
 	res.sendFile(__dirname + "/userSignUp.html");
 	console.log("Sent userSignUp.html");
@@ -221,14 +208,14 @@ app.get("/userProfile.html", function (req, res) {
 
 
 
-//-------------------
+//---------------------------
 /* Other HTTP Requests */
-//-------------------
+//---------------------------
 
 // User POSTs (submits) delivery sign up form (deliverySignUp.html)
 app.post("/submit_delivery_form", function (req, res) {
 
-	console.log(req.body);
+	console.log("Request fields:"); console.log(req.body);
 	// Validation for form fields
 	var regex = /[a-z\d\-_\s]+/i;  // only alphanumeric and space
 	req.checkBody("name", "Enter a valid name!").matches(regex); 
@@ -241,6 +228,77 @@ app.post("/submit_delivery_form", function (req, res) {
 	req.checkBody("transportation", "Enter a valid form of transportation").matches(regex);
 	req.checkBody("credit", "Enter a valid credit card number").isInt();
 	
+	// Check for any errors. If so, inform requester and stop execution
+	var errors = req.validationErrors();
+	if (errors) {
+		// errors is a list of objects, or null if no errors found
+		console.log("Errors:");
+		console.log(errors);
+		// Send error and message to client
+		res.status(400);
+		var toSend = "<p>Errors:</p>";
+		for (var i = 0; i < errors.length; i++) {
+			toSend += "<p>" + errors[i].msg + "</p>";
+		}
+		res.send(toSend);
+		return;
+	} 
+
+	var fields = req.body;
+	// first check if someone with this username already exists, otherwise run callback
+	Deliverer.findOne({"name": fields.name}, function (err, data) {
+		if (err || data) {
+			console.log("Name already exists!");
+			res.status(400);
+			res.send("Name already exists!");
+			return;
+		}
+
+		// Now we can create the new deliverer, add them to the database
+		var deliverer = new Deliverer({
+			name: fields.name,
+			password: fields.password,
+			email: fields.email,
+			phone: fields.phone,
+			address: fields.address,
+			city: fields.city,
+			transportation: fields.transportation,
+			credit: fields.credit,
+			feedback: []
+		});
+
+		deliverer.save(function (err, data) {
+			if (err) {
+				console.log(err);
+				res.status(400);
+				res.send("saving to database error");
+				return;
+			}
+			
+			// Everything was successful	
+			res.status(200);
+			res.end();
+			console.log("Deliverer sign up successful");
+		});
+	});
+
+});
+
+
+
+// User POSTs (submits) user sign up form (userSignUp.html)
+app.post("/submit_user_form", function (req, res) {
+	console.log("Request fields:"); console.log(req.body);
+	// Validation for form fields
+	var regex = /[a-z\d\-_\s]+/i;  // only alphanumeric and space
+	req.checkBody("name", "Enter a valid name!").matches(regex); 
+	req.checkBody("password", 'Password: 6 to 20 characters required').len(6, 20);
+	req.checkBody("password", "Passwords do not match").equals(req.body.password_repeat);
+	req.checkBody("email", "Enter a valid email!").isEmail();
+	req.checkBody("phone", "Enter a valid phone number").notEmpty(); // not sure how to validate phone
+	req.checkBody("address", "Enter a valid address").matches(regex); // only alphanumeric and space
+	req.checkBody("city", "Enter a valid city").matches(regex);
+	req.checkBody("credit", "Enter a valid credit card number").isInt();
 
 	// Check for any errors. If so, inform requester and stop execution
 	var errors = req.validationErrors();
@@ -258,34 +316,45 @@ app.post("/submit_delivery_form", function (req, res) {
 		return;
 	} 
 
-	// Now we can create the new deliverer, add them to the database
 	var fields = req.body;
-	var deliverer = new Deliverer({
-		name: fields.name,
-		password: fields.password,
-		email: fields.email,
-		phone: fields.phone,
-		address: fields.address,
-		city: fields.city,
-		transportation: fields.transportation,
-		credit: fields.credit,
-		feedback: []
-	});
-
-	deliverer.save(function (err, data) {
-		if (err) {
-			console.log(err);
+	// first check if someone with this username already exists, otherwise run callback
+	User.findOne({"name": fields.name}, function (err, data) {
+		if (err || data) {
+			console.log("Name already exists!");
 			res.status(400);
-			res.send("saving to database error");
+			res.send("Name already exists!");
 			return;
 		}
-		
-		// Everything was successful	
-		res.status(200);
-		res.end();
-		console.log("Deliverer sign up successful");
-	});
 
+		// Now we can create the new deliverer, add them to the database
+		var user = new User({
+			name: fields.name,
+			password: fields.password,
+			email: fields.email,
+			phone: fields.phone,
+			address: fields.address,
+			city: fields.city,
+			credit: fields.credit,
+			feedback: [],
+			savedFood: [],
+			orderHistory: []
+		});
+
+		user.save(function (err, data) {
+			if (err) {
+				console.log(err);
+				res.status(400);
+				res.send("saving to database error");
+				return;
+			}
+			
+			// Everything was successful	
+			res.status(200);
+			res.end();
+			console.log("User sign up successful");
+		});
+
+	});
 });
 
 
@@ -310,11 +379,10 @@ app.post("/login", function (req, res) {
 			}
 			// Entry found in database, return successful result
 			res.status(200);
-			res.cookie("loginDeliverer", data._id, { expires: new Date(Date.now() + 10000000)});
+			res.cookie("loginDeliverer", data._id, { expires: new Date(Date.now() + 600000)});
 			res.send("Deliverer Success");
 		});
 	}
-	/*
 	else {
 		var query = {"name": name, "password": password};
 
@@ -326,26 +394,16 @@ app.post("/login", function (req, res) {
 			}
 			// Entry found in database, return successful result
 			res.status(200);
-			res.cookie("login", data._id, { expires: new Date(Date.now() + 10000000)});
+			res.cookie("loginUser", data._id, { expires: new Date(Date.now() + 600000)});
 			res.send("Successful Login");
 		});
 	}	
-	*/
-
-	// temp
-	else {
-		res.status(400);
-		res.end();
-	}
-
 });
 
 
-// User requests for deliverer info. Return in nice html format
+// User requests for deliverer info. Return document object.
 app.get("/get_deliverer_info", function (req, res) {
 	var id = req.cookies.loginDeliverer;
-	console.log(id);
-
 	Deliverer.findById(id, function (err, data) {
 		if (err || !data) {
 			console.log(err);
@@ -353,18 +411,31 @@ app.get("/get_deliverer_info", function (req, res) {
 			res.send("Error in retrieving deliverer data");
 			return;
 		}
-		
-		// Prettify output
-		var html = "";
-		html += "<p>Name: " + data.name + "</p>";
-		html += "<p>City: " + data.city + ", Address: " + data.address + "</p>";
-		html += "<p>Phone Number: " + data.phone + ", Email: " + data.email + "</p>";
-		html += "<p>Transportation: " + data.transportation + "</p>";
-		// Put comments here later
-
 		res.status(200);
-		res.send(html);
+		res.send(data);
 	});
+});
 
+// User requests for user info. Return document object.
+app.get("/get_user_info", function (req, res) {
+	var id = req.cookies.loginUser;
+	User.findById(id, function (err, data) {
+		if (err || !data) {
+			console.log(err);
+			res.status(400);
+			res.send("Error in retrieving deliverer data");
+			return;
+		}		
+		res.status(200);
+		res.send(data);
+	});
+});
+
+
+// A user submits the order form
+app.post("/make_order", function (req, res) {
+
+	res.status(200);
+	res.send("Nothing");
 
 });

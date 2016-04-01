@@ -1,12 +1,23 @@
 #main-content {
   padding: 10px;
-  border: 1px solid orange;
   width: 90%;
   margin-top: 100px;
+<<<<<<< HEAD:Part2/a4p2/static/css/deliveryProfile.css
   margin-bottom: 50px;
   margin-left: auto;
   margin-right: auto;
   width: 90%;
+=======
+	margin-bottom: 50px;
+	margin-left: auto;
+	margin-right: auto;
+
+
+>>>>>>> 9d772f29b71744989e04e53b9e2e76add8bd8248:Part1/a4p1/deliveryProfile.css
+}
+
+h1, h2, h3, h4, h5, h6, p, div, label, input {
+  color: black;
 }
 
 input {
@@ -16,8 +27,8 @@ input {
 #deliverer-info {
 	margin-top: 20px;
 	margin-bottom: 20px;
-	border: 1px solid orange;
 	padding: 10px;
+  color: black;
 
 }
 
@@ -36,10 +47,13 @@ input {
 	border-radius: 5px;
 	text-align: center;
 	cursor: pointer;
-	height: 40px;
-	background-color: orange;
-	font-size: 24px;
-	border-radius: 5px;
+<<<<<<< HEAD:Part2/a4p2/static/css/deliveryProfile.css
+<<<<<<< HEAD:Part2/a4p2/static/css/deliveryProfile.css
+
+=======
+>>>>>>> 9d772f29b71744989e04e53b9e2e76add8bd8248:Part1/a4p1/deliveryProfile.css
+=======
+>>>>>>> 9d772f29b71744989e04e53b9e2e76add8bd8248:Part1/a4p1/deliveryProfile.css
 }
 
 
@@ -51,6 +65,14 @@ input {
 
 }
 
+<<<<<<< HEAD:Part2/a4p2/static/css/deliveryProfile.css
+<<<<<<< HEAD:Part2/a4p2/static/css/deliveryProfile.css
+=======
+/* Prevents clickability/draggability */
+>>>>>>> 9d772f29b71744989e04e53b9e2e76add8bd8248:Part1/a4p1/deliveryProfile.css
+=======
+/* Prevents clickability/draggability */
+>>>>>>> 9d772f29b71744989e04e53b9e2e76add8bd8248:Part1/a4p1/deliveryProfile.css
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
@@ -61,4 +83,27 @@ input {
                                   not supported by any browser */
 }
 
+#logout {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border: 1px orange;
+  width: 100px;
+  background-color: rgba(150, 230, 220, 0.8);
+  text-align: center;
+  cursor: pointer;
+}
+
+#logout:hover {
+  background-color: rgba(150, 100, 150, 0.8);
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
 

@@ -12,26 +12,25 @@ form.submit(function(e) {
 		phone: inputs[4].value,
 		address: inputs[5].value,
 		city: inputs[6].value,
-		transportation: $("#main-content #transport")[0].value,
 		credit: inputs[7].value,
 	}
 
 	// AJAX HTTP POST request
 	$.ajax({
 		type: "POST",
-		url: "submit_delivery_form",
+		url: "submit_user_form",
 		data: formData,
 		success: function(data, textStatus, jqXHR) {
 			console.log(document.cookie);
 			output.html("Successfully signed up. To log in, go to the login page.");
-			form[0].reset(); // clears form fields
+			form[0].reset(); // Clears form fields
 		},
 		
 		error: function(jqXHR, textStatus, errorThrown) {
 			output.html(jqXHR.responseText);
     }
-
 	});
+
 
 	// Prevent page change
 	return false;

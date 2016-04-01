@@ -190,3 +190,7 @@ body{ /*hides horizontal scroll bar -- cause unknown*/
     display: block;
     margin-top: 0; 
  }
+
+ a:hover {
+  text-decoration: none;
+ }

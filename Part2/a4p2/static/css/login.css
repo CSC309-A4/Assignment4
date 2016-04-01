@@ -13,44 +13,42 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff9022', endColorstr='#ffee7600', GradientType=0);
 }
 
-#main-content {
-  padding: 5px;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 h1 {
-	text-align: center;
+  text-align: center;
 }
 
 form {
-	margin: auto;
-	width: 90%;
+  width: 90%;
+  margin: auto;
 }
 
-label {
-	margin-top: 10px;
-}
 
-input {
-  width: 80%;
-  height: 36px;
+
+#loginForm input:not(#isDeliverer) {
+  width: 90%;
+  height: 40px;
   background-color: #61933a;
   font-size: 24px;
-  border-radius: 5px;
+
 }
 
-#transport {
-  width: 80%;
+#loginForm label {
+  margin-top: 5px;
 }
 
-#submit-button {
+#loginForm #submit-button {
+  height: 50px;
   margin-top: 20px;
 }
 
 #output {
-  margin-top: 20px;
-  font-size: 24px;
-  color: rgba(240, 200, 230, 0.9);
+  margin-top: 15px;
+  font-size: 18px;
 }
+
+#isDeliverer {
+  width: 30px ; 
+  height: 30px;
+  
+}
+

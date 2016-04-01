@@ -6,7 +6,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="static/css/style.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="static/css/login.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="static/css/userSignUp.css" media="screen">
 </head>
 <body>
 
@@ -46,31 +46,46 @@
     </nav>
   </div>
   
-  <div class="main-content">
+  <div id="main-content">
     <div class="form">
-      <h1>Log In</h1>
-      <!-- This form will go to a different page depending on whether the user is a user or deliverer -->
-      <form id="loginForm" autocomplete="off">
+      <h1>Quick food delivery is only 1 step away, sign up now!</h1>
 
+      <form id="userForm" autocomplete="off">
         <label for="name">Name:</label></br>
         <input id="name" type="text" name="name"></input></br>
 
         <label for="password">Password:</label></br>
         <input id="password" type="password" name="password"></input></br>
 
-        <label for="isDeliverer">Login as deliverer?</label>
-        <input id="isDeliverer" type="checkbox" name="isDeliverer"></input></br>
+        <label for="password_repeat">Re-enter Password:</label></br>
+        <input id="password_repeat" type="password" name="password_repeat"></input></br>
 
-        <input id="submit-button" type="submit" value="Log In!"></input>
+        <label for="email">Email Address:</label></br>
+        <input id="email" type="email" name="email"></input></br>
+
+        <label for="phone_num">Phone Number:</label></br>
+        <input id="phone_num" type="tel" name="telephone"></input></br>
+
+        <label for="address">Address:</label></br>
+        <input id="address" type="text" name="address"></input></br>
+
+        <label for="city">City:</label></br>
+        <input id="city" type="text" name="city"></input></br>
+
+        <label for="credit">Credit Card Number:</label></br>
+        <input id="credit" type="text" name="creditcard"></input></br>
+
+        <input id="submit-button" type="submit" value="Sign Up!">
       </form>
 
       <div id="output"></div>
-    </div>
-  </div>
+
+    </div> 
+  </div> 
   
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="static/js/login.js"></script>
+<script src="static/js/userSignUp.js"></script>
 
 </body>
 </html>

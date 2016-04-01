@@ -1,10 +1,15 @@
+/* Applies to: order.html, orderConfirmation.html, orderForm.html (?) */
+
 @charset "utf-8";
 /* CSS Document */
-html,body,h1,h2,h3,h4,h5,h6,p,img,ul,ol,li,form,fieldset{
+html,body,h1,h2,h3,h4,h6,p,img,ul,ol,li,form,fieldset{
   border:0 none;
   margin:0;
   padding:0;
   color: white;
+}
+h5 {
+  color: black;
 }
 
 h1 {
@@ -43,6 +48,8 @@ b{
   color: white;
   text-shadow: #444 0 1px 1px;
   background:transparent;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /*Background for sections*/

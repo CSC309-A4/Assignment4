@@ -1,11 +1,12 @@
 #main-content {
   padding: 10px;
   border: 1px solid orange;
-  margin-top: 150px;
-  margin-left: 10px;
-  margin-right: 10px;
-	width: 90%;
-
+  width: 90%;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
 }
 
 input {
@@ -20,16 +21,27 @@ input {
 
 }
 
+#order-selection {
+	width: 25%;
+}
+
 #search-orders {
 	margin-top: 20px;
 	margin-bottom:20px;
 
 	width: 100px;
-	height: 60px;
+	height: 34px;
+	background-color: orange;
+	font-size: 24px;
+	border-radius: 5px;
+	text-align: center;
+	cursor: pointer;
+	height: 40px;
 	background-color: orange;
 	font-size: 24px;
 	border-radius: 5px;
 }
+
 
 #display-orders {
 	margin-top: 20px;
@@ -37,10 +49,7 @@ input {
 	border: 1px solid orange;
 	padding: 10px;
 
-
 }
-
-
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -51,4 +60,5 @@ input {
   user-select: none;           /* non-prefixed version, currently
                                   not supported by any browser */
 }
+
 

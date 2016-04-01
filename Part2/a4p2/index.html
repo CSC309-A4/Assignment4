@@ -2,9 +2,9 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Assignment 4</title>
+    <title>Yum In The Tum</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" media="screen">
 </head>
 
 <body>
@@ -19,22 +19,22 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">YITT</a>
+          <a class="navbar-brand" href="index.html">YITT</a>
         </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">`
           <!--Right side buttons (signup/login/help)-->
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sign In<b class="caret"></b></a>
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sign Up<b class="caret"></b></a>
               <ul class="dropdown-menu" id="menu1">
-                <li class="dropdown-header">Sign in as a:</li>
-                <li><a href="#">User</a></li>
-                <li><a href="#">Deliverer</a></li>
+                <li class="dropdown-header">Sign up as a:</li>
+                <li><a href="user.html#signup">User</a></li>
+                <li><a href="deliverySignUp.html">Deliverer</a></li>
               </ul>
             </li>
-            <li><a href="#">Log In</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="help.html">Help</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
      </div><!-- /.container-fluid -->
@@ -50,7 +50,7 @@
           <br><br><br><br><br><br><br>
           <h1 class="text-center">Yum In The Tum</h1>
           <br><br><br>
-          <button type="submit" class="btn btn-success btn-block">Order Now!</button>
+          <button type="submit" class="btn btn-success btn-block" onClick="parent.location='order.html'">Order Now!</button>
         </div>
       </div>
     </div>
@@ -92,33 +92,28 @@
         <br><br><br>
       </div> <!--End of header row-->
       <div class="row">
-        <div class="col-md-3 col-sm-offset-1">
-          <div class="panel panel-default">
-            <div class="panel-heading">Panel Heading</div>
-            <div class="panel-body">Panel Content</div>
+        <div class="col-sm-1"></div>
+        <div class="col-xs-5 col-md-3">
+          <div class="panel panel-info">
+            <div class="panel-heading">Convenience</div>
+            <div class="panel-body"><p class="panelFont">Out of gas? Too lazy to leave the house? Craving McDonalds at 2 in the morning? This is what we're here for. You can have the convenience and comfort of staying at home, and be still able to eat food from your favorite places!</p></div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="panel panel-default">
-            <div class="panel-heading">Panel Heading</div>
-            <div class="panel-body">Panel Content</div>
+        <div class="col-xs-5 col-md-3">
+          <div class="panel panel-info">
+            <div class="panel-heading">Anytime, Anywhere</div>
+            <div class="panel-body"><p class="panelFont">As long as the place you would like to order from is still open, you can order off the menu anytime and anywhere, simply go onto the website and make your order.</div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="panel panel-default">
-            <div class="panel-heading">Panel Heading</div>
-            <div class="panel-body">Panel Content</div>
+        <div class="col-xs-5 col-md-3">
+          <div class="panel panel-info">
+            <div class="panel-heading">Endless Possibilities</div>
+            <div class="panel-body"><p class="panelFont">Yum In The Tum offers a huge selection of restaurants, and by huge, we mean any restaurant in your area. ANY. Order from your favorite place, and we'll pick it up and deliver it to you.</p></div>
           </div>
         </div>
       </div> <!--End of panel row-->
+    </div>
   </section>
-
-  <!-- Advantages
--convenient
--food anywhere anytime (as long as the restaurant is open)
--wider variety of restaurant than competitors
-
-  -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

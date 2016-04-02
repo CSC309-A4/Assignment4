@@ -5,6 +5,8 @@ var displayOrders = $("#display-orders");
 var logout = $("#logout");
 
 var cookie = document.cookie;
+// Keep this user's data in a global so we can reference it from anywhere
+var thisUser = null;
 
 $.ajax({
 	type: "GET",
@@ -21,6 +23,7 @@ $.ajax({
 		// still need feedback stuff here
 
 		delivererInfo.html(html);
+		thisUser = data;
 	}
 });
 

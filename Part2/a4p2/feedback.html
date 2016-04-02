@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Delivery Sign Up</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="static/css/feedback.css" media="screen"/>
+</head>
+<body>
+
+  <div class="container" id="navigationBar">
+    <nav class="navbar navbar-custom navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand button (top left) -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">YITT</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <!--Right side buttons (signup/login/help)-->
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="" data-toggle="dropdown" class="dropdown-toggle">Sign Up<b class="caret"></b></a>
+              <ul class="dropdown-menu" id="menu1">
+                <li class="dropdown-header">Sign up as a:</li>                
+                <li><a href="userSignUp.html">User</a></li>
+                <li><a href="deliverySignUp.html">Deliverer</a></li>
+              </ul>
+            </li>
+
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="help.html">Help</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+     </div><!-- /.container-fluid -->
+    </nav>
+  </div>
+
+  
+  <div id="main-content">
+
+    <div class="container-fluid well span6">
+      <h1>Show your appreciation for users or deliverers by leaving them feedback!</h1>
+      <p>Is there someone who is always reliable and who pays on time? Is there someone who always delivers
+        your food hot and ready? Show them some love here!</p>
+    </div>
+
+    <div class="container-fluid well span6">
+      <form id="feedbackForm">
+        <label for="msgInput">Comment:</label></br>
+        ​<textarea id="msgInput" form="feedbackForm" rows="5" cols="50"></textarea></br>
+        <label for="rating">Rating:</label></br>
+        <input id="rating" type="number" name="rating"></input></br>
+        <label for="username">Name of User:</label></br>
+        <input id="username" type="text" name="username"></input></br>
+        <label for="isDeliverer">Is this a deliverer?</label>
+        <input id="isDeliverer" type="checkbox" name="isDeliverer"></input></br>
+
+        <input id="submit" type="submit" value="Send"></input></br>
+      </form>
+    </div>
+
+    <div class="container-fluid well span6">
+      <h2>Don't remember the name of a specific user? Search for them here.</h2>
+      
+      <div id="getUsers">Get Users</div>
+      <div id="getDeliverers">Get Deliverers</div>
+
+      <div id="output"></div>
+    </div>
+
+  </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="static/js/feedback.js"></script>
+
+
+</body>
+</html>

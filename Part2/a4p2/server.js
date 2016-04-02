@@ -132,32 +132,15 @@ var Order = mongoose.model("Order", orderSchema);
 // Serving static content (everything in the /static directory)
 app.use('/static', express.static('static'));
 
-// Main entry page
-app.get("/", function (req, res) {
+// Main entry page (route is regex for either / or /index.html)
+app.get(/^(?:\/(index.html))?(?:\/(?=$))?$/i, function (req, res) {
 	res.sendFile(__dirname + "/index.html");
 	console.log("Sent index.html");
 });
 
-app.get("/index.html", function (req, res) {
-	res.sendFile(__dirname + "/index.html");
-	console.log("Sent index.html");
-});
-
-app.get("/admin.html", function (req, res) {
-	var id = req.cookies.loginDeliverer;
-	Deliverer.findById(id, function (err, data) {
-		if (!data || data.name != "Admin Bob") {
-			// No match
-			res.status(400);
-			res.send("You cannot access this page");
-			return;
-		}
-
-		// Entry exists in db, authorized
-		res.sendFile(__dirname + "/admin.html");
-		console.log("Sent admin.html");
-	});
-
+app.get("/admin", function (req, res) {
+	res.sendFile(__dirname + "/admin.html");
+	console.log("Sent admin.html");
 });
 
 app.get("/deliveryProfile.html", function (req, res) {
@@ -165,13 +148,12 @@ app.get("/deliveryProfile.html", function (req, res) {
 	var id = req.cookies.loginDeliverer;
 	console.log(id);
 	Deliverer.findById(id, function (err, data) {
-		if (!data) {
+		if (err || !data) {
 			// No match
 			res.status(400);
 			res.send("You cannot access this page");
 			return;
 		}
-
 		// Entry exists in db, authorized
 		res.sendFile(__dirname + "/deliveryProfile.html");
 		console.log("Sent deliveryProfile.html");
@@ -181,6 +163,11 @@ app.get("/deliveryProfile.html", function (req, res) {
 app.get("/deliverySignUp.html", function (req, res) {
 	res.sendFile(__dirname + "/deliverySignUp.html");
 	console.log("Sent deliverySignUp.html");
+});
+
+app.get("/feedback.html", function (req, res) {
+	res.sendFile(__dirname + "/feedback.html");
+	console.log("Sent feedback.html");
 });
 
 app.get("/help.html", function (req, res) {
@@ -199,11 +186,19 @@ app.get("/userSignUp.html", function (req, res) {
 });
 
 app.get("/userProfile.html", function (req, res) {
-	// if user not logged in don't send file
-	// incomplete
-
-	res.sendFile(__dirname + "/userProfile.html");
-	console.log("Sent userProfile.html");
+	var id = req.cookies.loginUser;
+	console.log(id);
+	User.findById(id, function (err, data) {
+		if (err || !data) {
+			// No match
+			res.status(400);
+			res.send("You cannot access this page");
+			return;
+		}
+		// Entry exists in db, authorized
+		res.sendFile(__dirname + "/userProfile.html");
+		console.log("Sent userProfile.html");
+	});
 });
 
 
@@ -283,7 +278,6 @@ app.post("/submit_delivery_form", function (req, res) {
 	});
 
 });
-
 
 
 // User POSTs (submits) user sign up form (userSignUp.html)
@@ -426,7 +420,7 @@ app.get("/get_user_info", function (req, res) {
 			res.send("Error in retrieving deliverer data");
 			return;
 		}		
-		res.status(200);
+		res.status(200);	
 		res.send(data);
 	});
 });
@@ -439,3 +433,41 @@ app.post("/make_order", function (req, res) {
 	res.send("Nothing");
 
 });
+
+
+
+
+
+
+
+
+
+/* These requests below are from feedback.html */
+app.get("/get_all_users", function (req, res) {
+	var query = {};
+	var projection = {"name": 1, "_id": 0};
+	User.find(query, projection, function (err, data) {
+		if (err) {
+			console.log(err);
+			res.status(400);
+			res.send("Error: No user found");
+			return;
+		}
+		res.send(data);
+	});
+});
+
+app.get("/get_all_deliverers", function (req, res) {
+	var query = {};
+	var projection = {"name": 1, "_id": 0};
+	Deliverer.find(query, projection, function (err, data) {
+		if (err) {
+			console.log(err);
+			res.status(400);
+			res.send("Error: No user found");
+			return;
+		}
+		res.send(data);
+	});
+});
+

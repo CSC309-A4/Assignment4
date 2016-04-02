@@ -5,6 +5,8 @@ var logout = $("#logout");
 var orderForm = $("#order-form")
 
 var cookie = document.cookie;
+// Keep this user's data as a global so we don't have to refetch it
+var thisUser = null;
 
 $.ajax({
 	type: "GET",
@@ -21,6 +23,7 @@ $.ajax({
 		// also need order history, saved food
 
 		userInfo.html(html);
+		thisUser = data;
 	}
 });
 

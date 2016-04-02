@@ -31,7 +31,7 @@ h1, h2, h3, h4, h5, h6, p, div, label, input, textarea, li {
   cursor: pointer;
 }
 
-#output {
+#feedbackOutput, #output {
   margin-top: 10px;
   margin-left: 50px;
 }

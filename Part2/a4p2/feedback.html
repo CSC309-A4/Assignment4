@@ -53,7 +53,7 @@
     </div>
 
     <div class="container-fluid well span6">
-      <form id="feedbackForm">
+      <form id="feedbackForm" autocomplete="off">
         <label for="msgInput">Comment:</label></br>
         ​<textarea id="msgInput" form="feedbackForm" rows="5" cols="50"></textarea></br>
         <label for="rating">Rating:</label></br>
@@ -66,8 +66,19 @@
         <input id="submit" type="submit" value="Send"></input></br>
       </form>
 
+      <div id="formOutput"></div>
+    </div>
+
+
+    <div class="container-fluid well span6">
+      <h4>Want to see what other people are saying about someone? Just enter their name here:<h4>
+      <p>Name:</p>
+      <input type="text" name="username" autocomplete="off"></input>
+      <button id="getFeedback">Get Feedback</button>
+
       <div id="feedbackOutput"></div>
     </div>
+
 
     <div class="container-fluid well span6">
       <h2>Don't remember the name of a specific user? Search for them here.</h2>
@@ -75,7 +86,7 @@
       <div id="getUsers">Get Users</div>
       <div id="getDeliverers">Get Deliverers</div>
 
-      <div id="output"></div>
+      <div id="usersOutput"></div>
     </div>
 
   </div>

@@ -447,12 +447,13 @@ app.get("/get_all_users", function (req, res) {
 	var query = {};
 	var projection = {"name": 1, "_id": 0};
 	User.find(query, projection, function (err, data) {
-		if (err) {
+		if (err || !data) {
 			console.log(err);
 			res.status(400);
-			res.send("Error: No user found");
+			res.send("No user found");
 			return;
 		}
+		res.status(200);
 		res.send(data);
 	});
 });
@@ -461,13 +462,73 @@ app.get("/get_all_deliverers", function (req, res) {
 	var query = {};
 	var projection = {"name": 1, "_id": 0};
 	Deliverer.find(query, projection, function (err, data) {
-		if (err) {
+		if (err || !data) {
 			console.log(err);
 			res.status(400);
-			res.send("Error: No user found");
+			res.send("No user found");
 			return;
 		}
+		res.status(200);
 		res.send(data);
 	});
+});
+
+// Handling case where someone wants to enter feedback about someone
+app.post("/make_comment", function (req, res) {
+	console.log("Make Comment");
+	if (Object.keys(req.cookies).length != 1) {
+		res.status(400);
+		res.send("You have to be logged in to make a comment");
+	}
+
+	// So at this point there should be exactly 1 entry in req.cookies...
+	// Get form fields
+	var thisUserIsDeliverer = false;
+	var commenter = req.cookies.loginUser;
+	if (!commenter) {
+		thisUserIsDeliverer = true;
+		commenter = req.cookies.loginDeliverer;
+	}
+
+	console.log(commenter);
+	console.log(thisUserIsDeliverer);
+	console.log(req.body);
+
+
+	var feedbackObj = {
+		rating: req.body.rating,
+		madeBy: null,
+		msg: req.body.msg,
+	}
+
+
+	// Get the name of this commenter
+	if (thisUserIsDeliverer) {
+		Deliverer.findById(commenter, function (err, data) {
+
+			var name = data.name;
+			console.log(name);
+			console.log(feedbackObj);
+
+		});
+	} else {
+
+
+	}
+
+
+	var query = {"name": req.body.username};
+	// Update the database with the entries provided
+	if (thisUserIsDeliverer) {
+		console.log(1);
+	}
+	else {
+		console.log(2);
+	}
+ 
+	res.status(200);
+	res.send("Hi");
+
+
 });
 

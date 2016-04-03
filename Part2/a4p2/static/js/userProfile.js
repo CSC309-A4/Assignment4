@@ -2,7 +2,8 @@
 // their cookie
 var userInfo = $("#user-info");
 var logout = $("#logout");
-var orderForm = $("#order-form")
+var output = $("#output");
+var orderForm = $("#order-form");
 
 var cookie = document.cookie;
 
@@ -52,22 +53,38 @@ orderForm.submit(function (e) {
   var orderFields = {};
   inputs.each(function() {
   	orderFields[this.name] = $(this).val();
+	console.log(new Date().toJSON().slice(0,10));
+	console.log($(this).val());
   });
-  // Also need to send cookie with this request...
-
-  //...
-  //...
-
-	$.ajax({
+  var x = "";
+  if (confirm("Food = " + orderFields['food'] + "\nStore = " + orderFields['store'] + "\nLocation = " + orderFields['userLocation']) == true){
+	  var order = {
+		  stat: 'Pending',
+		  food_status: 'Pending',
+		  deliverer_id: "",
+		  user_id: cookie,
+		  store: orderFields['store'],
+		  food: orderFields['food'],
+		  date: new Date().toJSON().slice(0,10),
+		  location: orderFields['userLocation'],
+		  amount: 0,
+	  }
+	  $.ajax({
 		type: "POST",
 		url: "make_order",
-		data: null,
+		data: order,
 		success: function(data, textStatus, jqXHR) {
 			console.log(data);
-		}
-
-	});
-
+			output.html("Sucessfully placed order");
+			orderForm[0].reset();
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			output.html(jqXHR.responseText);
+	  }
+	  });
+  }else{
+	  alert("The order is not placed")
+  }
 
 	// Prevent page change
 	return false;

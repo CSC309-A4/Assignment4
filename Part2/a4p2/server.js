@@ -113,8 +113,8 @@ var orderSchema = new mongoose.Schema({
 	orderStatus: String,
 	foodStatus: String,
 
-	delivererID: mongoose.Schema.ObjectId, 
-	userID: mongoose.Schema.ObjectId
+	delivererID: String,
+	userID: String
 },
 {
 	collection: "orders"
@@ -435,7 +435,45 @@ app.get("/get_user_info", function (req, res) {
 // A user submits the order form
 app.post("/make_order", function (req, res) {
 
-	res.status(200);
-	res.send("Nothing");
+	var errors = req.validationErrors();
+	if (errors) {
+		// errors is a list of objects, or null if no errors found
+		console.log("Errors:");
+		console.log(errors);
+		// Send error and message to client
+		res.status(400);
+		var toSend = "<p>Errors:</p>";
+		for (var i = 0; i < errors.length; i++) {
+			toSend += "<p>" + errors[i].msg + "</p>";
+		}
+		res.send(toSend);
+		return;
+	} 
+	var fields = req.body;
+	var order = new Order({
+		store: fields.store,
+		food: fields.food,
+		userLocation: fields.location,
+		amount: fields.amount,
+		date: fields.date,
+		orderStatus: fields.stat,
+		foodStatus: fields.food_status,
+		delivererID: fields.deliverer_id,
+		userID: fields.user_id
+	});
+	
+	order.save(function (err, data) {
+		if (err) {
+			console.log(err);
+			res.status(400);
+			res.send("saving to database error");
+			return;
+			}
+			
+			// Everything was successful	
+		res.status(200);
+		res.end();
+		console.log("User sign up successful");
+	});
 
 });

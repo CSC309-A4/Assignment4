@@ -2,10 +2,18 @@
   padding: 10px;
   width: 90%;
   margin-top: 100px;
+<<<<<<< HEAD:Part2/a4p2/static/css/deliveryProfile.css
   margin-bottom: 50px;
   margin-left: auto;
   margin-right: auto;
   width: 90%;
+=======
+	margin-bottom: 50px;
+	margin-left: auto;
+	margin-right: auto;
+
+
+>>>>>>> 9d772f29b71744989e04e53b9e2e76add8bd8248:Part1/a4p1/deliveryProfile.css
 }
 
 h1, h2, h3, h4, h5, h6, p, div, label, input {
@@ -39,7 +47,13 @@ input {
 	border-radius: 5px;
 	text-align: center;
 	cursor: pointer;
+<<<<<<< HEAD:Part2/a4p2/static/css/deliveryProfile.css
+<<<<<<< HEAD:Part2/a4p2/static/css/deliveryProfile.css
 
+=======
+>>>>>>> 9d772f29b71744989e04e53b9e2e76add8bd8248:Part1/a4p1/deliveryProfile.css
+=======
+>>>>>>> 9d772f29b71744989e04e53b9e2e76add8bd8248:Part1/a4p1/deliveryProfile.css
 }
 
 
@@ -51,6 +65,14 @@ input {
 
 }
 
+<<<<<<< HEAD:Part2/a4p2/static/css/deliveryProfile.css
+<<<<<<< HEAD:Part2/a4p2/static/css/deliveryProfile.css
+=======
+/* Prevents clickability/draggability */
+>>>>>>> 9d772f29b71744989e04e53b9e2e76add8bd8248:Part1/a4p1/deliveryProfile.css
+=======
+/* Prevents clickability/draggability */
+>>>>>>> 9d772f29b71744989e04e53b9e2e76add8bd8248:Part1/a4p1/deliveryProfile.css
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */

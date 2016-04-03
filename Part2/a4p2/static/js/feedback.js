@@ -11,22 +11,21 @@ var formOutput = $("#formOutput");
 var feedbackOutput = $("#feedbackOutput");
 var usersOutput = $("#usersOutput");
 
-
+// Populate the allUsers and allDeliverers
 $.ajax({
 	type: "GET",
 	url: "get_all_users",
 	data: null,
 	success: function(data, textStatus, jqXHR) {
 		allUsers = data;
-	}
-});
-
-$.ajax({
-	type: "GET",
-	url: "get_all_deliverers",
-	data: null,
-	success: function(data, textStatus, jqXHR) {
-		allDeliverers = data;
+		$.ajax({
+			type: "GET",
+			url: "get_all_deliverers",
+			data: null,
+			success: function(data, textStatus, jqXHR) {
+				allDeliverers = data;
+			}
+		});
 	}
 });
 
@@ -79,7 +78,7 @@ feedbackForm.submit(function (e) {
 		isDeliverer: $("#isDeliverer")[0].checked,
 		cookie: document.cookie
 	}
-	console.log(formData);
+	console.log(formData);	
 
 	// Make AJAX post request to submit form data
 	$.ajax({

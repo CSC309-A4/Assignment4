@@ -373,7 +373,7 @@ app.post("/login", function (req, res) {
 			}
 			// Entry found in database, return successful result
 			res.status(200);
-			res.cookie("loginDeliverer", data._id, { expires: new Date(Date.now() + 600000)});
+			res.cookie("loginDeliverer", data._id, { expires: new Date(Date.now() + 6000000)});
 			res.send("Deliverer Success");
 		});
 	}
@@ -388,7 +388,7 @@ app.post("/login", function (req, res) {
 			}
 			// Entry found in database, return successful result
 			res.status(200);
-			res.cookie("loginUser", data._id, { expires: new Date(Date.now() + 600000)});
+			res.cookie("loginUser", data._id, { expires: new Date(Date.now() + 6000000)});
 			res.send("Successful Login");
 		});
 	}	
@@ -483,15 +483,14 @@ app.post("/make_comment", function (req, res) {
 
 	// So at this point there should be exactly 1 entry in req.cookies...
 	// Get form fields
-	var thisUserIsDeliverer = false;
+	var comenteeIsDeliverer = false;
 	var commenter = req.cookies.loginUser;
-	if (!commenter) {
-		thisUserIsDeliverer = true;
+	if (!comenteeIsDeliverer) {
+		comenteeIsDeliverer = true;
 		commenter = req.cookies.loginDeliverer;
 	}
 
-	console.log(commenter);
-	console.log(thisUserIsDeliverer);
+	console.log(comenteeIsDeliverer);
 	console.log(req.body);
 
 
@@ -500,35 +499,48 @@ app.post("/make_comment", function (req, res) {
 		madeBy: null,
 		msg: req.body.msg,
 	}
+	console.log(feedbackObj);
+	console.log(req.body.username);
 
-
+	/*
 	// Get the name of this commenter
-	if (thisUserIsDeliverer) {
+	if (comenteeIsDeliverer) {
 		Deliverer.findById(commenter, function (err, data) {
 
-			var name = data.name;
-			console.log(name);
-			console.log(feedbackObj);
-
+			feedbackObj.madeBy = data.name;
+			// Now update the commenter's feedback array
+			var query = {"name": req.body.username};
+			Deliverer.findOneAndUpdate(query,
+			    {$push: {"feedback": feedbackObj }},
+			    // {safe: true, upsert: true},
+			    function (err, data) {
+			    	if (err || !data) {
+			      	console.log(err);
+			      	res.status(400);
+			      	res.send("Not found, couldn't make comment");
+			      	return;
+			    	}
+			      res.status(200);
+			      res.send("Success");
+			    }
+			);
 		});
-	} else {
-
-
-	}
-
-
-	var query = {"name": req.body.username};
-	// Update the database with the entries provided
-	if (thisUserIsDeliverer) {
-		console.log(1);
-	}
+	} 
 	else {
 		console.log(2);
+
+		res.status(200);
+		res.send("Hi");
+
 	}
- 
+	*/
+
 	res.status(200);
 	res.send("Hi");
 
 
-});
+	
 
+
+
+});

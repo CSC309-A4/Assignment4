@@ -1,3 +1,5 @@
+/* Client side code for the delivery profile page. */
+
 // As soon as the profile page is loaded, I can display information about them using
 // their cookie
 var delivererInfo = $("#deliverer-info");

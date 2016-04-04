@@ -42,7 +42,6 @@ form.submit(function(e) {
 		url: "submit_user_form",
 		data: formData,
 		success: function(data, textStatus, jqXHR) {
-			console.log(document.cookie);
 			alert("Successfully signed up!");
 			location.href = "login.html"
 		},

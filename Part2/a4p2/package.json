@@ -21,6 +21,7 @@
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "express-validator": "^2.20.3",
+    "mocha": "^2.4.5",
     "mongodb": "^2.1.10",
     "mongoose": "^4.4.8",
     "superagent": "^1.8.3"

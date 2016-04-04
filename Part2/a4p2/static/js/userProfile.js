@@ -18,7 +18,7 @@ $.ajax({
 	data: cookie,
 	success: function(data, textStatus, jqXHR) {
 		// Data is an object, get its fields and output to html
-		console.log(data);
+		// console.log(data);
 		var html = "";
 		html += "<h2>User: " + data.name + "</h2>";
 		html += "<p>Email: " + data.email + ", Phone: " + data.phone + "</p>";
@@ -40,7 +40,7 @@ function updateOrderHistory() {
 		data: thisUser,
 		success: function(data, textStatus, jqXHR){
 			var html = "";
-			console.log(data);
+			// console.log(data);
 			for (i = 0; i < data.length; i++){
 				html += "<div class='orderEntry'>";
 				html += "<p>Status of order: " + data[i].orderStatus + "</p>";
@@ -70,7 +70,7 @@ function updateOrderHistory() {
 orderForm.submit(function (e) {
 	// If user is currently logged out (for whatever reason) don't continue
 	if (document.cookie.indexOf("loginUser") < 0) {
-		console.log("No");
+		console.log("Bad order form submission");
 		return false;
 	}
 

@@ -413,6 +413,7 @@ app.get("/get_deliverer_info", function (req, res) {
 // User requests for user info. Return document object.
 app.get("/get_user_info", function (req, res) {
 	var id = req.cookies.loginUser;
+	console.log(id);
 	User.findById(id, function (err, data) {
 		if (err || !data) {
 			console.log(err);
@@ -425,6 +426,24 @@ app.get("/get_user_info", function (req, res) {
 	});
 });
 
+app.get("/get_order", function (req, res) {
+	
+	var id = req.cookies.loginUser;
+	Order.find({userID: id}, function (err, data){
+		console.log(data);
+		if (err || !data) {
+			console.log(err);
+			res.status(400);
+			res.send("Error in retrieving deliverer data");
+			return;
+		}
+		if (!data.length){
+			data = {};
+		}
+		res.status(200);
+		res.send(data);
+	});
+});
 
 // A user submits the order form
 app.post("/make_order", function (req, res) {

@@ -376,7 +376,7 @@ app.post("/login", function (req, res) {
 			}
 			// Entry found in database, return successful result
 			res.status(200);
-			res.cookie("loginDeliverer", data._id, { expires: new Date(Date.now() + 600000)});
+			res.cookie("loginDeliverer", data._id, { expires: new Date(Date.now() + 6000000)});
 			res.send("Deliverer Success");
 		});
 	}
@@ -391,7 +391,7 @@ app.post("/login", function (req, res) {
 			}
 			// Entry found in database, return successful result
 			res.status(200);
-			res.cookie("loginUser", data._id, { expires: new Date(Date.now() + 600000)});
+			res.cookie("loginUser", data._id, { expires: new Date(Date.now() + 6000000)});
 			res.send("Successful Login");
 		});
 	}	
@@ -507,12 +507,13 @@ app.get("/get_all_users", function (req, res) {
 	var query = {};
 	var projection = {"name": 1, "_id": 0};
 	User.find(query, projection, function (err, data) {
-		if (err) {
+		if (err || !data) {
 			console.log(err);
 			res.status(400);
-			res.send("Error: No user found");
+			res.send("No user found");
 			return;
 		}
+		res.status(200);
 		res.send(data);
 	});
 });
@@ -521,13 +522,137 @@ app.get("/get_all_deliverers", function (req, res) {
 	var query = {};
 	var projection = {"name": 1, "_id": 0};
 	Deliverer.find(query, projection, function (err, data) {
-		if (err) {
+		if (err || !data) {
 			console.log(err);
 			res.status(400);
-			res.send("Error: No user found");
+			res.send("No user found");
 			return;
 		}
+		res.status(200);
 		res.send(data);
 	});
 });
+
+// Handling case where someone wants to enter feedback about someone
+app.post("/make_comment", function (req, res) {
+	console.log("Make Comment");
+	// Check if logged in
+	if (Object.keys(req.cookies).length != 1) {
+		res.status(400);
+		res.send("You have to be logged in to make a comment");
+	}
+	// So at this point there should be exactly 1 entry in req.cookies...
+
+	// Why do we need to do this? Because I dont have the current user's name,
+	// and for comments I need to associate the commenter's name with each piece of feedback
+	var commenterIsDeliverer = false;
+	var commenter = req.cookies.loginUser;
+	if (!commenter) {
+		commenterIsDeliverer = true;
+		commenter = req.cookies.loginDeliverer;
+	}
+
+	var feedbackObj = {
+		rating: req.body.rating,
+		madeBy: null,
+		msg: req.body.msg,
+	}
+	
+	// brute force code but someone else can clean it up maybe
+	if (commenterIsDeliverer) {
+		Deliverer.findById(commenter, function (err, data) {
+			feedbackObj.madeBy = data.name;
+			var query = {"name": req.body.username};
+
+			if (req.body.isDeliverer == "true") {
+				Deliverer.findOneAndUpdate(query, {$push: {"feedback": feedbackObj}}, function (err, data) {
+					if (err || !data) {
+						res.status(400);
+						res.send("Not found, couldn't make comment");
+						return;
+					}
+					res.status(200);
+					res.send("Success");
+				});
+			}
+			else {
+				User.findOneAndUpdate(query, {$push: {"feedback": feedbackObj}}, function (err, data) {
+					if (err || !data) {
+						res.status(400);
+						res.send("Not found, could not make comment");
+						return;
+					}
+					res.status(200);
+					res.send("success");
+
+				});
+			}
+
+
+		});
+	}
+	else { // commenterIsDeliverer == false
+		User.findById(commenter, function (err, data) {
+			feedbackObj.madeBy = data.name;
+			var query = {"name": req.body.username};
+
+			if (req.body.isDeliverer == "true") {
+				Deliverer.findOneAndUpdate(query, {$push: {"feedback": feedbackObj}}, function (err, data) {
+					if (err || !data) {
+						res.status(400);
+						res.send("not found, couldn't make comment");
+						return;
+					}
+					res.status(200);
+					res.send("Success");
+				});
+			}
+			else {
+				User.findOneAndUpdate(query, {$push: {"feedback": feedbackObj}}, function (err, data) {
+					if (err || !data) {
+						res.status(400);
+						res.send("not found, could not make comment");
+						return;
+					}
+					res.status(200);
+					res.send("success");
+				});
+			}
+
+		});
+	}
+
+});
+
+// Return all feedback for a given user
+app.get("/get_feedback", function (req, res) {
+	console.log("Get Feedback");
+	
+	var query = {"name": req.query.username};
+	var projection = {"feedback": 1, "_id": 0};
+	if (req.query.userType == "user") {
+		User.findOne(query, projection, function (err, data) {
+			if (err || !data) {
+				res.status(400);
+				res.send("User not found");
+				return;
+			}
+			res.status(200);
+			res.send(data);
+		});
+	}
+	else {
+		Deliverer.findOne(query, projection, function (err, data) {
+			if (err || !data) {
+				res.status(400);
+				res.send("Deliverer not found");
+				return;
+			}
+			res.status(200);
+			res.send(data);
+		});
+	}
+
+});
+
 

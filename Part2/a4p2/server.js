@@ -484,18 +484,15 @@ app.post("/make_order", function (req, res) {
 			res.status(400);
 			res.send("saving to database error");
 			return;
-			}
+		}
 			
-			// Everything was successful	
+		// Everything was successful	
 		res.status(200);
 		res.end();
 		console.log("User sign up successful");
 	});
 
 });
-
-
-
 
 
 

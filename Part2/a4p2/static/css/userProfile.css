@@ -11,11 +11,6 @@
 
 }
 
-img {
-	float: right;
-	display: block;
-}
-
 #logout {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -43,7 +38,9 @@ img {
 	width: 50%;
 }
 
-
+.orderEntry {
+	background-color: rgba(150, 100, 150, 0.8);
+}
 
 
 

@@ -1,7 +1,5 @@
 /* This file contains all the main server / database code. 
-Sets up a connection the database, listens for incoming connections, etc.
-
-*/
+Sets up a connection the database, listens for incoming connections, etc. */
 
 
 //---------------
@@ -377,7 +375,7 @@ app.post("/login", function (req, res) {
 			// Entry found in database, return successful result
 			res.status(200);
 			res.cookie("loginDeliverer", data._id, { expires: new Date(Date.now() + 6000000)});
-			res.send("Deliverer Success");
+			res.send("Successful Login Deliverer");
 		});
 	}
 	else {
@@ -392,7 +390,7 @@ app.post("/login", function (req, res) {
 			// Entry found in database, return successful result
 			res.status(200);
 			res.cookie("loginUser", data._id, { expires: new Date(Date.now() + 6000000)});
-			res.send("Successful Login");
+			res.send("Successful Login User");
 		});
 	}	
 });
@@ -484,18 +482,15 @@ app.post("/make_order", function (req, res) {
 			res.status(400);
 			res.send("saving to database error");
 			return;
-			}
+		}
 			
-			// Everything was successful	
+		// Everything was successful	
 		res.status(200);
 		res.end();
 		console.log("User sign up successful");
 	});
 
 });
-
-
-
 
 
 

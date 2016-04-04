@@ -22,7 +22,6 @@ $.ajax({
 		html += "<p>Email: " + data.email + ", Phone: " + data.phone + "</p>";
 		html += "<p>Address: " + data.address + ", City: " + data.city + "</p>";
 		// still need feedback stuff here
-		// also need order history, saved food 
 
 		userInfo.html(html);
 		thisUser = data;

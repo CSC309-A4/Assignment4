@@ -36,7 +36,7 @@ Notes:
 - we provide some sample users, in users.json and deliverers.json. Can use mongoimport to load these
 documents into the foodshare database if you want (eg. mongoimport --db foodshare --collection users users.json)
 - users have unique names, so you can't sign up as "Bob" twice. You can however, have a "Bob" user and a "Bob" deliverer
-- 
+
 
 
 // Making an order

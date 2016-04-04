@@ -4,6 +4,7 @@ var userInfo = $("#user-info");
 var logout = $("#logout");
 var output = $("#output");
 var orderForm = $("#order-form");
+var orderHistory = $("#order-history");
 
 var cookie = document.cookie;
 // Keep this user's data as a global so we don't have to refetch it
@@ -25,6 +26,37 @@ $.ajax({
 
 		userInfo.html(html);
 		thisUser = data;
+	}
+});
+
+$.ajax({
+	type: "GET",
+	url: "get_order",
+	data: thisUser,
+	success: function(data, textStatus, jqXHR){
+		var html = "";
+		console.log(data);
+		for (i = 0; i < data.length; i++){
+			console.log(data[i]);
+
+			html += "<div class=\"col-xs-12\">";
+			html += "<div id=\"panel" + (i + 1) + "class=\"panel panel-primary\">";
+			html += "<div class=\"panel-heading\">Order " + (i + 1) + "</div>";
+			html += "<div class=\"panel-body\"><p>" + data[i].orderStatus + "</p>";
+			html += "<p>" + data[i].foodStatus + "</p>";
+			html += "<p>" + data[i].userLocation + "</p>";
+			html += "<p>" + data[i].store + "</p>";
+			html += "<p>" + data[i].food + "</p>";
+			if (data[i].amount != 0){
+				html += "<p>" + data[i].amount + "</p>";
+			}
+			if (data[i].delivererID != ""){
+				html += "<p>" + data[i].delivererID + "</p>";
+			}
+			html += "<p>" + data[i].date + "</p>";
+			html += "</div></div></div>";
+		}
+		orderHistory.html(html);
 	}
 });
 
@@ -56,8 +88,6 @@ orderForm.submit(function (e) {
   var orderFields = {};
   inputs.each(function() {
   	orderFields[this.name] = $(this).val();
-	console.log(new Date().toJSON().slice(0,10));
-	console.log($(this).val());
   });
   var x = "";
   if (confirm("Food = " + orderFields['food'] + "\nStore = " + orderFields['store'] + "\nLocation = " + orderFields['userLocation']) == true){
@@ -65,7 +95,7 @@ orderForm.submit(function (e) {
 		  stat: 'Pending',
 		  food_status: 'Pending',
 		  deliverer_id: "",
-		  user_id: cookie,
+		  user_id: thisUser,
 		  store: orderFields['store'],
 		  food: orderFields['food'],
 		  date: new Date().toJSON().slice(0,10),

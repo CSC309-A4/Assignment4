@@ -45,3 +45,9 @@ h1, h2, h3, h4, h5, h6, p, div, label, input, textarea, li {
 textarea {
   resize: none;
 }
+
+.feedbackEntry {
+  background-color: rgba(200, 130, 200, 0.7);
+  margin-top: 10px;
+
+}

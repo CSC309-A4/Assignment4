@@ -1,65 +1,54 @@
-// As soon as the page loads, make a request for all users in the system
-// Known problem: this is not asynchronous, and if user signs up in the meantime, changes wont show here
-var allUsers = [];
-var allDeliverers = [];
+// Feedback form code
 
 var getAllUsers = $("#getUsers");
 var getAllDeliverers = $("#getDeliverers");
 var feedbackForm = $("#feedbackForm");
+var getFeedbackButton = $("#getFeedback");
+var getFeedbackInput = $("#getFeedbackUser");
 
 var formOutput = $("#formOutput");
 var feedbackOutput = $("#feedbackOutput");
 var usersOutput = $("#usersOutput");
 
-// Populate the allUsers and allDeliverers
-$.ajax({
-	type: "GET",
-	url: "get_all_users",
-	data: null,
-	success: function(data, textStatus, jqXHR) {
-		allUsers = data;
-		$.ajax({
-			type: "GET",
-			url: "get_all_deliverers",
-			data: null,
-			success: function(data, textStatus, jqXHR) {
-				allDeliverers = data;
-			}
-		});
-	}
-});
-
 
 getAllUsers.click(function (e) {
-	if (allUsers.length < 1) {
-		usersOutput.html("No users");	
-		return;
-	}
+	$.ajax({
+		type: "GET",
+		url: "get_all_users",
+		data: null,
+		success: function(data, textStatus, jqXHR) {
+			var html = "";
+			for (var i = 0; i < data.length; i++) {
+				html += "<li>" + data[i].name + "</li>";
+			}
+			html += "</ul>";
+			usersOutput.html(html);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			usersOutput.html("Error in retrieving users");
+    }
+	});
 
-	var html = "";
-	html += "<ul>";
-	for (var i = 0; i < allUsers.length; i++) {
-		html += "<li>" + allUsers[i].name + "</li>";
-	}
-	html += "</ul>";
-
-	usersOutput.html(html);
 });
 
 getAllDeliverers.click(function (e) {
-	if (allDeliverers.length < 1) {
-		usersOutput.html("No deliverers");
-		return;
-	}
+	$.ajax({
+		type: "GET",
+		url: "get_all_deliverers",
+		data: null,
+		success: function(data, textStatus, jqXHR) {
+			var html = "";
+			for (var i = 0; i < data.length; i++) {
+				html += "<li>" + data[i].name + "</li>";
+			}
+			html += "</ul>";
+			usersOutput.html(html);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			usersOutput.html("Error in retrieving users");
+    }
+	});
 
-	var html = "";
-	html += "<ul>";
-	for (var i = 0; i < allDeliverers.length; i++) {
-		html += "<li>" + allDeliverers[i].name + "</li>";
-	}
-	html += "</ul>";
-
-	usersOutput.html(html);
 });
 
 
@@ -78,7 +67,6 @@ feedbackForm.submit(function (e) {
 		isDeliverer: $("#isDeliverer")[0].checked,
 		cookie: document.cookie
 	}
-	console.log(formData);	
 
 	// Make AJAX post request to submit form data
 	$.ajax({
@@ -86,10 +74,10 @@ feedbackForm.submit(function (e) {
 		url: "make_comment",
 		data: formData,
 		success: function(data, textStatus, jqXHR) {
-			console.log(data);
+			formOutput.html(data);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
-			console.log(jqXHR);
+			formOutput.html(jqXHR.responseText);
     }
 	});
 
@@ -97,6 +85,47 @@ feedbackForm.submit(function (e) {
 	return false;
 });
 
+// Get feedback associated with a user
+getFeedbackButton.click(function (e) {
+	var username = getFeedbackInput[0].value;
+	var userType;
+	if ($("input[type='radio']")[0].checked) {
+		userType = "user";
+	} else {
+		userType = "deliverer";
+	}
+	var data = {
+		username: username,
+		userType: userType
+	}
+
+	$.ajax({
+		type: "GET",
+		url: "get_feedback",
+		data: data,
+		success: function(data, textStatus, jqXHR) {
+			if (data.feedback.length <= 0) {
+				feedbackOutput.html("<h3>No feedback to display</h3>");
+				return;
+			}
+			var html = "";
+			html += "<h3>Feedback for user:</h3>";
+			for (var i = 0; i < data.feedback.length; i++) {
+				html += "<div class=feedbackEntry>";
+				html += "<p>Made by: " + data.feedback[i].madeBy + "</p>";
+				html += "<p>Rating (out of 10): " + data.feedback[i].rating + "</p>";
+				html += "<p>Message:";
+				html += data.feedback[i].msg;
+				html += "</p></div>";
+			}
+			feedbackOutput.html(html);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			feedbackOutput.html(jqXHR.responseText);
+    }
+	});
+
+});
 
 
 

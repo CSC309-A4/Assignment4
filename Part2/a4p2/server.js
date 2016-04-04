@@ -514,71 +514,123 @@ app.get("/get_all_deliverers", function (req, res) {
 // Handling case where someone wants to enter feedback about someone
 app.post("/make_comment", function (req, res) {
 	console.log("Make Comment");
+	// Check if logged in
 	if (Object.keys(req.cookies).length != 1) {
 		res.status(400);
 		res.send("You have to be logged in to make a comment");
 	}
-
 	// So at this point there should be exactly 1 entry in req.cookies...
-	// Get form fields
-	var comenteeIsDeliverer = false;
+
+	// Why do we need to do this? Because I dont have the current user's name,
+	// and for comments I need to associate the commenter's name with each piece of feedback
+	var commenterIsDeliverer = false;
 	var commenter = req.cookies.loginUser;
-	if (!comenteeIsDeliverer) {
-		comenteeIsDeliverer = true;
+	if (!commenter) {
+		commenterIsDeliverer = true;
 		commenter = req.cookies.loginDeliverer;
 	}
-
-	console.log(comenteeIsDeliverer);
-	console.log(req.body);
-
 
 	var feedbackObj = {
 		rating: req.body.rating,
 		madeBy: null,
 		msg: req.body.msg,
 	}
-	console.log(feedbackObj);
-	console.log(req.body.username);
-
-	/*
-	// Get the name of this commenter
-	if (comenteeIsDeliverer) {
-		Deliverer.findById(commenter, function (err, data) {
-
-			feedbackObj.madeBy = data.name;
-			// Now update the commenter's feedback array
-			var query = {"name": req.body.username};
-			Deliverer.findOneAndUpdate(query,
-			    {$push: {"feedback": feedbackObj }},
-			    // {safe: true, upsert: true},
-			    function (err, data) {
-			    	if (err || !data) {
-			      	console.log(err);
-			      	res.status(400);
-			      	res.send("Not found, couldn't make comment");
-			      	return;
-			    	}
-			      res.status(200);
-			      res.send("Success");
-			    }
-			);
-		});
-	} 
-	else {
-		console.log(2);
-
-		res.status(200);
-		res.send("Hi");
-
-	}
-	*/
-
-	res.status(200);
-	res.send("Hi");
-
-
 	
+	// brute force code but someone else can clean it up maybe
+	if (commenterIsDeliverer) {
+		Deliverer.findById(commenter, function (err, data) {
+			feedbackObj.madeBy = data.name;
+			var query = {"name": req.body.username};
+
+			if (req.body.isDeliverer == "true") {
+				Deliverer.findOneAndUpdate(query, {$push: {"feedback": feedbackObj}}, function (err, data) {
+					if (err || !data) {
+						res.status(400);
+						res.send("Not found, couldn't make comment");
+						return;
+					}
+					res.status(200);
+					res.send("Success");
+				});
+			}
+			else {
+				User.findOneAndUpdate(query, {$push: {"feedback": feedbackObj}}, function (err, data) {
+					if (err || !data) {
+						res.status(400);
+						res.send("Not found, could not make comment");
+						return;
+					}
+					res.status(200);
+					res.send("success");
+
+				});
+			}
 
 
+		});
+	}
+	else { // commenterIsDeliverer == false
+		User.findById(commenter, function (err, data) {
+			feedbackObj.madeBy = data.name;
+			var query = {"name": req.body.username};
+
+			if (req.body.isDeliverer == "true") {
+				Deliverer.findOneAndUpdate(query, {$push: {"feedback": feedbackObj}}, function (err, data) {
+					if (err || !data) {
+						res.status(400);
+						res.send("not found, couldn't make comment");
+						return;
+					}
+					res.status(200);
+					res.send("Success");
+				});
+			}
+			else {
+				User.findOneAndUpdate(query, {$push: {"feedback": feedbackObj}}, function (err, data) {
+					if (err || !data) {
+						res.status(400);
+						res.send("not found, could not make comment");
+						return;
+					}
+					res.status(200);
+					res.send("success");
+				});
+			}
+
+		});
+	}
 
 });
+
+// Return all feedback for a given user
+app.get("/get_feedback", function (req, res) {
+	console.log("Get Feedback");
+	
+	var query = {"name": req.query.username};
+	var projection = {"feedback": 1, "_id": 0};
+	if (req.query.userType == "user") {
+		User.findOne(query, projection, function (err, data) {
+			if (err || !data) {
+				res.status(400);
+				res.send("User not found");
+				return;
+			}
+			res.status(200);
+			res.send(data);
+		});
+	}
+	else {
+		Deliverer.findOne(query, projection, function (err, data) {
+			if (err || !data) {
+				res.status(400);
+				res.send("Deliverer not found");
+				return;
+			}
+			res.status(200);
+			res.send(data);
+		});
+	}
+
+});
+
+

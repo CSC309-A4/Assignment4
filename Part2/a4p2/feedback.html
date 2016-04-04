@@ -57,7 +57,7 @@
         <label for="msgInput">Comment:</label></br>
         ​<textarea id="msgInput" form="feedbackForm" rows="5" cols="50"></textarea></br>
         <label for="rating">Rating:</label></br>
-        <input id="rating" type="number" name="rating"></input></br>
+        <input id="rating" type="number" name="rating" value="10" min="0" max="10"></input></br>
         <label for="username">Name of User:</label></br>
         <input id="username" type="text" name="username"></input></br>
         <label for="isDeliverer">Is this a deliverer?</label>
@@ -73,7 +73,14 @@
     <div class="container-fluid well span6">
       <h4>Want to see what other people are saying about someone? Just enter their name here:<h4>
       <p>Name:</p>
-      <input type="text" name="username" autocomplete="off"></input>
+      <input id="getFeedbackUser" type="text" name="username" autocomplete="off"></input></br>
+
+      <label for="radioUser">User</label>
+      <input id="radioUser" type="radio" name="userType" value="user" checked="checked"></input>
+      <label for="radioDeliverer">Deliverer</label>
+      <input id="radioDeliverer" type="radio" name="userType" value="deliverer"></input>
+      </br>
+      
       <button id="getFeedback">Get Feedback</button>
 
       <div id="feedbackOutput"></div>
@@ -81,7 +88,7 @@
 
 
     <div class="container-fluid well span6">
-      <h2>Don't remember the name of a specific user? Search for them here.</h2>
+      <h2>Don't remember the name of a specific person? Search for them here.</h2>
       
       <div id="getUsers">Get Users</div>
       <div id="getDeliverers">Get Deliverers</div>

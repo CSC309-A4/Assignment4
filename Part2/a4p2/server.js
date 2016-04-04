@@ -34,6 +34,9 @@ var db;
 
 // Mongoose Setup and Database Connection
 var mongoose = require('mongoose');
+//var configDB = require('./config/database.js');
+//mongoose.connect(configDB.url);
+//make database.js
 mongoose.connect(url);
 
 var db = mongoose.connection;
@@ -302,9 +305,9 @@ app.post("/submit_user_form", function (req, res) {
 		console.log(errors);
 		// Send error and message to client
 		res.status(400);
-		var toSend = "<p>Errors:</p>";
+		var toSend = '';
 		for (var i = 0; i < errors.length; i++) {
-			toSend += "<p>" + errors[i].msg + "</p>";
+			toSend += errors[i].msg + "\n";
 		}
 		res.send(toSend);
 		return;

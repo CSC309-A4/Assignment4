@@ -47,41 +47,76 @@
   </div>
   
   <div id="main-content">
-    <div class="form">
-      <h1>Quick food delivery is only 1 step away, sign up now!</h1>
+      
+      <div class="form">
 
-      <form id="userForm" autocomplete="off">
-        <label for="name">Name:</label></br>
-        <input id="name" type="text" name="name"></input></br>
+          <h1>Sign Up!</h1>
+          
+          <form id="userForm">
+          
+            <div class="field-wrap">
+              <label>
+                Name<span class="req">*</span>
+              </label>
+              <input type="text" id="name" title="Alphanumeric characters only, Space permitted" required pattern="[a-zA-Z0-9 ]+" autocomplete="off" />
+            </div>
 
-        <label for="password">Password:</label></br>
-        <input id="password" type="password" name="password"></input></br>
+            <div class="field-wrap">
+              <label>
+                Password<span class="req">*</span>
+              </label>
+              <input type="password" id="pass1" title="6 to 20 characters" required pattern=".{6,20}" autocomplete="off"/>
+            </div>
 
-        <label for="password_repeat">Re-enter Password:</label></br>
-        <input id="password_repeat" type="password" name="password_repeat"></input></br>
+            <div class="field-wrap">
+              <label>
+                Confirm Password<span class="req">*</span>
+              </label>
+              <input type="password" id="pass2" title="6 to 20 characters" required pattern=".{6,20}" autocomplete="off"/>
+            </div>
 
-        <label for="email">Email Address:</label></br>
-        <input id="email" type="email" name="email"></input></br>
+            <div class="field-wrap">
+              <label>
+                Email Address<span class="req">*</span>
+              </label>
+              <input type="email" id="emailaddress" title="example@domain.com"required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" autocomplete="off"/>
+            </div>
 
-        <label for="phone_num">Phone Number:</label></br>
-        <input id="phone_num" type="tel" name="telephone"></input></br>
+            <div class="field-wrap">
+              <label>
+                Phone Number<span class="req">*</span>
+              </label>
+              <input type="text" title="xxx-xxx-xxxx" id="phone" required pattern="[0-9]{3}-*[0-9]{3}-*[0-9]{4}" autocomplete="off"/>
+            </div>
 
-        <label for="address">Address:</label></br>
-        <input id="address" type="text" name="address"></input></br>
+            <div class="field-wrap">
+              <label>
+                Address<span class="req">*</span>
+              </label>
+              <input type="address" id="address" required autocomplete="off"/>
+            </div>
 
-        <label for="city">City:</label></br>
-        <input id="city" type="text" name="city"></input></br>
+            <div class="field-wrap">
+              <label>
+                City<span class="req">*</span>
+              </label>
+              <input type="city" id="city" required autocomplete="off"/>
+            </div>
 
-        <label for="credit">Credit Card Number:</label></br>
-        <input id="credit" type="text" name="creditcard"></input></br>
-
-        <input id="submit-button" type="submit" value="Sign Up!">
-      </form>
-
-      <div id="output"></div>
-
-    </div> 
-  </div> 
+            <div class="field-wrap">
+              <label>
+                Credit Card Number<span class="req">*</span>
+              </label>
+              <input type="number" id="credit" required autocomplete="off"/>
+            </div>
+            
+            <button type="submit" class="button button-block"/>Sign Up!</button>
+          
+          </form>
+        
+      </div><!-- /form -->
+      
+</div> <!-- /main-content --> -->
   
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>

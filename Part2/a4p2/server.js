@@ -1,7 +1,5 @@
 /* This file contains all the main server / database code. 
-Sets up a connection the database, listens for incoming connections, etc.
-
-*/
+Sets up a connection the database, listens for incoming connections, etc. */
 
 
 //---------------
@@ -34,6 +32,9 @@ var db;
 
 // Mongoose Setup and Database Connection
 var mongoose = require('mongoose');
+//var configDB = require('./config/database.js');
+//mongoose.connect(configDB.url);
+//make database.js
 mongoose.connect(url);
 
 var db = mongoose.connection;
@@ -146,7 +147,7 @@ app.get("/admin", function (req, res) {
 app.get("/deliveryProfile.html", function (req, res) {
 	// if user not logged in don't send file	
 	var id = req.cookies.loginDeliverer;
-	console.log(id);
+	// console.log(id);
 	Deliverer.findById(id, function (err, data) {
 		if (err || !data) {
 			// No match
@@ -187,7 +188,7 @@ app.get("/userSignUp.html", function (req, res) {
 
 app.get("/userProfile.html", function (req, res) {
 	var id = req.cookies.loginUser;
-	console.log(id);
+	// console.log(id);
 	User.findById(id, function (err, data) {
 		if (err || !data) {
 			// No match
@@ -302,9 +303,9 @@ app.post("/submit_user_form", function (req, res) {
 		console.log(errors);
 		// Send error and message to client
 		res.status(400);
-		var toSend = "<p>Errors:</p>";
+		var toSend = '';
 		for (var i = 0; i < errors.length; i++) {
-			toSend += "<p>" + errors[i].msg + "</p>";
+			toSend += errors[i].msg + "\n";
 		}
 		res.send(toSend);
 		return;
@@ -360,6 +361,7 @@ app.post("/login", function (req, res) {
 	var name = req.body.name;
 	var password = req.body.password;
 	var isDeliverer = req.body.isDeliverer;
+	console.log(req.body);
 
 	// Check if name and password are in the database
 	// Look in deliverers collection or the users collection depending on isDeliverer
@@ -373,8 +375,8 @@ app.post("/login", function (req, res) {
 			}
 			// Entry found in database, return successful result
 			res.status(200);
-			res.cookie("loginDeliverer", data._id, { expires: new Date(Date.now() + 600000)});
-			res.send("Deliverer Success");
+			res.cookie("loginDeliverer", data._id, { expires: new Date(Date.now() + 6000000)});
+			res.send("Successful Login Deliverer");
 		});
 	}
 	else {
@@ -388,8 +390,8 @@ app.post("/login", function (req, res) {
 			}
 			// Entry found in database, return successful result
 			res.status(200);
-			res.cookie("loginUser", data._id, { expires: new Date(Date.now() + 600000)});
-			res.send("Successful Login");
+			res.cookie("loginUser", data._id, { expires: new Date(Date.now() + 6000000)});
+			res.send("Successful Login User");
 		});
 	}	
 });
@@ -481,9 +483,9 @@ app.post("/make_order", function (req, res) {
 			res.status(400);
 			res.send("saving to database error");
 			return;
-			}
+		}
 			
-			// Everything was successful	
+		// Everything was successful	
 		res.status(200);
 		res.end();
 		console.log("User sign up successful");
@@ -496,20 +498,18 @@ app.post("/make_order", function (req, res) {
 
 
 
-
-
-
 /* These requests below are from feedback.html */
 app.get("/get_all_users", function (req, res) {
 	var query = {};
 	var projection = {"name": 1, "_id": 0};
 	User.find(query, projection, function (err, data) {
-		if (err) {
+		if (err || !data) {
 			console.log(err);
 			res.status(400);
-			res.send("Error: No user found");
+			res.send("No user found");
 			return;
 		}
+		res.status(200);
 		res.send(data);
 	});
 });
@@ -518,13 +518,137 @@ app.get("/get_all_deliverers", function (req, res) {
 	var query = {};
 	var projection = {"name": 1, "_id": 0};
 	Deliverer.find(query, projection, function (err, data) {
-		if (err) {
+		if (err || !data) {
 			console.log(err);
 			res.status(400);
-			res.send("Error: No user found");
+			res.send("No user found");
 			return;
 		}
+		res.status(200);
 		res.send(data);
 	});
 });
+
+// Handling case where someone wants to enter feedback about someone
+app.post("/make_comment", function (req, res) {
+	console.log("Make Comment");
+	// Check if logged in
+	if (Object.keys(req.cookies).length != 1) {
+		res.status(400);
+		res.send("You have to be logged in to make a comment");
+	}
+	// So at this point there should be exactly 1 entry in req.cookies...
+
+	// Why do we need to do this? Because I dont have the current user's name,
+	// and for comments I need to associate the commenter's name with each piece of feedback
+	var commenterIsDeliverer = false;
+	var commenter = req.cookies.loginUser;
+	if (!commenter) {
+		commenterIsDeliverer = true;
+		commenter = req.cookies.loginDeliverer;
+	}
+
+	var feedbackObj = {
+		rating: req.body.rating,
+		madeBy: null,
+		msg: req.body.msg,
+	}
+	
+	// brute force code but someone else can clean it up maybe
+	if (commenterIsDeliverer) {
+		Deliverer.findById(commenter, function (err, data) {
+			feedbackObj.madeBy = data.name;
+			var query = {"name": req.body.username};
+
+			if (req.body.isDeliverer == "true") {
+				Deliverer.findOneAndUpdate(query, {$push: {"feedback": feedbackObj}}, function (err, data) {
+					if (err || !data) {
+						res.status(400);
+						res.send("Not found, couldn't make comment");
+						return;
+					}
+					res.status(200);
+					res.send("Success");
+				});
+			}
+			else {
+				User.findOneAndUpdate(query, {$push: {"feedback": feedbackObj}}, function (err, data) {
+					if (err || !data) {
+						res.status(400);
+						res.send("Not found, could not make comment");
+						return;
+					}
+					res.status(200);
+					res.send("success");
+
+				});
+			}
+
+
+		});
+	}
+	else { // commenterIsDeliverer == false
+		User.findById(commenter, function (err, data) {
+			feedbackObj.madeBy = data.name;
+			var query = {"name": req.body.username};
+
+			if (req.body.isDeliverer == "true") {
+				Deliverer.findOneAndUpdate(query, {$push: {"feedback": feedbackObj}}, function (err, data) {
+					if (err || !data) {
+						res.status(400);
+						res.send("not found, couldn't make comment");
+						return;
+					}
+					res.status(200);
+					res.send("Success");
+				});
+			}
+			else {
+				User.findOneAndUpdate(query, {$push: {"feedback": feedbackObj}}, function (err, data) {
+					if (err || !data) {
+						res.status(400);
+						res.send("not found, could not make comment");
+						return;
+					}
+					res.status(200);
+					res.send("success");
+				});
+			}
+
+		});
+	}
+
+});
+
+// Return all feedback for a given user
+app.get("/get_feedback", function (req, res) {
+	console.log("Get Feedback");
+	
+	var query = {"name": req.query.username};
+	var projection = {"feedback": 1, "_id": 0};
+	if (req.query.userType == "user") {
+		User.findOne(query, projection, function (err, data) {
+			if (err || !data) {
+				res.status(400);
+				res.send("User not found");
+				return;
+			}
+			res.status(200);
+			res.send(data);
+		});
+	}
+	else {
+		Deliverer.findOne(query, projection, function (err, data) {
+			if (err || !data) {
+				res.status(400);
+				res.send("Deliverer not found");
+				return;
+			}
+			res.status(200);
+			res.send(data);
+		});
+	}
+
+});
+
 

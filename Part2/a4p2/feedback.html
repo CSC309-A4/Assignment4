@@ -26,16 +26,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <!--Right side buttons (signup/login/help)-->
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="" data-toggle="dropdown" class="dropdown-toggle">Sign Up<b class="caret"></b></a>
-              <ul class="dropdown-menu" id="menu1">
-                <li class="dropdown-header">Sign up as a:</li>                
-                <li><a href="userSignUp.html">User</a></li>
-                <li><a href="deliverySignUp.html">Deliverer</a></li>
-              </ul>
-            </li>
-
-            <li><a href="login.html">Log In</a></li>
+            <li id="logout"><a>Logout</a></li>
             <li><a href="help.html">Help</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
@@ -53,11 +44,11 @@
     </div>
 
     <div class="container-fluid well span6">
-      <form id="feedbackForm">
+      <form id="feedbackForm" autocomplete="off">
         <label for="msgInput">Comment:</label></br>
         ​<textarea id="msgInput" form="feedbackForm" rows="5" cols="50"></textarea></br>
         <label for="rating">Rating:</label></br>
-        <input id="rating" type="number" name="rating"></input></br>
+        <input id="rating" type="number" name="rating" value="10" min="0" max="10"></input></br>
         <label for="username">Name of User:</label></br>
         <input id="username" type="text" name="username"></input></br>
         <label for="isDeliverer">Is this a deliverer?</label>
@@ -66,16 +57,34 @@
         <input id="submit" type="submit" value="Send"></input></br>
       </form>
 
+      <div id="formOutput"></div>
+    </div>
+
+
+    <div class="container-fluid well span6">
+      <h4>Want to see what other people are saying about someone? Just enter their name here:<h4>
+      <p>Name:</p>
+      <input id="getFeedbackUser" type="text" name="username" autocomplete="off"></input></br>
+
+      <label for="radioUser">User</label>
+      <input id="radioUser" type="radio" name="userType" value="user" checked="checked"></input>
+      <label for="radioDeliverer">Deliverer</label>
+      <input id="radioDeliverer" type="radio" name="userType" value="deliverer"></input>
+      </br>
+      
+      <button id="getFeedback">Get Feedback</button>
+
       <div id="feedbackOutput"></div>
     </div>
 
-    <div class="container-fluid well span6">
-      <h2>Don't remember the name of a specific user? Search for them here.</h2>
-      
-      <div id="getUsers">Get Users</div>
-      <div id="getDeliverers">Get Deliverers</div>
 
-      <div id="output"></div>
+    <div class="container-fluid well span6">
+      <h2>Don't remember the name of a specific person? Search for them here.</h2>
+      
+      <div id="getUsers">Click me to display all users</div>
+      <div id="getDeliverers">Click me to display all deliverers</div>
+
+      <div id="usersOutput"></div>
     </div>
 
   </div>

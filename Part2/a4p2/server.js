@@ -654,3 +654,37 @@ app.get("/get_feedback", function (req, res) {
 });
 
 
+
+/* ADMIN ROUTES */
+app.get("/admin/search_all_users", function (req, res) {
+	console.log("Admin: Search All Users");
+	User.find({}, function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send(data);
+	});
+});
+
+app.get("/admin/search_all_deliverers", function (req, res) {
+	console.log("Admin: Search All Deliverers");
+	Deliverer.find({}, function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send(data);
+	});
+});
+
+app.get("/admin/search_all_orders", function (req, res) {
+	console.log("Admin: Search All Orders");
+	Order.find({}, function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send(data);
+	});
+});
+
+
+

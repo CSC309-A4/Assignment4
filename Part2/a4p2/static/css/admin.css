@@ -32,18 +32,29 @@ label {
 
 #floatLeft {
 	float: left;
-	width: 60%;
+	width: 50%;
 }
 
 #floatRight {
 	float: right;
-	width: 37%;
+	width: 48%;
 }
 
 #output {
 	overflow: auto;
 	background-color: rgba(230, 230, 220, 0.9);
-	height: 500px;
+	height: 600px;
 	border: 1px solid orange;
 	color: black;
+	padding: 35px;
+}
+
+#output h2, #output h3, #output h4, #output p, #output li, #output ul, #output ol {
+	color: black;
+	margin-top: 4px;
+}
+
+ul {
+	padding: 0px;
+	list-style-type: none;
 }

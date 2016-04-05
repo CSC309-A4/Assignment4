@@ -147,7 +147,7 @@ app.get("/admin", function (req, res) {
 app.get("/deliveryProfile.html", function (req, res) {
 	// if user not logged in don't send file	
 	var id = req.cookies.loginDeliverer;
-	console.log(id);
+	// console.log(id);
 	Deliverer.findById(id, function (err, data) {
 		if (err || !data) {
 			// No match
@@ -188,7 +188,7 @@ app.get("/userSignUp.html", function (req, res) {
 
 app.get("/userProfile.html", function (req, res) {
 	var id = req.cookies.loginUser;
-	console.log(id);
+	// console.log(id);
 	User.findById(id, function (err, data) {
 		if (err || !data) {
 			// No match
@@ -361,6 +361,7 @@ app.post("/login", function (req, res) {
 	var name = req.body.name;
 	var password = req.body.password;
 	var isDeliverer = req.body.isDeliverer;
+	console.log(req.body);
 
 	// Check if name and password are in the database
 	// Look in deliverers collection or the users collection depending on isDeliverer

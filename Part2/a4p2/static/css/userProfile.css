@@ -1,4 +1,4 @@
-.jumbotron h1, h2, p, div, label, input {
+.jumbotron h1, h2, p, div, label, input, a {
 	color: black;
 	margin: 0px;
 }
@@ -11,19 +11,6 @@
 
 }
 
-#logout {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  border: 1px orange;
-  width: 100px;
-  background-color: rgba(150, 230, 220, 0.8);
-  text-align: center;
-  cursor: pointer;
-}
-
-#logout:hover {
-  background-color: rgba(150, 100, 150, 0.8);
-}
 
 #submit-button {
 	margin-top: 10px;

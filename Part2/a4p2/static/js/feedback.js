@@ -10,6 +10,8 @@ var formOutput = $("#formOutput");
 var feedbackOutput = $("#feedbackOutput");
 var usersOutput = $("#usersOutput");
 
+var logout = $("#logout");
+
 
 getAllUsers.click(function (e) {
 	$.ajax({
@@ -128,7 +130,16 @@ getFeedbackButton.click(function (e) {
 });
 
 
+logout.click(function (e) {
+	console.log(1);
+	delete_cookie("loginUser");
+	delete_cookie("loginDeliverer");
+	window.location = "index.html";
+});
 
-
+// Function that deletes a cookie. 
+var delete_cookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
 
 

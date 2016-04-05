@@ -114,7 +114,7 @@ getFeedbackButton.click(function (e) {
 				html += "<div class=feedbackEntry>";
 				html += "<p>Made by: " + data.feedback[i].madeBy + "</p>";
 				html += "<p>Rating (out of 10): " + data.feedback[i].rating + "</p>";
-				html += "<p>Message:";
+				html += "<p>Message: ";
 				html += data.feedback[i].msg;
 				html += "</p></div>";
 			}

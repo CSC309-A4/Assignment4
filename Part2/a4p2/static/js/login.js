@@ -18,7 +18,7 @@ form.submit(function(e) {
 			var cookie = document.cookie;
 
 			// Successful login. Get Request to appropriate profile page with cookie
-			if (option == "Deliverer Success") {
+			if (option == "Successful Login Deliverer") {
 				// request for delivery page
 				$.ajax({
 					type: "GET",

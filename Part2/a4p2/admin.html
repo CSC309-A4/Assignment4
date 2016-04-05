@@ -9,30 +9,58 @@
 </head>
 
 <body>
-  <h1>Admin</h1>
+  
+  <div id="main-content">  
 
-  <section id="intro">
-    <h3>This page allows admins to access special pieces of information about the system.</h3> 
-  </section>
-
-  <section id="main">  
-    <h3>Queries</h3>
-    <p>(Not yet implemented)</p>
-    
-    <div id="queries">
-      <button>Get All Users</button></br>
-      <button>Get All Delivery People</button></br>
-      <button>Get all Orders (complete and incomplete)</button></br>
+    <div id="intro">
+      <h1>Admin</h1>
+      <h2>This page allows admins to access special pieces of information about the system.</h2> 
     </div>
+    
+    <div id="floatLeft">
+      <div id="searchAll" class="dark container-fluid well span6">
+        <h2>Search database</h2>
+        
+        <button>Search All Users</button>
+        <button>Search All Deliverers</button>
+        <button>Search All Orders</button>
 
-  </section>
+        <label for="searchByUsername">Search By User Name</label>
+        <input id="searchByUsername" type="text" name="searchByUsername"></input>
+        <button id="button-searchByUsername">Go</button>
 
-  <section id="output">
-    This is where query output will go.
-  </section>
+        <label for="searchByDelivererName">Search By Deliverer Name</label>
+        <input id="searchByDelivererName" type="text" name="searchByDelivererName"></input>
+        <button id="button-searchByDelivererName">Go</button>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      </div> 
+
+      <div id="deleteFrom" class="dark container-fluid well span6">
+        <h2>Delete from database</h2>
+        <p>(incomplete)</p>
+      </div>
+
+      <div id="deleteFrom" class="dark container-fluid well span6">
+        <h2>Update database</h2>
+        <p>(incomplete)</p>
+      </div>
+
+      <div id="deleteFrom" class="dark container-fluid well span6">
+        <h2>Other actions</h2>
+        <p>(incomplete)</p>
+      </div>
+
+    </div> <!-- Left Side -->
+    
+
+    <div id="floatRight">
+      <div id="output">Placeholder text for query output</div>
+    </div> <!-- Right Side -->
+
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 </body>
 </html>

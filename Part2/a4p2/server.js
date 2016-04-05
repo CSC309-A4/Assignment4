@@ -71,7 +71,7 @@ var delivererSchema = new mongoose.Schema({
 		}
 	],
 	acceptedOrders: [
-		mongoose.Types.ObjectId
+		String
 	]
 }, 
 {
@@ -97,7 +97,7 @@ var userSchema = new mongoose.Schema({
 		String
 	],
 	orderHistory: [
-		mongoose.Types.ObjectId
+		String
 	]
 },
 {
@@ -332,7 +332,7 @@ app.post("/submit_user_form", function (req, res) {
 			credit: fields.credit,
 			feedback: [],
 			savedFood: [],
-			orderHistory: []
+			// orderHistory: []
 		});
 
 		user.save(function (err, data) {
@@ -553,6 +553,8 @@ app.post("/make_comment", function (req, res) {
 		madeBy: null,
 		msg: req.body.msg,
 	}
+	console.log(req.body.isDeliverer);
+	console.log(commenterIsDeliverer);
 	
 	// brute force code but someone else can clean it up maybe
 	if (commenterIsDeliverer) {

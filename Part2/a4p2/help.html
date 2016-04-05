@@ -6,7 +6,7 @@
   <title>Help Page</title>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="static/css/style.css" media="screen">
-  
+  <link rel="stylesheet" type="text/css" href="static/css/help.css" media="screen">
 
 
 </head>
@@ -28,60 +28,36 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <!--Right side buttons (signup/login/help)-->
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sign Up<b class="caret"></b></a>
+            <li id="maybeProfile"><a>My Profile</a></li>
+            <li class="dropdown maybe">
+              <a href="" data-toggle="dropdown" class="dropdown-toggle">Sign Up<b class="caret"></b></a>
               <ul class="dropdown-menu" id="menu1">
                 <li class="dropdown-header">Sign up as a:</li>
-                <li><a href="user.html#signup">User</a></li>
-                <li><a href="deliverySignUp.html#">Deliverer</a></li>
+                <li><a href="userSignUp.html">User</a></li>
+                <li><a href="deliverySignUp.html">Deliverer</a></li>
               </ul>
             </li>
-            <li><a href="user.html#login">Log In</a></li>
-            <li><a href="#">Help</a></li>
+            <li class="maybe"><a href="login.html">Log In</a></li>
+            <li><a href="help.html">Help</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
      </div><!-- /.container-fluid -->
     </nav>
   </div>
 
-  <section class="helpBody" id="interactions">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <h3 class="text-center">Interactions</h3>
-          <br>
-		  <ul>
-			<li> press logo on top left to return to homepage </li>
-			<li> sign in will drop down links to user sign in and deliverer sign in </li>
-			<li> login will take you to log in page </li>
-			<li> help will take you to this page </li>
-			<li> In Homepage, Order Now will take you to order page </li>
-			<li> In Order page, Submitting an order will take you to a sample confirmation page</li>
-			<li> In Order Confirmation Page, Confirm Order will take you to Order Form </li>
-			<li> In User Sign Up and Login, Getting Started or Log In will take you to a sample user profile</li>
-			<li> In Delivery Sign Up, Sign In will take you to a sample deliverer profile</li>
-		  </ul>
-		</div>
-	  </div>
-	</div>
-  </section>
-		  <br>
-		  <br>
-  <section class="helpBody" id="specs">
-    <div class="container">  
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <h3 class="text-center">Specifications</h3>
-			Homepage: index.html <br>
-			User Sign In/Log In/Profile: user.html, login.html, userProfile.html <br>
-			Deliverer Sign In/Log In/Profile: deliverySignUp.html, login.html, deliveryProfile.html <br>
-			Order Page: order.html, orderConfirmation.html, orderForm.html <br><br>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div id="main-content">
+    <div class="container-fluid well span6">
+      <h1>Hi there</h1>
 
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <p>Do you need help with getting started? Read on then.</p>
+      <p></p>
+
+    </div>
+  </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="static/js/navButtons.js"></script> 
+
 
 </body>

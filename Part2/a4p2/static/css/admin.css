@@ -2,33 +2,59 @@ h1 {
 	text-align: center;
 }
 
-section {
-	margin: 10px;
-	padding: 10px;
-	border: 1px solid orange;
-}
 
-#queries {
-	margin-top: 10px;
-	padding: 10px;
-
-	height: 90%;
+#main-content {
 	width: 90%;
-
+	margin: auto;
 }
 
-#queries button {
-	width: 500px;
-	height: 35px;
-	font-size: 20px;
+.dark h1, .dark h2, .dark p, .dark button, .dark label, .dark input {
 	color: black;
-	background-color: orange;
+}
 
-	margin-top: 5px;
-	
+#intro h1, #intro h2 {
+	color: rgba(230, 250, 230, 0.9);
+}
+
+#searchAll {
+	margin-top: 10px;
+}
+
+#searchAll button, #searchAll input {
+	display: block;
+	width: 40%;
+	margin-top: 2px;
+}
+
+label {
+	margin-top: 15px;
+}
+
+#floatLeft {
+	float: left;
+	width: 50%;
+}
+
+#floatRight {
+	float: right;
+	width: 48%;
 }
 
 #output {
-	height: 500px;
-	overflow: scroll;
+	overflow: auto;
+	background-color: rgba(230, 230, 220, 0.9);
+	height: 600px;
+	border: 1px solid orange;
+	color: black;
+	padding: 35px;
+}
+
+#output h2, #output h3, #output h4, #output p, #output li, #output ul, #output ol {
+	color: black;
+	margin-top: 4px;
+}
+
+ul {
+	padding: 0px;
+	list-style-type: none;
 }

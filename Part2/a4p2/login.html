@@ -6,11 +6,12 @@
     <title>Login</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="static/css/style.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="static/css/user.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="static/css/login.css" media="screen">
 </head>
 <body>
 
 <body>
+
   <div class="container" id="navigationBar">
     <nav class="navbar navbar-custom navbar-fixed-top">
       <div class="container-fluid">
@@ -29,14 +30,15 @@
           <!--Right side buttons (signup/login/help)-->
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sign Up<b class="caret"></b></a>
+              <a href="" data-toggle="dropdown" class="dropdown-toggle">Sign Up<b class="caret"></b></a>
               <ul class="dropdown-menu" id="menu1">
-                <li class="dropdown-header">Sign up as a:</li>
-                <li class="tab1 active"><a href="#signup">User</a></li>
+                <li class="dropdown-header">Sign up as a:</li>                
+                <li><a href="userSignUp.html">User</a></li>
                 <li><a href="deliverySignUp.html">Deliverer</a></li>
               </ul>
             </li>
-            <li class="tab1"><a href="#login">Log In</a></li>
+
+            <li><a href="login.html">Log In</a></li>
             <li><a href="help.html">Help</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
@@ -44,74 +46,32 @@
     </nav>
   </div>
   
-  <div class="jumbotron">
-
+  <div class="main-content">
     <div class="form">
-        
-        <ul class="tab-group">
-          <li class="tab2"><a href="#signup">Sign Up</a></li>
-          <li class="tab2 active"><a href="#login">Log In</a></li>
-        </ul>
-        
-        <div class="tab-content">
+      <h1>Log In</h1>
+      <!-- This form will go to a different page depending on whether the user is a user or deliverer -->
+      <form id="loginForm" autocomplete="off">
 
-          <div id="login">   
-            <h1>Log In!</h1>
-              <div class="field-wrap">
-              <label>Email Address</label>
-              <input type="email"/>
-            </div>
-            
-            <div class="field-wrap">
-              <label>Password</label>
-              <input type="password"/>
-            </div>
+        <label for="name">Name:</label></br>
+        <input id="name" type="text" name="name"></input></br>
 
-            <p class="forgot"><a href="#">Forgot Password?</a></p>
+        <label for="password">Password:</label></br>
+        <input id="password" type="password" name="password"></input></br>
 
-            <form method="get" action="userProfile.html">
-              <button class="button button-block">Log In</button>
-            </form>
-          </div> <!-- login -->
+        <label for="isDeliverer">Login as deliverer?</label>
+        <input id="isDeliverer" type="checkbox" name="isDeliverer"></input></br>
 
-          <div id="signup">   
-            <h1>Sign Up!</h1>            
-            <div class="top-row">
-              <div class="field-wrap">
-                <label>First Name</label>
-                <input type="text"/>
-              </div>
-          
-              <div class="field-wrap">
-                <label>Last Name</label>
-                <input type="text"/>
-              </div>
-            </div>
+        <input id="submit-button" type="submit" value="Log In!"></input>
+      </form>
 
-            <div class="field-wrap">
-              <label>Email Address</label>
-              <input type="email"/>
-            </div>
-            
-            <div class="field-wrap">
-              <label>Password</label>
-              <input type="password"/>
-            </div>
-            <form method="get" action="userProfile.html">
-              <button type="submit" class="button button-block">Get Started</button>
-            </form>
-          </div> <!-- top-row -->
-
-        </div> <!-- tab content -->
-        
-    </div> <!-- form -->
-
-  </div>
+      <div id="output"></div>
+    </div>
   </div>
   
 
-  <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
-  <script src="static/js/user.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="static/js/login.js"></script>
+
 </body>
 </html>
 

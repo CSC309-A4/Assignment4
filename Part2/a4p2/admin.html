@@ -18,8 +18,8 @@
     </div>
     
     <div id="floatLeft">
-      <div id="searchAll" class="dark container-fluid well span6">
-        <h2>Search database</h2>
+      <div id="searchFunc" class="dark container-fluid well span6 admin">
+        <h2>Search Functions</h2>
         
         <button id="searchAllUsers">Search All Users</button>
         <button id="searchAllDeliverers">Search All Deliverers</button>
@@ -35,19 +35,41 @@
 
       </div> 
 
-      <div id="deleteFrom" class="dark container-fluid well span6">
-        <h2>Delete from database</h2>
-        <p>(incomplete)</p>
+      <div id="updateFunc" class="dark container-fluid well span6 admin">
+        <h2>Update Functons</h2>
+
+        <label for="updateByUsername">Update A User's Info</label>
+        <input id="updateByUsername" type="text" placeholder ="Enter a user's name" name="updateByUsername"></input>
+        <button id="button-updateByUsername">Go</button>
+
+        <label for="updateByDelivererName">Update A Deliverer's Info</label>
+        <input id="updateByDelivererName" type="text" placeholder ="Enter a deliverer's name" name="updateByDelivererName"></input>
+        <button id="button-updateByDelivererName">Go</button>
+
       </div>
 
-      <div id="deleteFrom" class="dark container-fluid well span6">
-        <h2>Update database</h2>
-        <p>(incomplete)</p>
+      <div id="deleteFunc" class="dark container-fluid well span6 admin">
+        <h2>Delete Functions</h2>
+
+        <label for="deleteByUsername">Update A User's Info</label>
+        <input id="deleteByUsername" type="text" placeholder ="Enter a user's name" name="deleteByUsername"></input>
+        <button id="button-deleteByUsername">Go</button>
+
+        <label for="deleteByDelivererName">Update A Deliverer's Info</label>
+        <input id="deleteByDelivererName" type="text" placeholder ="Enter a deliverer's name" name="deleteByDelivererName"></input>
+        <button id="button-deleteByDelivererName">Go</button>
+
       </div>
 
-      <div id="deleteFrom" class="dark container-fluid well span6">
+
+
+      <div id="miscFunc" class="dark container-fluid well span6 admin">
         <h2>Other actions</h2>
-        <p>(incomplete)</p>
+
+        <button id="initUserDB">Initialize the User Database</button>
+        <button id="initDelivererDB">Initialize the Deliverer Database</button>
+        <button id="repopUserDB">Repopulate the User Database</button>
+        <button id="repopDelivererDB">Repopulate the Deliverer Database</button>
       </div>
 
     </div> <!-- Left Side -->

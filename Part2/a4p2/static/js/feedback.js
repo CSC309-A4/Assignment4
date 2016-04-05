@@ -131,7 +131,7 @@ getFeedbackButton.click(function (e) {
 
 
 logout.click(function (e) {
-	console.log(1);
+	// console.log(1);
 	delete_cookie("loginUser");
 	delete_cookie("loginDeliverer");
 	window.location = "index.html";

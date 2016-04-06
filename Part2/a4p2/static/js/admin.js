@@ -9,15 +9,18 @@ var searchByDelivererNameButton = $("#button-searchByDelivererName");
 var searchOrderByUserButton = $("#button-searchOrderByUser");
 var searchOrderByDelivererButton = $("#button-searchOrderByDelivery");
 
+var updateByUsernameButton = $("#button-updateByUsername");
+var updateByDelivererNameButton = $("button-updateByDelivererName");
+
 //var updateByUsernameButton = $("updateByUsername");
 //var updateByDelivererNameButton = $("updateByDelivererName");
 
 var output = $("#output");
 
 
-/*----------
-// Events
------------*/
+ /*-------------------
+// Search Functions //
+-------------------*/
 searchAllUsersButton.click(function (e) {
 	$.ajax({
 		type: "GET",
@@ -178,7 +181,7 @@ searchByUsernameButton.click(function (e) {
 	//console.log(JSON.stringify($username));
 	$.ajax({
 		type: "POST",
-		url: "admin/search_user_info",
+		url: "admin/update_user_info",
 		data: $username,
 		success: function(data, textStatus, jqXHR) {
 			//an array of 1 user
@@ -354,6 +357,101 @@ searchOrderByDelivererButton.click(function (e) {
 				html += "</ul>"; // end of properties list
 			}
 			html += "</ol>";
+
+			output.html(html);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			output.html("Error");
+    }
+	}); // end of ajax call
+});
+
+
+ /*-------------------
+// Update Functions //
+-------------------*/
+
+
+updateByUsernameButton.click(function (e) {
+	//console.log($('#searchByUsername').val());
+	var $username = $('#updateByUsername').val();
+	//console.log(JSON.stringify($username));
+	$.ajax({
+		type: "POST",
+		url: "admin/search_user_info",
+		data: $username,
+		success: function(data, textStatus, jqXHR) {
+			//an array of 1 user
+			console.log(data[0])
+
+			// If empty
+			if (data[0].length <= 0) {
+				output.html("<p>User not found</p>");
+				return;
+			}
+
+			// Otherwise 
+			var html = "<h4>Enter info into the form to update. Leave the field blank to leave the data unchanged.</h4>";
+
+			html += "<label for=\'updateUserName\' >User Name</label><br>";
+			html += "<input id=\'updateUserName\' type=\'text\' placeholder=\'" + data[0].name + "\' name=\'updateUserName\'></input><br>";
+
+			html += "<label for=\'updateUserPassword\' >Password</label><br>";
+			html += "<input id=\'updateUserPassword\' type=\'text\' placeholder=\'" + data[0].password + "\' name=\'updateUserPassword\'></input><br>";
+
+			html += "<label for=\'updateUserEmail\' >Email</label><br>";
+			html += "<input id=\'updateUserEmail\' type=\'text\' placeholder=\'" + data[0].email + "\' name=\'updateUserEmail\'></input><br>";
+
+			html += "<label for=\'updateUserPhone\' >Phone Number</label><br>";
+			html += "<input id=\'updateUserPhone\' type=\'text\' placeholder=\'" + data[0].phone + "\' name=\'updateUserPhone\'></input><br>";
+
+			html += "<label for=\'updateUserAddress\' >Address</label><br>";
+			html += "<input id=\'updateUserAddress\' type=\'text\' placeholder=\'" + data[0].city + "\' name=\'updateUserAddress\'></input><br>";
+
+			html += "<label for=\'updateUserCity\' >City</label><br>";
+			html += "<input id=\'updateUserCity\' type=\'text\' placeholder=\'" + data[0].address + "\' name=\'updateUserCity\'></input><br>";
+
+			html += "<label for=\'updateUserCCN\' >Credit Card Number</label><br>";
+			html += "<input id=\'updateUserCCN\' type=\'text\' placeholder=\'" + data[0].password + "\' name=\'updateUserCCN\'></input><br>";
+
+			html += "<label>Feedback</label>";
+
+			if (data[0].feedback.length <= 0) { //User has no feedback
+				html += "<label for=\'updateUserFeedbackRating\' >Feedback Rating</label><br>";
+				html += "<input id=\'updateUserFeedbackRating\' type=\'text\' placeholder=\'No data found.\' name=\'updateUserFeedbackRating\'></input><br>";
+
+				html += "<label for=\'updateUserFeedbackAuthor\' >Feedback Author</label><br>";
+				html += "<input id=\'updateUserFeedbackAuthor\' type=\'text\' placeholder=\'No data found.\' name=\'updateUserFeedbackAuthor\'></input><br>";
+
+				html += "<label for=\'updateUserFeedbackMsg\' >Feedback Message</label><br>";
+				html += "<input id=\'updateUserFeedbackMsg\' type=\'text\' placeholder=\'No data found.\' name=\'updateUserFeedbackMsg\'></input><br>";
+			} else { //User has feedback
+				html += "<label for=\'updateUserFeedbackRating\' >Feedback Rating</label><br>";
+				html += "<input id=\'updateUserFeedbackRating\' type=\'text\' placeholder=\'" + data[0].feedback[0].rating + "\' name=\'updateUserFeedbackRating\'></input><br>";
+
+				html += "<label for=\'updateUserFeedbackAuthor\' >Feedback Author</label><br>";
+				html += "<input id=\'updateUserFeedbackAuthor\' type=\'text\' placeholder=\'" + data[0].feedback[1].madeBy + "\' name=\'updateUserFeedbackAuthor\'></input><br>";
+
+				html += "<label for=\'updateUserFeedbackMsg\' >Feedback Message</label><br>";
+				html += "<input id=\'updateUserFeedbackMsg\' type=\'text\' placeholder=\'" + data[0].feedback[2].msg + "\' name=\'updateUserFeedbackMsg\'></input><br>";
+			}
+
+			html += "<label for=\'updateSavedFood\' >Saved Food (Enter as a list of string)</label><br>";
+			if (data[0].savedFood.length > 0) {
+				html += "<input id=\'updateSavedFood\' type=\'text\' placeholder=\'" + data[0].savedFood + "\' name=\'updateSavedFood\'></input><br>";
+			} else {
+				html += "<input id=\'updateSavedFood\' type=\'text\' placeholder=\'No data found.\' name=\'updateSavedFood\'></input><br>";
+			}
+
+
+			html += "<label for=\'updateOrderHistory\' >orderHistory (Enter as a list of string)</label><br>";
+			if (data[0].savedFood.length > 0) {			
+				html += "<input id=\'updateOrderHistory\' type=\'text\' placeholder=\'" + data[0].orderHistory + "\' name=\'updateOrderHistory\'></input><br>";
+			} else {
+				html += "<input id=\'updateOrderHistory\' type=\'text\' placeholder=\'No data found.\' name=\'updateOrderHistory\'></input><br>";
+			}
+			html += "<button id=\"button-updateByDelivererName\">UPDATE      <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span></button>";
+
 
 			output.html(html);
 		},

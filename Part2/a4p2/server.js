@@ -742,3 +742,20 @@ app.post("/admin/search_deliverer_orders", function (req, res) {
 		res.send(data);
 	});
 });
+
+
+
+
+app.post("/admin/update_user_info", function (req, res) {
+	console.log("Admin: Updating A Certain User");
+	var body = req.body;
+	var name = Object.keys(body);
+	console.log(name[0]);
+	//console.log(User.find({'name': req.body}));
+	User.find({'name': name[0]}, function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send(data);
+	});
+});

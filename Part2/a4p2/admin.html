@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" media="screen">
+    <link rel="stylesheet" href="static/css/admin.css">
+</head>
+
+<body>
+  
+  <div id="main-content">  
+
+    <div id="intro">
+      <h1>Admin</h1>
+      <h2>This page allows admins to access special pieces of information about the system.</h2> 
+    </div>
+    
+    <div id="floatLeft">
+      <div id="searchFunc" class="dark container-fluid well span6 admin">
+        <h2>Search Functions</h2>
+        
+        <button id="searchAllUsers">Search All Users</button>
+        <button id="searchAllDeliverers">Search All Deliverers</button>
+        <button id="searchAllOrders">Search All Orders</button>
+
+        <label for="searchByUsername">Search By User Name</label>
+        <input id="searchByUsername" type="text" name="searchByUsername"></input>
+        <button id="button-searchByUsername">Go</button>
+
+        <label for="searchByDelivererName">Search By Deliverer Name</label>
+        <input id="searchByDelivererName" type="text" name="searchByDelivererName"></input>
+        <button id="button-searchByDelivererName">Go</button>
+
+      </div> 
+
+      <div id="updateFunc" class="dark container-fluid well span6 admin">
+        <h2>Update Functons</h2>
+
+        <label for="updateByUsername">Update A User's Info</label>
+        <input id="updateByUsername" type="text" placeholder ="Enter a user's name" name="updateByUsername"></input>
+        <button id="button-updateByUsername">Go</button>
+
+        <label for="updateByDelivererName">Update A Deliverer's Info</label>
+        <input id="updateByDelivererName" type="text" placeholder ="Enter a deliverer's name" name="updateByDelivererName"></input>
+        <button id="button-updateByDelivererName">Go</button>
+
+      </div>
+
+      <div id="deleteFunc" class="dark container-fluid well span6 admin">
+        <h2>Delete Functions</h2>
+
+        <label for="deleteByUsername">Update A User's Info</label>
+        <input id="deleteByUsername" type="text" placeholder ="Enter a user's name" name="deleteByUsername"></input>
+        <button id="button-deleteByUsername">Go</button>
+
+        <label for="deleteByDelivererName">Update A Deliverer's Info</label>
+        <input id="deleteByDelivererName" type="text" placeholder ="Enter a deliverer's name" name="deleteByDelivererName"></input>
+        <button id="button-deleteByDelivererName">Go</button>
+
+      </div>
+
+
+
+      <div id="miscFunc" class="dark container-fluid well span6 admin">
+        <h2>Other actions</h2>
+
+        <button id="initUserDB">Initialize the User Database</button>
+        <button id="initDelivererDB">Initialize the Deliverer Database</button>
+        <button id="repopUserDB">Repopulate the User Database</button>
+        <button id="repopDelivererDB">Repopulate the Deliverer Database</button>
+      </div>
+
+    </div> <!-- Left Side -->
+    
+
+    <div id="floatRight">
+      <div id="output">Placeholder text for query output</div>
+    </div> <!-- Right Side -->
+
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="static/js/admin.js"></script>  
+
+</body>
+</html>
+

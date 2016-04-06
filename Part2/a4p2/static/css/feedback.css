@@ -1,0 +1,53 @@
+#main-content {
+  padding: 10px;
+  width: 90%;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+
+h1, h2, h3, h4, h5, h6, p, div, label, input, textarea, li {
+  color: black;
+}
+
+#rating {
+  width: 10%;
+}
+
+#submit {
+  margin-top: 20px;
+}
+
+#getUsers, #getDeliverers {
+  margin-top: 10px;
+  background-color: rgba(210, 210, 210, 0.8);
+  width: 20%;
+  text-align: center;
+}
+
+#getUsers:hover, #getDeliverers:hover {
+  cursor: pointer;
+}
+
+#formOutput, #feedbackOutput, #usersOutput {
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+#feedbackOutput {
+  width: 50%;
+  height: 200px;
+  overflow: auto;
+}
+
+textarea {
+  resize: none;
+}
+
+.feedbackEntry {
+  background-color: rgba(200, 130, 200, 0.7);
+  margin-top: 10px;
+
+}

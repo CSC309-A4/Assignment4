@@ -1,0 +1,35 @@
+.jumbotron h1, h2, p, div, label, input, a {
+	color: black;
+	margin: 0px;
+}
+
+.jumbotron .container-fluid {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+
+}
+
+
+#submit-button {
+	margin-top: 10px;
+	background-color: rgba(150, 230, 220, 0.8);
+}
+
+#submit-button:hover {
+	background-color: rgba(150, 100, 150, 0.8);
+}
+
+#order-form input {
+	width: 50%;
+}
+
+.orderEntry {
+	background-color: rgba(150, 100, 150, 0.8);
+}
+
+
+
+
+

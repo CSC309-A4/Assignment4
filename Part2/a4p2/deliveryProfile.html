@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Delivery Person Profile</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="static/css/deliveryProfile.css" media="screen">
+</head>
+<body>
+
+    <div class="container" id="navigationBar">
+    <nav class="navbar navbar-custom navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand button (top left) -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">YITT</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <!--Right side buttons (signup/login/help)-->
+          <ul class="nav navbar-nav navbar-right">
+            <li id="logout"><a>Logout</a></li>
+            <li><a href="help.html">Help</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+     </div><!-- /.container-fluid -->
+    </nav>
+  </div>
+
+
+
+  <div id="main-content">
+
+    <div class="container-fluid well span6">
+      <h1>Your Profile</h1>
+
+      <div class="center" id="deliverer-info">
+        Unknown.
+      </div>
+
+      <a href="feedback.html">Go to feedback page</a>
+    </div>
+
+    
+    <div class="container-fluid well span6">
+
+      <h4>Want to make a delivery? Check out all the starving people who need your delivery services!</h4>
+      <div class="vertical-space"></div>
+
+      <p>Search orders by:</p>
+      <select class="form-control" id="order-selection">
+        <option value="store_name">Store Name</option>
+        <option value="near_me">Near Me</option>
+        <option value="list_all">List All</option>
+      </select>
+      
+      <!-- User clicks this button to search for all the orders available. 
+      ie) Retrieve appropriate order data from the database. -->
+      <div id="search-orders" class="noselect"><span>Search!</span></div>
+
+
+      <!-- Orders will be displayed in here. -->
+      <div id="display-orders">
+        This is where search results will be displayed.
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="static/js/deliveryProfile.js"></script>
+
+</body>
+</html>

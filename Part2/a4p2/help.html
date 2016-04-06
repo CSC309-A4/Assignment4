@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Help Page</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="static/css/style.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="static/css/help.css" media="screen">
+
+
+</head>
+<body>
+  <div class="container" id="navigationBar">
+    <nav class="navbar navbar-custom navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand button (top left) -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">YITT</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <!--Right side buttons (signup/login/help)-->
+          <ul class="nav navbar-nav navbar-right">
+            <li id="maybeProfile"><a>My Profile</a></li>
+            <li class="dropdown maybe">
+              <a href="" data-toggle="dropdown" class="dropdown-toggle">Sign Up<b class="caret"></b></a>
+              <ul class="dropdown-menu" id="menu1">
+                <li class="dropdown-header">Sign up as a:</li>
+                <li><a href="userSignUp.html">User</a></li>
+                <li><a href="deliverySignUp.html">Deliverer</a></li>
+              </ul>
+            </li>
+            <li class="maybe"><a href="login.html">Log In</a></li>
+            <li><a href="help.html">Help</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+     </div><!-- /.container-fluid -->
+    </nav>
+  </div>
+
+  <div id="main-content">
+    <div class="container-fluid well span6">
+      <h1>Hi there</h1>
+
+      <p>Do you need help with getting started? Read on then.</p>
+      <p></p>
+
+    </div>
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="static/js/navButtons.js"></script> 
+
+
+</body>

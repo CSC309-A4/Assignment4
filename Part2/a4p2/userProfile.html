@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="static/css/userProfile.css" media="screen">
+</head>
+<body>
+
+  <div class="container" id="navigationBar">
+    <nav class="navbar navbar-custom navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand button (top left) -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">YITT</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <!--Right side buttons (signup/login/help)-->
+          <ul class="nav navbar-nav navbar-right">
+            <li id="logout"><a>Logout</a></li>
+            <li><a href="help.html">Help</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+     </div><!-- /.container-fluid -->
+    </nav>
+  </div>
+
+  <!-- content -->
+  <div class="jumbotron">
+
+    <div class="container-fluid well span6">
+
+      <div id="user-info">
+        <!-- Filler -->
+        <h2>Unknown User</h2>
+      </div>
+
+      <a href="feedback.html">Go to feedback page</a>
+
+    </div> <!-- end of info panel -->
+
+
+    <div class="container-fluid well span6">
+      <h2>Make an order!</h2>
+      <p>For example, Food: McLobster, Store: McDicks, Location: UofT right outside the doors of SS2173</p>
+  
+      <form id="order-form">
+        <label for="food">Food:</label></br>
+        <input id="food" type="text" name="food"></input></br>
+        <label for="store">Store:</label></br>
+        <input id="store" type="text" name="store"></input></br>
+        <label for="userLocation">Where should this order be delivered to? (Enter a location):</label></br>
+        <input id="userLocation" type="text" name="userLocation"></input></br>
+        <input id="submit-button" type="submit" value="Place Order!"></input>
+      </form>
+
+    </div> <!-- end of order panel -->
+
+
+
+    <div class="container-fluid well span6">
+      <h2>Order History</h2>
+       
+      <!-- Order history goes here -->
+      <div id="order-history"></div>
+
+    </div> <!-- end of order history panel -->
+
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="static/js/userProfile.js"></script>    
+
+</body>
+</html>
+

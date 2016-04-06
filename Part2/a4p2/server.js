@@ -747,7 +747,7 @@ app.post("/admin/search_deliverer_orders", function (req, res) {
 
 
 app.post("/admin/update_user_info", function (req, res) {
-	console.log("Admin: Updating A Certain User");
+	console.log("Admin: Looking To Update A User's Info");
 	var body = req.body;
 	var name = Object.keys(body);
 	console.log(name[0]);
@@ -757,5 +757,19 @@ app.post("/admin/update_user_info", function (req, res) {
 			res.send("Error");
 		}
 		res.send(data);
+	});
+});
+
+
+app.post("/admin/updating_user_info", function (req, res) {
+	console.log("Admin: Updating A Certain User's Info");
+	console.log(req.body.name);
+	var name = req.body.name;
+	//console.log(User.find({'name': req.body}));
+	User.findOneAndUpdate({'name': name}, req.body, function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send("User's info was successfully updated.");
 	});
 });

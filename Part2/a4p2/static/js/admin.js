@@ -10,10 +10,14 @@ var searchOrderByUserButton = $("#button-searchOrderByUser");
 var searchOrderByDelivererButton = $("#button-searchOrderByDelivery");
 
 var updateByUsernameButton = $("#button-updateByUsername");
+var updateUserInfoButton= $("button-updateUserInfo");
+
 var updateByDelivererNameButton = $("button-updateByDelivererName");
 
 //var updateByUsernameButton = $("updateByUsername");
 //var updateByDelivererNameButton = $("updateByDelivererName");
+
+var user; //store the user info when updating
 
 var output = $("#output");
 
@@ -378,11 +382,11 @@ updateByUsernameButton.click(function (e) {
 	//console.log(JSON.stringify($username));
 	$.ajax({
 		type: "POST",
-		url: "admin/search_user_info",
+		url: "admin/update_user_info",
 		data: $username,
 		success: function(data, textStatus, jqXHR) {
-			//an array of 1 user
-			console.log(data[0])
+			//console.log(data[0])
+			user = data; //store for when updating the database
 
 			// If empty
 			if (data[0].length <= 0) {
@@ -430,10 +434,10 @@ updateByUsernameButton.click(function (e) {
 				html += "<input id=\'updateUserFeedbackRating\' type=\'text\' placeholder=\'" + data[0].feedback[0].rating + "\' name=\'updateUserFeedbackRating\'></input><br>";
 
 				html += "<label for=\'updateUserFeedbackAuthor\' >Feedback Author</label><br>";
-				html += "<input id=\'updateUserFeedbackAuthor\' type=\'text\' placeholder=\'" + data[0].feedback[1].madeBy + "\' name=\'updateUserFeedbackAuthor\'></input><br>";
+				html += "<input id=\'updateUserFeedbackAuthor\' type=\'text\' placeholder=\'" + data[0].feedback[0].madeBy + "\' name=\'updateUserFeedbackAuthor\'></input><br>";
 
 				html += "<label for=\'updateUserFeedbackMsg\' >Feedback Message</label><br>";
-				html += "<input id=\'updateUserFeedbackMsg\' type=\'text\' placeholder=\'" + data[0].feedback[2].msg + "\' name=\'updateUserFeedbackMsg\'></input><br>";
+				html += "<input id=\'updateUserFeedbackMsg\' type=\'text\' placeholder=\'" + data[0].feedback[0].msg + "\' name=\'updateUserFeedbackMsg\'></input><br>";
 			}
 
 			html += "<label for=\'updateSavedFood\' >Saved Food (Enter as a list of string)</label><br>";
@@ -448,13 +452,72 @@ updateByUsernameButton.click(function (e) {
 			if (data[0].savedFood.length > 0) {			
 				html += "<input id=\'updateOrderHistory\' type=\'text\' placeholder=\'" + data[0].orderHistory + "\' name=\'updateOrderHistory\'></input><br>";
 			} else {
-				html += "<input id=\'updateOrderHistory\' type=\'text\' placeholder=\'No data found.\' name=\'updateOrderHistory\'></input><br>";
+				html += "<input id=\'updateOrderHistory\' type=\'text\' placeholder=\'No data found.\' name=\'updateOrderHistory\'></input><br><br>";
 			}
-			html += "<button id=\"button-updateByDelivererName\">UPDATE      <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span></button>";
+			html += "<button id=\"button-updateUserInfo\">UPDATE      <span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span></button>";
 
 
 			output.html(html);
 		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			output.html("Error");
+    }
+	}); // end of ajax call
+});
+
+updateUserInfoButton.click(function (e) { //when the user clicks update on the right
+	console.log(user[0]);
+
+	var $username = ($('#updateUserName').val() == '') ? user[0].name : $('#updateUserName').val();
+
+	var $password = ($('#updateUserPassword').val() == '') ? user[0].password : $('#updateUserPassword').val();
+
+	var $email = ($('#updateUserEmail').val() == '') ? user[0].email : $('#updateUserEmail').val();
+
+	var $phone = ($('#updateUserPhone').val() == '') ? user[0].phone : $('#updateUserPhone').val();
+
+	var $address = ($('#updateUserAddress').val() == '') ? user[0].address : $('#updateUserAddress').val();
+
+	var $city = ($('#updateUserCity').val() == '') ? user[0].city : $('#updateUserCity').val();
+
+	var $creditCardNum = ($('#updateUserCCN').val() == '') ? user[0].creditCardNum : $('#updateUserCCN').val();
+
+	var $feedbackRating = ($('#updateUserFeedbackRating').val() == '') ? '' : $('#updateUserFeedbackRating').val();
+
+	var $feedbackAuthor = ($('#updateUserFeedbackAuthor').val() == '') ? '' : $('#updateUserFeedbackAuthor').val();
+
+	var $feedbackMsg = ($('#updateUserFeedbackMsg').val() == '') ? '' : $('#updateUserFeedbackMsg').val();
+
+	var $savedFood = ($('#updateSavedFood').val() == '') ? [] : $('#updateSavedFood').val();
+
+	var $orderHistory = ($('#updateOrderHistory').val() == '') ? [] : $('#updateOrderHistory').val();
+
+	userInfo = {"name": $username,
+				"password": $password,
+				"email": $email,
+				"phone": $phone,
+				"address": $address,
+				"city": $city,
+				"creditCardNum": $creditCardNum,
+				"feedback": [
+					{
+						"rating": $feedbackRating,
+						"madeBy": $feedbackAuthor,
+						"msg": $feedbackMsg
+					}
+				],
+				"savedFood": $savedFood,
+				"orderHistory": $orderHistory
+			   }
+	
+	$.ajax({
+		type: "POST",
+		url: "admin/updating_user_info",
+		data: userInfo,
+		success: function(data, textStatus, jqXHR) {
+			output.html(data);
+		},
+		
 		error: function(jqXHR, textStatus, errorThrown) {
 			output.html("Error");
     }

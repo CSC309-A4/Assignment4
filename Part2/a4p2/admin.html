@@ -21,17 +21,25 @@
       <div id="searchFunc" class="dark container-fluid well span6 admin">
         <h2>Search Functions</h2>
         
-        <button id="searchAllUsers">Search All Users</button>
-        <button id="searchAllDeliverers">Search All Deliverers</button>
-        <button id="searchAllOrders">Search All Orders</button>
+        <button id="searchAllUsers">Search All Users      <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+        <button id="searchAllDeliverers">Search All Deliverers      <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+        <button id="searchAllOrders">Search All Orders      <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
         <label for="searchByUsername">Search By User Name</label>
         <input id="searchByUsername" type="text" placeholder="Enter a user's name" name="searchByUsername"></input>
-        <button id="button-searchByUsername">Go</button>
+        <button id="button-searchByUsername"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
         <label for="searchByDelivererName">Search By Deliverer Name</label>
         <input id="searchByDelivererName" type="text" placeholder="Enter a deliverer's name" name="searchByDelivererName"></input>
-        <button id="button-searchByDelivererName">Go</button>
+        <button id="button-searchByDelivererName"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+
+        <label for="searchOrderByUser">Search Orders By A User</label>
+        <input id="searchOrderByUser" type="text" placeholder="Enter the user ID" name="searchOrderByUser"></input>
+        <button id="button-searchOrderByUser"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+
+        <label for="searchOrderByDelivery">Search Orders By A User</label>
+        <input id="searchOrderByDelivery" type="text" placeholder="Enter the user ID" name="searchOrderByDelivery"></input>
+        <button id="button-searchOrderByDelivery"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
       </div> 
 
@@ -40,11 +48,11 @@
 
         <label for="updateByUsername">Update A User's Info</label>
         <input id="updateByUsername" type="text" placeholder="Enter a user's name" name="updateByUsername"></input>
-        <button id="button-updateByUsername">Go</button>
+        <button id="button-updateByUsername"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
 
         <label for="updateByDelivererName">Update A Deliverer's Info</label>
         <input id="updateByDelivererName" type="text" placeholder="Enter a deliverer's name" name="updateByDelivererName"></input>
-        <button id="button-updateByDelivererName">Go</button>
+        <button id="button-updateByDelivererName"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
 
       </div>
 
@@ -53,11 +61,11 @@
 
         <label for="deleteByUsername">Delete A User's Info</label>
         <input id="deleteByUsername" type="text" placeholder="Enter a user's name" name="deleteByUsername"></input>
-        <button id="button-deleteByUsername">Go</button>
+        <button id="button-deleteByUsername"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 
         <label for="deleteByDelivererName">Delete A Deliverer's Info</label>
         <input id="deleteByDelivererName" type="text" placeholder="Enter a deliverer's name" name="deleteByDelivererName"></input>
-        <button id="button-deleteByDelivererName">Go</button>
+        <button id="button-deleteByDelivererName"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 
       </div>
 

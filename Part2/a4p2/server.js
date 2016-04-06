@@ -687,7 +687,7 @@ app.get("/admin/search_all_orders", function (req, res) {
 	});
 });
 
-app.post("/admin/search_user", function (req, res) {
+app.post("/admin/search_user_info", function (req, res) {
 	console.log("Admin: Searching A Certain User");
 	var body = req.body;
 	var name = Object.keys(body);
@@ -701,7 +701,7 @@ app.post("/admin/search_user", function (req, res) {
 	});
 });
 
-app.post("/admin/search_deliverer", function (req, res) {
+app.post("/admin/search_deliverer_info", function (req, res) {
 	console.log("Admin: Searching A Certain Deliverer");
 	var body = req.body;
 	var name = Object.keys(body);
@@ -715,3 +715,30 @@ app.post("/admin/search_deliverer", function (req, res) {
 	});
 });
 
+app.post("/admin/search_user_orders", function (req, res) {
+	console.log("Admin: Searching A Certain Order");
+	var body = req.body;
+	var userID = Object.keys(body);
+	console.log(userID[0]);
+	//console.log(User.find({'name': req.body}));
+	Order.find({"userID": userID[0]}, function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send(data);
+	});
+});
+
+app.post("/admin/search_deliverer_orders", function (req, res) {
+	console.log("Admin: Searching A Certain Order");
+	var body = req.body;
+	var delivererID = Object.keys(body);
+	console.log(delivererID[0]);
+	//console.log(User.find({'name': req.body}));
+	Order.find({"userID": delivererID[0]}, function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send(data);
+	});
+});

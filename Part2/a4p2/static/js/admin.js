@@ -6,6 +6,8 @@ var searchAllDeliverersButton = $("#searchAllDeliverers");
 var searchAllOrdersButton = $("#searchAllOrders");
 var searchByUsernameButton = $("#button-searchByUsername");
 var searchByDelivererNameButton = $("#button-searchByDelivererName");
+var searchOrderByUserButton = $("#button-searchOrderByUser");
+var searchOrderByDelivererButton = $("#button-searchOrderByDelivery");
 
 //var updateByUsernameButton = $("updateByUsername");
 //var updateByDelivererNameButton = $("updateByDelivererName");
@@ -176,7 +178,7 @@ searchByUsernameButton.click(function (e) {
 	//console.log(JSON.stringify($username));
 	$.ajax({
 		type: "POST",
-		url: "admin/search_user",
+		url: "admin/search_user_info",
 		data: $username,
 		success: function(data, textStatus, jqXHR) {
 			//an array of 1 user
@@ -227,7 +229,7 @@ searchByDelivererNameButton.click(function (e) {
 	var $delivererName = $('#searchByDelivererName').val();
 	$.ajax({
 		type: "POST",
-		url: "admin/search_deliverer",
+		url: "admin/search_deliverer_info",
 		data: $delivererName,
 		success: function(data, textStatus, jqXHR) {
 			// Expects an array of data objects
@@ -273,4 +275,90 @@ searchByDelivererNameButton.click(function (e) {
     }
 	}); // end of ajax call
 
+});
+
+searchOrderByUserButton.click(function (e) {
+	var $userID = $('#searchOrderByUser').val();
+	$.ajax({
+		type: "POST",
+		url: "admin/search_user_orders",
+		data: $userID,
+		success: function(data, textStatus, jqXHR) {
+			// Expects an array of data objects
+			//console.log(data);
+
+			// If empty
+			if (data.length <= 0) {
+				output.html("<p>No orders found</p>");
+				return;
+			}	
+
+			// Otherwise 
+			var html = "<h2>Orders</h2>"; //figure out how we're gonna implement order name
+			html += "<ol>";
+			for (var i = 0; i < data.length; i++) {
+				html += "<li><h3>Order</h3></li>";
+				html += "<ul>" // start of properties list
+				html += "<li>_id: " + data[i]._id + "</li>";
+				html += "<li>Food Item: " + data[i].food + "</li>";
+				html += "<li>Food Status: " + data[i].foodStatus + "</li>";
+				html += "<li>Order Status: " + data[i].orderStatus + "</li>";
+				html += "<li>userID: " + data[i].userID + "</li>";
+				html += "<li>delivererID: " + data[i].delivererID + "</li>";
+				html += "<li>Location: " + data[i].userLocation + "</li>";
+				html += "<li>Date made: " + data[i].date + "</li>";
+				html += "<li>Amount of money exchanged: " + data[i].amount + "</li>";
+				html += "</ul>"; // end of properties list
+			}
+			html += "</ol>";
+
+			output.html(html);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			output.html("Error");
+    }
+	}); // end of ajax call
+});
+
+searchOrderByDelivererButton.click(function (e) {
+	var $delivererID = $('#searchOrderByDelivery').val();
+	$.ajax({
+		type: "POST",
+		url: "admin/search_deliverer_orders",
+		data: $delivererID,
+		success: function(data, textStatus, jqXHR) {
+			// Expects an array of data objects
+			//console.log(data);
+
+			// If empty
+			if (data.length <= 0) {
+				output.html("<p>No orders found</p>");
+				return;
+			}	
+
+			// Otherwise 
+			var html = "<h2>Orders</h2>"; //figure out how we're gonna implement order name
+			html += "<ol>";
+			for (var i = 0; i < data.length; i++) {
+				html += "<li><h3>Order</h3></li>";
+				html += "<ul>" // start of properties list
+				html += "<li>_id: " + data[i]._id + "</li>";
+				html += "<li>Food Item: " + data[i].food + "</li>";
+				html += "<li>Food Status: " + data[i].foodStatus + "</li>";
+				html += "<li>Order Status: " + data[i].orderStatus + "</li>";
+				html += "<li>userID: " + data[i].userID + "</li>";
+				html += "<li>delivererID: " + data[i].delivererID + "</li>";
+				html += "<li>Location: " + data[i].userLocation + "</li>";
+				html += "<li>Date made: " + data[i].date + "</li>";
+				html += "<li>Amount of money exchanged: " + data[i].amount + "</li>";
+				html += "</ul>"; // end of properties list
+			}
+			html += "</ol>";
+
+			output.html(html);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			output.html("Error");
+    }
+	}); // end of ajax call
 });

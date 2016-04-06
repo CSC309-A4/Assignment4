@@ -48,22 +48,24 @@
 
         <label for="updateByUsername">Update A User's Info</label>
         <input id="updateByUsername" type="text" placeholder="Enter a user's name" name="updateByUsername"></input>
-        <button id="button-updateByUsername"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+        <button id="button-updateByUsername">Display User Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+        <button id="button-updateUserInfo">Update User Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>        
 
         <label for="updateByDelivererName">Update A Deliverer's Info</label>
         <input id="updateByDelivererName" type="text" placeholder="Enter a deliverer's name" name="updateByDelivererName"></input>
-        <button id="button-updateByDelivererName"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+        <button id="button-updateByDelivererName">Display Deliverer Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+        <button id="button-updateDelivererInfo">Update Deliverer Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>  
 
       </div>
 
       <div id="deleteFunc" class="dark container-fluid well span6 admin">
         <h2>Delete Functions</h2>
 
-        <label for="deleteByUsername">Delete A User's Info</label>
+        <label for="deleteByUsername">Delete A User From The Database</label>
         <input id="deleteByUsername" type="text" placeholder="Enter a user's name" name="deleteByUsername"></input>
         <button id="button-deleteByUsername"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 
-        <label for="deleteByDelivererName">Delete A Deliverer's Info</label>
+        <label for="deleteByDelivererName">Delete A Deliverer From The Database</label>
         <input id="deleteByDelivererName" type="text" placeholder="Enter a deliverer's name" name="deleteByDelivererName"></input>
         <button id="button-deleteByDelivererName"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 
@@ -76,15 +78,20 @@
 
         <button id="initUserDB">Initialize the User Database</button>
         <button id="initDelivererDB">Initialize the Deliverer Database</button>
-        <button id="repopUserDB">Repopulate the User Database</button>
-        <button id="repopDelivererDB">Repopulate the Deliverer Database</button>
+
+        <button id="repopUserDB">Add A User To The User Database</button>
+        <button id="repopDelivererDB">Add A Deliverer To The Deliverer Database</button>
+
+         <button id="emptyUserDB">Empty the User Database</button>
+        <button id="emptyDelivererDB">Empty the Deliverer Database</button>
+               
       </div>
 
     </div> <!-- Left Side -->
     
 
     <div id="floatRight">
-      <div id="output">Placeholder text for query output</div>
+      <div id="output">Data will be outputted in this block.</div>
     </div> <!-- Right Side -->
 
   </div>
@@ -95,4 +102,3 @@
 
 </body>
 </html>
-

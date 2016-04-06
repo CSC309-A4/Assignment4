@@ -657,6 +657,8 @@ app.get("/get_feedback", function (req, res) {
 
 
 /* ADMIN ROUTES */
+
+/* SEARCH FUNCTIONS*/
 app.get("/admin/search_all_users", function (req, res) {
 	console.log("Admin: Search All Users");
 	User.find({}, function (err, data) {
@@ -744,8 +746,7 @@ app.post("/admin/search_deliverer_orders", function (req, res) {
 });
 
 
-
-
+/*UPDATE FUNCTIONS*/
 app.post("/admin/update_user_info", function (req, res) {
 	console.log("Admin: Looking To Update A User's Info");
 	var body = req.body;
@@ -760,7 +761,6 @@ app.post("/admin/update_user_info", function (req, res) {
 	});
 });
 
-
 app.post("/admin/updating_user_info", function (req, res) {
 	console.log("Admin: Updating A Certain User's Info");
 	console.log(req.body.name);
@@ -773,3 +773,64 @@ app.post("/admin/updating_user_info", function (req, res) {
 		res.send("User's info was successfully updated.");
 	});
 });
+
+
+app.post("/admin/update_deliverer_info", function (req, res) {
+	console.log("Admin: Looking To Update A Deliverer's Info");
+	var body = req.body;
+	var name = Object.keys(body);
+	console.log(name[0]);
+	//console.log(User.find({'name': req.body}));
+	Deliverer.find({'name': name[0]}, function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send(data);
+	});
+});
+
+app.post("/admin/updating_deliverer_info", function (req, res) {
+	console.log("Admin: Looking To Update A Deliverer's Info");
+	console.log(req.body.name);
+	var name = req.body.name;
+	//console.log(User.find({'name': req.body}));
+	Deliverer.findOneAndUpdate({'name': name}, req.body, function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send("Deliverer's info was successfully updated.");
+	});
+});
+
+
+/*DELETE FUNCTIONS*/
+
+app.post("/admin/delete_user_info", function (req, res) {
+	console.log("Admin: Deleting A Certain User's Info");
+	var body = req.body;
+	var name = Object.keys(body);
+	console.log(name[0]);
+	//console.log(User.find({'name': req.body}));
+	User.remove({'name': name}, function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send("The user's info was successfully removed from the database.");
+	});
+});
+
+app.post("/admin/delete_deliverer_info", function (req, res) {
+	console.log("Admin: Deleting To Update A Deliverer's Info");
+	var body = req.body;
+	var name = Object.keys(body);
+	console.log(name[0]);
+	//console.log(User.find({'name': req.body}));
+	Deliverer.remove({'name': name}, function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send("The deliverer's info was successfully removed from the database.");
+	});
+});
+
+/*MISC FUNCTIONS*/

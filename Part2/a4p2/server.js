@@ -467,6 +467,26 @@ app.get("/search_all", function (req, res){
 		res.send(data);
 	});
 });
+
+// update status of order that is accepted by a deliverer
+app.post("/update_order", function (req, res){
+	console.log("Request fields:"); console.log(req.body);
+	
+	var fields = req.body;
+	Order.findOne({"_id": fields.orderID}, function (err, data){
+		console.log(data);
+		if (err || !data) {
+			console.log(err);
+			res.status(400);
+			res.send("Order does not exist!");
+			return;
+		}
+
+		res.status(200);
+		res.send(data);
+	});
+});
+
 /* Need help on this, unsure how to get something from external source, talk tommorow.
 app.get("/search_location", function (req, res){
 	

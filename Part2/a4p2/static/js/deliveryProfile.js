@@ -5,6 +5,8 @@
 var delivererInfo = $("#deliverer-info");
 var displayOrders = $("#display-orders"); 
 var logout = $("#logout");
+var search = $("#search-orders");
+var display = $("#display-orders")
 
 var cookie = document.cookie;
 // Keep this user's data in a global so we can reference it from anywhere
@@ -20,12 +22,85 @@ $.ajax({
 		var html = "";
 		html += "<h1>User: " + data.name + "</h1>";
 		html += "<p>Email: " + data.email + ", Phone: " + data.phone + "</p>";
-		html += "<p>Address: " + data.address + ", City: " + data.email + "</p>";
+		html += "<p>Address: " + data.address + ", City: " + data.city + "</p>";
 		html += "<p>Transportation: " + data.transportation + "</p>";
 		// still need feedback stuff here
 
 		delivererInfo.html(html);
 		thisUser = data;
+	}
+});
+
+search.click(function (e){
+	var search_orders = $("#order-selection option:selected").text();
+	if (search_orders == "Store Name"){
+		$.ajax({
+		type: "GET",
+		url: "search_store",
+		data: search_orders,
+		success: function(data, textStatus, jqXHR) {
+			var html = "";
+			// console.log(data);
+			for (i = 0; i < data.length; i++){
+				if (data[i].orderStatus == "Pending"){
+					html += "<div class='orderEntry'>";
+					html += "<p>Delivery Location: " + data[i].userLocation + "</p>";
+					html += "<p>Store requested from: " + data[i].store + "</p>";
+					html += "<p>Food requested: " + data[i].food + "</p>";
+					html += "<p>Date made: " + data[i].date + "</p>";
+					html += "</div>";
+				}
+			}
+			displayOrders.html(html);
+			},
+		});
+	}
+	else if (search_orders == "Near Me"){
+		var cur_location = thisUser.city;
+		$.ajax({
+		type: "GET",
+		url: "search_all",
+		data: search_orders,
+		success: function(data, textStatus, jqXHR) {
+			var html = "";
+			// console.log(data);
+			for (i = 0; i < data.length; i++){
+				if (data[i].orderStatus == "Pending"){
+					if (data[i].city == cur_location){
+						html += "<div class='orderEntry'>";
+						html += "<p>Delivery Location: " + data[i].userLocation + "</p>";
+						html += "<p>Store requested from: " + data[i].store + "</p>";
+						html += "<p>Food requested: " + data[i].food + "</p>";
+						html += "<p>Date made: " + data[i].date + "</p><br>";
+						html += "</div>";
+					}
+				}
+			}
+			displayOrders.html(html);
+			},
+		});
+	}
+	else if (search_orders == "List All"){
+		$.ajax({
+		type: "GET",
+		url: "search_all",
+		data: search_orders,
+		success: function(data, textStatus, jqXHR) {
+			var html = "";
+			// console.log(data);
+			for (i = 0; i < data.length; i++){
+				if (data[i].orderStatus == "Pending"){
+					html += "<div class='orderEntry'>";
+					html += "<p>Delivery Location: " + data[i].userLocation + "</p>";
+					html += "<p>Store requested from: " + data[i].store + "</p>";
+					html += "<p>Food requested: " + data[i].food + "</p>";
+					html += "<p>Date made: " + data[i].date + "</p><br>";
+					html += "</div>";
+				}
+			}
+			displayOrders.html(html);
+			},
+		});
 	}
 });
 

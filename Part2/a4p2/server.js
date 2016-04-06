@@ -109,6 +109,7 @@ var orderSchema = new mongoose.Schema({
 	store: String,
 	food: String,
 	userLocation: String,
+	city: String,
 	amount: Number,
 
 	date: Date,
@@ -449,6 +450,44 @@ app.get("/get_order", function (req, res) {
 	});
 });
 
+app.get("/search_all", function (req, res){
+	
+	Order.find({}, function (err, data){
+		console.log(data);
+		if (err || !data) {
+			console.log(err);
+			res.status(400);
+			res.send("Error in retrieving deliverer data");
+			return;
+		}
+		if (!data.length){
+			data = {};
+		}
+		res.status(200);
+		res.send(data);
+	});
+});
+/* Need help on this, unsure how to get something from external source, talk tommorow.
+app.get("/search_location", function (req, res){
+	
+	var fields = req.body;
+	console.log(fields.location);
+	Order.find({location: fields.location}, function (err, data){
+	//	console.log(data);
+		if (err || !data) {
+			console.log(err);
+			res.status(400);
+			res.send("Error in retrieving deliverer data");
+			return;
+		}
+		if (!data.length){
+			data = {};
+		}
+		res.status(200);
+		res.send(data);
+	});
+});
+*/
 // A user submits the order form
 app.post("/make_order", function (req, res) {
 
@@ -467,10 +506,12 @@ app.post("/make_order", function (req, res) {
 		return;
 	} 
 	var fields = req.body;
+	console.log(fields);
 	var order = new Order({
 		store: fields.store,
 		food: fields.food,
 		userLocation: fields.location,
+		city: fields.city,
 		amount: fields.amount,
 		date: fields.date,
 		orderStatus: fields.stat,

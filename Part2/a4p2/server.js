@@ -27,7 +27,7 @@ var validator = require("express-validator");
 app.use(validator());
 
 // Specify database details (database name is foodshare)
-var url = "mongodb://localhost:27017/foodshare";
+var url = "mongodb://deliverer:hungry@ds015740.mlab.com:15740/foodshare";
 var db;
 
 // Mongoose Setup and Database Connection
@@ -71,7 +71,7 @@ var delivererSchema = new mongoose.Schema({
 		}
 	],
 	acceptedOrders: [
-		String
+		mongoose.Types.ObjectId
 	]
 }, 
 {
@@ -97,7 +97,7 @@ var userSchema = new mongoose.Schema({
 		String
 	],
 	orderHistory: [
-		String
+		mongoose.Types.ObjectId
 	]
 },
 {
@@ -333,7 +333,7 @@ app.post("/submit_user_form", function (req, res) {
 			credit: fields.credit,
 			feedback: [],
 			savedFood: [],
-			// orderHistory: []
+			orderHistory: []
 		});
 
 		user.save(function (err, data) {
@@ -554,8 +554,6 @@ app.post("/make_comment", function (req, res) {
 		madeBy: null,
 		msg: req.body.msg,
 	}
-	console.log(req.body.isDeliverer);
-	console.log(commenterIsDeliverer);
 	
 	// brute force code but someone else can clean it up maybe
 	if (commenterIsDeliverer) {
@@ -653,39 +651,5 @@ app.get("/get_feedback", function (req, res) {
 	}
 
 });
-
-
-
-/* ADMIN ROUTES */
-app.get("/admin/search_all_users", function (req, res) {
-	console.log("Admin: Search All Users");
-	User.find({}, function (err, data) {
-		if (err) {
-			res.send("Error");
-		}
-		res.send(data);
-	});
-});
-
-app.get("/admin/search_all_deliverers", function (req, res) {
-	console.log("Admin: Search All Deliverers");
-	Deliverer.find({}, function (err, data) {
-		if (err) {
-			res.send("Error");
-		}
-		res.send(data);
-	});
-});
-
-app.get("/admin/search_all_orders", function (req, res) {
-	console.log("Admin: Search All Orders");
-	Order.find({}, function (err, data) {
-		if (err) {
-			res.send("Error");
-		}
-		res.send(data);
-	});
-});
-
 
 

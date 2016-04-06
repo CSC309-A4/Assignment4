@@ -66,8 +66,6 @@ Using it should be quite self-explanatory. Note: you need to be logged in to giv
 
 - Code cleanup. Notice the parallels between user and deliverer sign up / login code in server.js. Some of this is repeated code,
 and can be optimized with functions / callback functions
-- Testing
 - Performance
-- Writeups
 - Video
 

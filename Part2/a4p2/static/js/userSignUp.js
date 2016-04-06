@@ -17,7 +17,6 @@ $('.form').find('input, textarea').on('keyup blur focus', function (e) {
 
 // Server Interaction
 var form = $("#main-content form");
-var output = $("#output");
 
 form.submit(function(e) {
 
@@ -43,7 +42,7 @@ form.submit(function(e) {
 		data: formData,
 		success: function(data, textStatus, jqXHR) {
 			alert("Successfully signed up!");
-			location.href = "login.html"
+			location.href = "login.html";
 		},
 		
 		error: function(jqXHR, textStatus, errorThrown) {
@@ -73,7 +72,6 @@ form.submit(function(e) {
 	// Prevent page change
 	return false;
 });
-
 
 
 

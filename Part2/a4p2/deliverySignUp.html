@@ -46,10 +46,12 @@
   </div>
 
   
-  <div id="main-content">
+<!--   <div id="main-content">
     <div class="form">
       <h1>Signing up as a delivery person is quick and easy!</h1>
+
       <form id="deliverySignUpForm" autocomplete="off">
+
         <label for="name">Name:</label></br>
         <input id="name" type="text" name="name"></input></br>
 
@@ -91,10 +93,90 @@
       <div id="output"></div>
     </div>
 
-  </div>
+  </div> -->
 
+  <div id="main-content">
+    
+    <div class="form">
 
+        <h1>Deliverer Sign Up!</h1>
+        
+        <form id="delivererForm">
+        
+          <div class="field-wrap">
+            <label>
+              Name<span class="req">*</span>
+            </label>
+            <input type="text" id="name" title="Alphanumeric characters only, Space permitted" required pattern="[a-zA-Z0-9 ]+" autocomplete="off" />
+          </div>
 
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input type="password" id="pass1" title="6 to 20 characters" required pattern=".{6,20}" autocomplete="off"/>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Confirm Password<span class="req">*</span>
+            </label>
+            <input type="password" id="pass2" title="6 to 20 characters" required pattern=".{6,20}" autocomplete="off"/>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="email" id="emailaddress" title="example@domain.com"required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" autocomplete="off"/>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Phone Number<span class="req">*</span>
+            </label>
+            <input type="text" title="xxx-xxx-xxxx" id="phone" required pattern="[0-9]{3}-*[0-9]{3}-*[0-9]{4}" autocomplete="off"/>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Address<span class="req">*</span>
+            </label>
+            <input type="address" id="address" required autocomplete="off"/>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              City<span class="req">*</span>
+            </label>
+            <input type="city" id="city" required autocomplete="off"/>
+          </div>
+
+          <p>Preferred Transportation Method</p>
+          <select class="form-control" id="transport" name="transportation">
+          <option disabled="disabled" selected="selected" value=''>Select Transportation</option>
+          <optgroup label="Transportations:">
+            <option value="Car">Car</option>
+            <option value="Foot">Foot</option>
+            <option value="Bicycle">Bicycle</option>
+            <option value="Public Transportation">Public Transportation</option>
+          </optgroup>
+          </select>
+
+          <div class="field-wrap">
+            <label>
+              Credit Card Number<span class="req">*</span>
+            </label>
+            <input type="number" id="credit" required autocomplete="off"/>
+          </div>
+          
+          <button type="submit" class="button button-block"/>Sign Up!</button>
+        
+        </form>
+      
+    </div><!-- /form -->
+    
+  </div> <!-- /main-content --> 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="static/js/deliverySignUp.js"></script>

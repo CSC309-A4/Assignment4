@@ -214,6 +214,7 @@ app.post("/submit_delivery_form", function (req, res) {
 	console.log("Request fields:"); console.log(req.body);
 	// Validation for form fields
 	var regex = /[a-z\d\-_\s]+/i;  // only alphanumeric and space
+	var transportation = ["Car", "Foot", "Bicycle", "Public Transportation"];
 	req.checkBody("name", "Enter a valid name!").matches(regex); 
 	req.checkBody("password", 'Password: 6 to 20 characters required').len(6, 20);
 	req.checkBody("password", "Passwords do not match").equals(req.body.password_repeat);
@@ -221,7 +222,7 @@ app.post("/submit_delivery_form", function (req, res) {
 	req.checkBody("phone", "Enter a valid phone number").notEmpty(); // not sure how to validate phone
 	req.checkBody("address", "Enter a valid address").matches(regex); // only alphanumeric and space
 	req.checkBody("city", "Enter a valid city").matches(regex);
-	req.checkBody("transportation", "Enter a valid form of transportation").matches(regex);
+	req.checkBody("transportation", "Choose a preferred transportation method").notEmpty();
 	req.checkBody("credit", "Enter a valid credit card number").isInt();
 	
 	// Check for any errors. If so, inform requester and stop execution
@@ -232,9 +233,9 @@ app.post("/submit_delivery_form", function (req, res) {
 		console.log(errors);
 		// Send error and message to client
 		res.status(400);
-		var toSend = "<p>Errors:</p>";
+		var toSend = '';
 		for (var i = 0; i < errors.length; i++) {
-			toSend += "<p>" + errors[i].msg + "</p>";
+			toSend += errors[i].msg + '\n';
 		}
 		res.send(toSend);
 		return;

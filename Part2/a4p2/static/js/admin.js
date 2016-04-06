@@ -37,7 +37,7 @@ searchAllUsersButton.click(function (e) {
 		data: null,
 		success: function(data, textStatus, jqXHR) {
 			// Expects an array of data objects
-			console.log(data);
+			//console.log(data);
 
 			// If empty
 			if (data.length <= 0) {
@@ -294,7 +294,7 @@ searchByDelivererNameButton.click(function (e) {
 		data: $delivererName,
 		success: function(data, textStatus, jqXHR) {
 			// Expects an array of data objects
-			console.log(data);
+			//console.log(data);
 
 			// If empty
 			if (data.length <= 0) {
@@ -347,7 +347,7 @@ searchOrderByUserButton.click(function (e) {
 		data: $userID,
 		success: function(data, textStatus, jqXHR) {
 			// Expects an array of data objects
-			//console.log(data);
+			console.log(data);
 
 			// If empty
 			if (data.length <= 0) {
@@ -356,21 +356,20 @@ searchOrderByUserButton.click(function (e) {
 			}	
 
 			// Otherwise 
-			var html = "<h2>Orders</h2>"; //figure out how we're gonna implement order name
+			var html = "<h2>Orders from userID: " + data[0].userID + "</h2>"; //figure out how we're gonna implement order name
 			html += "<ol>";
 			for (var i = 0; i < data.length; i++) {
-				html += "<li><h3>Order</h3></li>";
-				html += "<ul>" // start of properties list
-				html += "<li>_id: " + data[i]._id + "</li>";
+				html += "<li><ul>" // start of properties list
+				html += "<li>Order ID: " + data[i]._id + "</li>";
 				html += "<li>Food Item: " + data[i].food + "</li>";
 				html += "<li>Food Status: " + data[i].foodStatus + "</li>";
 				html += "<li>Order Status: " + data[i].orderStatus + "</li>";
 				html += "<li>userID: " + data[i].userID + "</li>";
-				html += "<li>delivererID: " + data[i].delivererID + "</li>";
+				html += (data[i].delivererID == '') ? "<li>delivererID: Order still pending, no deliverer.</li>" : "<li>delivererID: " + data[i].delivererID + "</li>";
 				html += "<li>Location: " + data[i].userLocation + "</li>";
 				html += "<li>Date made: " + data[i].date + "</li>";
 				html += "<li>Amount of money exchanged: " + data[i].amount + "</li>";
-				html += "</ul>"; // end of properties list
+				html += "</ul></li>"; // end of properties list
 			}
 			html += "</ol>";
 
@@ -399,12 +398,11 @@ searchOrderByDelivererButton.click(function (e) {
 			}	
 
 			// Otherwise 
-			var html = "<h2>Orders</h2>"; //figure out how we're gonna implement order name
+			var html = "<h2>Orders from delivererID: " + data[0].userID + "</h2>"; //figure out how we're gonna implement order name
 			html += "<ol>";
 			for (var i = 0; i < data.length; i++) {
-				html += "<li><h3>Order</h3></li>";
-				html += "<ul>" // start of properties list
-				html += "<li>_id: " + data[i]._id + "</li>";
+				html += "<li><ul>" // start of properties list
+				html += "<li>Order ID: " + data[i]._id + "</li>";
 				html += "<li>Food Item: " + data[i].food + "</li>";
 				html += "<li>Food Status: " + data[i].foodStatus + "</li>";
 				html += "<li>Order Status: " + data[i].orderStatus + "</li>";
@@ -413,7 +411,7 @@ searchOrderByDelivererButton.click(function (e) {
 				html += "<li>Location: " + data[i].userLocation + "</li>";
 				html += "<li>Date made: " + data[i].date + "</li>";
 				html += "<li>Amount of money exchanged: " + data[i].amount + "</li>";
-				html += "</ul>"; // end of properties list
+				html += "</ul></li>"; // end of properties list
 			}
 			html += "</ol>";
 
@@ -716,7 +714,7 @@ updateDelivererInfoButton.click(function (e) { //when the user clicks update on 
 deleteByUsernameButton.click(function (e) {
 	//console.log($('#searchByUsername').val());
 	var $username = $('#deleteByUsername').val();
-	console.log($('#deleteByUsername').val());
+	//console.log($('#deleteByUsername').val());
 	//console.log(JSON.stringify($username));
 	$.ajax({
 		type: "POST",
@@ -734,7 +732,7 @@ deleteByUsernameButton.click(function (e) {
 deleteByDelivererNameButton.click(function (e) {
 	//console.log($('#searchByUsername').val());
 	var $delivererName = $('#deleteByDelivererName').val();
-	console.log($('#deleteByDelivererName').val());
+	//console.log($('#deleteByDelivererName').val());
 	//console.log(JSON.stringify($username));
 	$.ajax({
 		type: "POST",

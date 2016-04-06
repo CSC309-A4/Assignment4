@@ -699,6 +699,7 @@ app.post("/admin/search_user_info", function (req, res) {
 		if (err) {
 			res.send("Error");
 		}
+		console.log(data);		
 		res.send(data);
 	});
 });
@@ -718,11 +719,10 @@ app.post("/admin/search_deliverer_info", function (req, res) {
 });
 
 app.post("/admin/search_user_orders", function (req, res) {
-	console.log("Admin: Searching A Certain Order");
+	console.log("Admin: Searching A Certain User's Order");
 	var body = req.body;
 	var userID = Object.keys(body);
 	console.log(userID[0]);
-	//console.log(User.find({'name': req.body}));
 	Order.find({"userID": userID[0]}, function (err, data) {
 		if (err) {
 			res.send("Error");
@@ -732,12 +732,11 @@ app.post("/admin/search_user_orders", function (req, res) {
 });
 
 app.post("/admin/search_deliverer_orders", function (req, res) {
-	console.log("Admin: Searching A Certain Order");
+	console.log("Admin: Searching Orders A Certain Deliverer Made");
 	var body = req.body;
 	var delivererID = Object.keys(body);
 	console.log(delivererID[0]);
-	//console.log(User.find({'name': req.body}));
-	Order.find({"userID": delivererID[0]}, function (err, data) {
+	Order.find({"delivererID": delivererID[0]}, function (err, data) {
 		if (err) {
 			res.send("Error");
 		}
@@ -751,8 +750,7 @@ app.post("/admin/update_user_info", function (req, res) {
 	console.log("Admin: Looking To Update A User's Info");
 	var body = req.body;
 	var name = Object.keys(body);
-	console.log(name[0]);
-	//console.log(User.find({'name': req.body}));
+	//console.log(name[0]);
 	User.find({'name': name[0]}, function (err, data) {
 		if (err) {
 			res.send("Error");
@@ -763,7 +761,7 @@ app.post("/admin/update_user_info", function (req, res) {
 
 app.post("/admin/updating_user_info", function (req, res) {
 	console.log("Admin: Updating A Certain User's Info");
-	console.log(req.body.name);
+	//console.log(req.body.name);
 	var name = req.body.name;
 	//console.log(User.find({'name': req.body}));
 	User.findOneAndUpdate({'name': name}, req.body, function (err, data) {
@@ -779,7 +777,7 @@ app.post("/admin/update_deliverer_info", function (req, res) {
 	console.log("Admin: Looking To Update A Deliverer's Info");
 	var body = req.body;
 	var name = Object.keys(body);
-	console.log(name[0]);
+	//console.log(name[0]);
 	//console.log(User.find({'name': req.body}));
 	Deliverer.find({'name': name[0]}, function (err, data) {
 		if (err) {
@@ -790,8 +788,8 @@ app.post("/admin/update_deliverer_info", function (req, res) {
 });
 
 app.post("/admin/updating_deliverer_info", function (req, res) {
-	console.log("Admin: Looking To Update A Deliverer's Info");
-	console.log(req.body.name);
+	console.log("Admin: Updating A Certain Deliverer's Info");
+	//console.log(req.body.name);
 	var name = req.body.name;
 	//console.log(User.find({'name': req.body}));
 	Deliverer.findOneAndUpdate({'name': name}, req.body, function (err, data) {
@@ -823,7 +821,7 @@ app.post("/admin/delete_deliverer_info", function (req, res) {
 	console.log("Admin: Deleting To Update A Deliverer's Info");
 	var body = req.body;
 	var name = Object.keys(body);
-	console.log(name[0]);
+	//console.log(name[0]);
 	//console.log(User.find({'name': req.body}));
 	Deliverer.remove({'name': name}, function (err, data) {
 		if (err) {

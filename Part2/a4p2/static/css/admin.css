@@ -16,11 +16,22 @@ h1 {
 	color: rgba(230, 250, 230, 0.9);
 }
 
+/*Trevor's old css
 #searchAll {
 	margin-top: 10px;
 }
 
 #searchAll button, #searchAll input {
+	display: block;
+	width: 40%;
+	margin-top: 2px;
+}
+*/
+.admin {
+	margin-top: 10px;
+}
+
+.admin button, .admin input {
 	display: block;
 	width: 40%;
 	margin-top: 2px;

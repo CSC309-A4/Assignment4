@@ -6,7 +6,6 @@ It is kinda hard to test every possible http request / situation, so I only prov
 a subset of tests, mostly relating to signup / login functions.
 
 INSTRUCTIONS:
-- Start database process, mongod
 - Start server process, node server.js
 - Run this file, mocha test.js (Need to have mocha installed)
 
@@ -15,8 +14,7 @@ Running this test file will change the db state. In particular, it will:
 - add "AlbertGO" to the users collection
 - add "MaryMaryMary" to the deliverers collection
 Just a heads up. You can get rid of these users after running this test file by doing the following:
-- Go to mongo shell
-- use foodshare
+- Go to mongo shell -> mongo ds015740.mlab.com:15740/foodshare -u deliverer -p hungry
 - db.users.remove({"name": "AlbertGO"})
 - db.deliverers.remove({"name": "MaryMaryMary"})
 

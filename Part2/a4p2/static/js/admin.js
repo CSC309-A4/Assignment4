@@ -4,6 +4,11 @@
 var searchAllUsersButton = $("#searchAllUsers");
 var searchAllDeliverersButton = $("#searchAllDeliverers");
 var searchAllOrdersButton = $("#searchAllOrders");
+var searchByUsernameButton = $("#button-searchByUsername");
+var searchByDelivererNameButton = $("#button-searchByDelivererName");
+
+//var updateByUsernameButton = $("updateByUsername");
+//var updateByDelivererNameButton = $("updateByDelivererName");
 
 var output = $("#output");
 
@@ -18,7 +23,7 @@ searchAllUsersButton.click(function (e) {
 		data: null,
 		success: function(data, textStatus, jqXHR) {
 			// Expects an array of data objects
-			// console.log(data);
+			console.log(data);
 
 			// If empty
 			if (data.length <= 0) {
@@ -72,7 +77,7 @@ searchAllDeliverersButton.click(function (e) {
 		data: null,
 		success: function(data, textStatus, jqXHR) {
 			// Expects an array of data objects
-			// console.log(data);
+			//console.log(data);
 
 			// If empty
 			if (data.length <= 0) {
@@ -129,7 +134,7 @@ searchAllOrdersButton.click(function (e) {
 		data: null,
 		success: function(data, textStatus, jqXHR) {
 			// Expects an array of data objects
-			console.log(data);
+			//console.log(data);
 
 			// If empty
 			if (data.length <= 0) {
@@ -165,14 +170,107 @@ searchAllOrdersButton.click(function (e) {
 });
 
 
+searchByUsernameButton.click(function (e) {
+	//console.log($('#searchByUsername').val());
+	var $username = $('#searchByUsername').val();
+	//console.log(JSON.stringify($username));
+	$.ajax({
+		type: "POST",
+		url: "admin/search_user",
+		data: $username,
+		success: function(data, textStatus, jqXHR) {
+			//an array of 1 user
+			//console.log(data[0])
 
+			// If empty
+			if (data[0].length <= 0) {
+				output.html("<p>User not found</p>");
+				return;
+			}
 
+			// Otherwise 
+			var html = "<h2>" + data[0].name + "'s Info</h2>";
+			html += "<ul>";	// Start of properties list
+			html += "<li>Username: " + data[0].name + "</li>";			
+			html += "<li>_id: " + data[0]._id + "</li>";
+			html += "<li>Password: " + data[0].password + "</li>";
+			html += "<li>Email: " + data[0].email + "</li>";
+			html += "<li>Phone: " + data[0].phone + "</li>";
+			html += "<li>City: " + data[0].city + "</li>";
+			html += "<li>Address: " + data[0].address + "</li>";
 
+				if (data[0].feedback.length > 0) {
+					html += "<ul><h4>Feedback made for this user:</h4>";
+					for (var j = 0; j < data[0].feedback.length; j++) {
+						html += "<h4>Entry: </h4>";	
+						html += "<li>Made By: " + data[0].feedback[j].madeBy + "</li>";
+						html += "<li>Rating: " + data[0].feedback[j].rating + "</li>";
+						html += "<li>Message: " + data[0].feedback[j].msg + "</li>";
+					}
+					html += "</ul>"; // close feedback list
+				}
+				else {
+					html += "<p>No feedback made for this user</p>";
+				}
 
+				html += "</ul>"; // close properties list
 
+			output.html(html);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			output.html("Error");
+    }
+	}); // end of ajax call
+});
 
+searchByDelivererNameButton.click(function (e) {
+	var $delivererName = $('#searchByDelivererName').val();
+	$.ajax({
+		type: "POST",
+		url: "admin/search_deliverer",
+		data: $delivererName,
+		success: function(data, textStatus, jqXHR) {
+			// Expects an array of data objects
+			console.log(data);
 
+			// If empty
+			if (data.length <= 0) {
+				output.html("<p>No deliverers found</p>");
+				return;
+			}	
 
+			// Otherwise 
+			var html = "<h2>" + data[0].name + "'s Info</h2>";
+			html += "<ul>";	// Start of properties list				
+			html += "<li>Deliverer name: " + data[0].name + "</li>";
+			html += "<li>_id: " + data[0]._id + "</li>";
+			html += "<li>Password: " + data[0].password + "</li>";
+			html += "<li>Email: " + data[0].email + "</li>";
+			html += "<li>Phone: " + data[0].phone + "</li>";
+			html += "<li>City: " + data[0].city + "</li>";
+			html += "<li>Address: " + data[0].address + "</li>";
+			html += "<li>Preferred transportation: " + data[0].transportation + "</li>";
 
+			if (data[0].feedback.length > 0) {
+				html += "<ul><h4>Feedback made for this deliverer:</h4>";
+				for (var j = 0; j < data[0].feedback.length; j++) {
+					html += "<h4>Entry: </h4>";	
+					html += "<li>Made By: " + data[0].feedback[j].madeBy + "</li>";
+					html += "<li>Rating: " + data[0].feedback[j].rating + "</li>";
+					html += "<li>Message: " + data[0].feedback[j].msg + "</li>";
+				}
+				html += "</ul>"; // close feedback list
+			} else {
+				html += "<p>No feedback made for this deliverer</p>";
+			}
 
+			html += "</ul>"; // close properties list
+			
+			output.html(html);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			output.html("Error");
+    }
+	}); // end of ajax call
 
+});

@@ -93,6 +93,7 @@ orderForm.submit(function (e) {
 		  date: new Date().toJSON().slice(0,10),
 		  location: orderFields['userLocation'],
 		  amount: 0,
+		  city: thisUser.city,
 	  }
 	  $.ajax({
 		type: "POST",

@@ -41,11 +41,12 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 
+var port = process.env.PORT || 3000
 // Connect to the database, and listen for connections
 db.once('open', function() {
   console.log("Connected to database");
 
-	app.listen(3000, function() {
+	app.listen(port, function() {
 		console.log("Listening on port 3000, localhost");
 	});
 });

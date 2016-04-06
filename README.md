@@ -5,7 +5,6 @@ Food Share Application (without this text of course)
 # Getting Started:
 - navigate to the a4p2 directory
 - npm install (this should install the required dependencies in package.json)
-- mongod (start the database - should listen on the default port 27017)
 - node server.js (start the server process)
 - open browser, localhost:3000
 
@@ -14,8 +13,7 @@ Food Share Application (without this text of course)
 See comments in top of this test.js file for detailed information about the tests.
 
 # Notes:
-- The database name is "foodshare", so if you want to see quickly what the database contents are, type mongo foodshare, 
-then run mongo queries
+- The database name is "foodshare", so if you want to see quickly what the database contents are, type "mongo ds015740.mlab.com:15740/foodshare -u deliverer -p hungry", then run mongo queries
 
 # Basic Usage / Tests:
 

@@ -18,7 +18,6 @@ $.ajax({
 	data: cookie,
 	success: function(data, textStatus, jqXHR) {
 		// Data is an object, get its fields and output to html
-		console.log(data);
 		var html = "";
 		html += "<h1>User: " + data.name + "</h1>";
 		html += "<p>Email: " + data.email + ", Phone: " + data.phone + "</p>";
@@ -44,10 +43,24 @@ search.click(function (e){
 			for (i = 0; i < data.length; i++){
 				if (data[i].orderStatus == "Pending"){
 					html += "<div class='orderEntry'>";
-					html += "<p>Delivery Location: " + data[i].userLocation + "</p>";
-					html += "<p>Store requested from: " + data[i].store + "</p>";
-					html += "<p>Food requested: " + data[i].food + "</p>";
-					html += "<p>Date made: " + data[i].date + "</p>";
+					html += "<form>";
+					html += "<label for='orderID'>Order ID:</label>" 
+					        + "<input type='text' readonly='readonly' value='" + data[i]._id + "'><br>";
+
+					html += "<label for='deliveryLocation'>Delivery Location:</label>"
+							+ "<input type='text' readonly='readonly' value='" + data[i].userLocation + "'><br>";
+
+					html += "<label for='store'>Store requested from:</label>"
+							+ "<input type='text' readonly='readonly' value='" + data[i].store + "'><br>";
+
+					html += "<label for='food'>Food requested:</label>"
+							+ "<input type='text' readonly='readonly' value='" + data[i].food + "'><br>";
+
+					html += "<label for='date'>Date made:</label>"
+						 	+ "<input type='text' readonly='readonly' value='" + data[i].date + "'><br>";
+
+					html += "<button type='submit' class='button button-block'>Accept Order</button><br><br><br>";
+					html += "</form>";
 					html += "</div>";
 				}
 			}
@@ -68,10 +81,24 @@ search.click(function (e){
 				if (data[i].orderStatus == "Pending"){
 					if (data[i].city == cur_location){
 						html += "<div class='orderEntry'>";
-						html += "<p>Delivery Location: " + data[i].userLocation + "</p>";
-						html += "<p>Store requested from: " + data[i].store + "</p>";
-						html += "<p>Food requested: " + data[i].food + "</p>";
-						html += "<p>Date made: " + data[i].date + "</p><br>";
+						html += "<form>";
+						html += "<label for='orderID'>Order ID:</label>" 
+						        + "<input type='text' readonly='readonly' value='" + data[i]._id + "'><br>";
+
+						html += "<label for='deliveryLocation'>Delivery Location:</label>"
+								+ "<input type='text' readonly='readonly' value='" + data[i].userLocation + "'><br>";
+
+						html += "<label for='store'>Store requested from:</label>"
+								+ "<input type='text' readonly='readonly' value='" + data[i].store + "'><br>";
+
+						html += "<label for='food'>Food requested:</label>"
+								+ "<input type='text' readonly='readonly' value='" + data[i].food + "'><br>";
+
+						html += "<label for='date'>Date made:</label>"
+							 	+ "<input type='text' readonly='readonly' value='" + data[i].date + "'><br>";
+
+						html += "<button type='submit' class='button button-block'>Accept Order</button><br><br><br>";
+						html += "</form>";
 						html += "</div>";
 					}
 				}
@@ -91,10 +118,24 @@ search.click(function (e){
 			for (i = 0; i < data.length; i++){
 				if (data[i].orderStatus == "Pending"){
 					html += "<div class='orderEntry'>";
-					html += "<p>Delivery Location: " + data[i].userLocation + "</p>";
-					html += "<p>Store requested from: " + data[i].store + "</p>";
-					html += "<p>Food requested: " + data[i].food + "</p>";
-					html += "<p>Date made: " + data[i].date + "</p><br>";
+					html += "<form>";
+					html += "<label for='orderID'>Order ID:</label>" 
+					        + "<input type='text' readonly='readonly' value='" + data[i]._id + "'><br>";
+
+					html += "<label for='deliveryLocation'>Delivery Location:</label>"
+							+ "<input type='text' readonly='readonly' value='" + data[i].userLocation + "'><br>";
+
+					html += "<label for='store'>Store requested from:</label>"
+							+ "<input type='text' readonly='readonly' value='" + data[i].store + "'><br>";
+
+					html += "<label for='food'>Food requested:</label>"
+							+ "<input type='text' readonly='readonly' value='" + data[i].food + "'><br>";
+
+					html += "<label for='date'>Date made:</label>"
+						 	+ "<input type='text' readonly='readonly' value='" + data[i].date + "'><br>";
+
+					html += "<button type='submit' class='button button-block'>Accept Order</button><br><br><br>";
+					html += "</form>";
 					html += "</div>";
 				}
 			}
@@ -114,3 +155,39 @@ var delete_cookie = function(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 };
 
+
+
+
+// Deliverer accept an order: Update order status
+var form = $("#display-orders orderEntry");
+
+form.submit(function(e) {
+
+	var inputs = $("#display-orders orderEntry input");
+
+	var formData = {
+		orderID: inputs[0].value,
+	}
+
+	// AJAX HTTP POST request
+	$.ajax({
+		type: "POST",
+		url: "update_order",
+		data: formData,
+		success: function(data, textStatus, jqXHR) {
+			console.log(data);
+			// change button to say Drop Order
+			// $().html('Drop Order'); - need to figure out how to reference button
+			alert("Order Accepted");
+		},
+		
+		error: function(jqXHR, textStatus, errorThrown) {
+			// Display error
+			alert(jqXHR.responseText);
+    }
+	});
+
+
+	// Prevent page change
+	return false;
+});

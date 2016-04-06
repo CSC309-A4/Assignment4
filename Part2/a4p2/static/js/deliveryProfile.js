@@ -44,10 +44,24 @@ search.click(function (e){
 			for (i = 0; i < data.length; i++){
 				if (data[i].orderStatus == "Pending"){
 					html += "<div class='orderEntry'>";
-					html += "<p>Delivery Location: " + data[i].userLocation + "</p>";
-					html += "<p>Store requested from: " + data[i].store + "</p>";
-					html += "<p>Food requested: " + data[i].food + "</p>";
-					html += "<p>Date made: " + data[i].date + "</p>";
+					html += "<form>";
+					html += "<label for='orderID'>Order ID:</label>" 
+					        + "<input type='text' readonly='readonly' value='" + data[i]._id + "'><br>";
+
+					html += "<label for='deliveryLocation'>Delivery Location:</label>"
+							+ "<input type='text' readonly='readonly' value='" + data[i].userLocation + "'><br>";
+
+					html += "<label for='store'>Store requested from:</label>"
+							+ "<input type='text' readonly='readonly' value='" + data[i].store + "'><br>";
+
+					html += "<label for='food'>Food requested:</label>"
+							+ "<input type='text' readonly='readonly' value='" + data[i].food + "'><br>";
+
+					html += "<label for='date'>Date made:</label>"
+						 	+ "<input type='text' readonly='readonly' value='" + data[i].date + "'><br>";
+
+					html += "<button type='submit' class='button button-block'>Accept Order</button><br><br><br>";
+					html += "</form>";
 					html += "</div>";
 				}
 			}
@@ -68,10 +82,24 @@ search.click(function (e){
 				if (data[i].orderStatus == "Pending"){
 					if (data[i].city == cur_location){
 						html += "<div class='orderEntry'>";
-						html += "<p>Delivery Location: " + data[i].userLocation + "</p>";
-						html += "<p>Store requested from: " + data[i].store + "</p>";
-						html += "<p>Food requested: " + data[i].food + "</p>";
-						html += "<p>Date made: " + data[i].date + "</p><br>";
+						html += "<form>";
+						html += "<label for='orderID'>Order ID:</label>" 
+						        + "<input type='text' readonly='readonly' value='" + data[i]._id + "'><br>";
+
+						html += "<label for='deliveryLocation'>Delivery Location:</label>"
+								+ "<input type='text' readonly='readonly' value='" + data[i].userLocation + "'><br>";
+
+						html += "<label for='store'>Store requested from:</label>"
+								+ "<input type='text' readonly='readonly' value='" + data[i].store + "'><br>";
+
+						html += "<label for='food'>Food requested:</label>"
+								+ "<input type='text' readonly='readonly' value='" + data[i].food + "'><br>";
+
+						html += "<label for='date'>Date made:</label>"
+							 	+ "<input type='text' readonly='readonly' value='" + data[i].date + "'><br>";
+
+						html += "<button type='submit' class='button button-block'>Accept Order</button><br><br><br>";
+						html += "</form>";
 						html += "</div>";
 					}
 				}
@@ -91,10 +119,25 @@ search.click(function (e){
 			for (i = 0; i < data.length; i++){
 				if (data[i].orderStatus == "Pending"){
 					html += "<div class='orderEntry'>";
-					html += "<p>Delivery Location: " + data[i].userLocation + "</p>";
-					html += "<p>Store requested from: " + data[i].store + "</p>";
-					html += "<p>Food requested: " + data[i].food + "</p>";
-					html += "<p>Date made: " + data[i].date + "</p><br>";
+					html += "<form>";
+					console.log(data);
+					html += "<label for='orderID'>Order ID:</label>" 
+					        + "<input type='text' readonly='readonly' value='" + data[i]._id + "'><br>";
+
+					html += "<label for='deliveryLocation'>Delivery Location:</label>"
+							+ "<input type='text' readonly='readonly' value='" + data[i].userLocation + "'><br>";
+
+					html += "<label for='store'>Store requested from:</label>"
+							+ "<input type='text' readonly='readonly' value='" + data[i].store + "'><br>";
+
+					html += "<label for='food'>Food requested:</label>"
+							+ "<input type='text' readonly='readonly' value='" + data[i].food + "'><br>";
+
+					html += "<label for='date'>Date made:</label>"
+						 	+ "<input type='text' readonly='readonly' value='" + data[i].date + "'><br>";
+
+					html += "<button type='submit' class='button button-block'>Accept Order</button><br><br><br>";
+					html += "</form>";
 					html += "</div>";
 				}
 			}

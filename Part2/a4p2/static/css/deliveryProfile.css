@@ -13,10 +13,6 @@ h1, h2, h3, h4, h5, h6, p, div, label, input {
   color: black;
 }
 
-input {
-  background-color: orange;
-}
-
 #deliverer-info {
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -51,6 +47,10 @@ input {
 
 }
 
+form {
+	color: black;
+}
+
 
 /* Prevents clickability/draggability */
 .noselect {
@@ -60,6 +60,19 @@ input {
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* IE/Edge */
   user-select: none;           /* non-prefixed version, currently not supported by any browser */
+}
+
+label{
+	display:inline-block;
+	width:200px;
+	margin-right:15px;
+	text-align:left;
+}
+
+input {
+	width: 50%;
+    border: none;
+    border-bottom: 2px solid red;
 }
 
 

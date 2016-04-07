@@ -76,3 +76,15 @@
  "feedback":[],
  "__v":0}
 
+{ "_id":{"$oid":"570597e0e6cbe9803027ffb0"},
+ "name":"DillPickle",
+ "password":"999999",
+ "email":"thecakeis@lie.com",
+ "phone":"416-911-0000",
+ "address":"42 Universe Way",
+ "city":"Atlantis",
+ "creditCardNum":"00000000000",
+ "orderHistory":[ ],
+ "savedFood":[ ],
+ "feedback":[ { "rating":null, "madeBy":"", "msg":""} ],
+  "__v":0}

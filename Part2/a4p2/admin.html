@@ -19,24 +19,29 @@
     
     <div id="floatLeft">
       <div id="searchFunc" class="dark container-fluid well span6 admin">
-        <h2>Search Functions</h2>
+        <h2>Search Functions</h2> 
         
+        <!-- Search all-->
         <button id="searchAllUsers">Search All Users      <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         <button id="searchAllDeliverers">Search All Deliverers      <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         <button id="searchAllOrders">Search All Orders      <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
+        <!-- Search by user name -->
         <label for="searchByUsername">Search By User Name</label>
         <input id="searchByUsername" type="text" placeholder="Enter a user's name" name="searchByUsername"></input>
         <button id="button-searchByUsername"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
+        <!-- Search by deliverer name -->
         <label for="searchByDelivererName">Search By Deliverer Name</label>
         <input id="searchByDelivererName" type="text" placeholder="Enter a deliverer's name" name="searchByDelivererName"></input>
         <button id="button-searchByDelivererName"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
+        <!-- Search order by user id -->
         <label for="searchOrderByUser">Search Orders By A User</label>
         <input id="searchOrderByUser" type="text" placeholder="Enter the user ID" name="searchOrderByUser"></input>
         <button id="button-searchOrderByUser"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
+        <!-- Search order by deliverer id -->
         <label for="searchOrderByDelivery">Search Orders Delivered By A Deliverer</label>
         <input id="searchOrderByDelivery" type="text" placeholder="Enter the deliverer ID" name="searchOrderByDelivery"></input>
         <button id="button-searchOrderByDelivery"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
@@ -46,11 +51,13 @@
       <div id="updateFunc" class="dark container-fluid well span6 admin">
         <h2>Update Functons</h2>
 
+        <!-- Update user by user name -->
         <label for="updateByUsername">Update A User's Info</label>
         <input id="updateByUsername" type="text" placeholder="Enter a user's name" name="updateByUsername"></input>
         <button id="button-updateByUsername">Display User Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
         <button id="button-updateUserInfo">Update User Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>        
 
+        <!-- Update deliverer by deliverer name -->
         <label for="updateByDelivererName">Update A Deliverer's Info</label>
         <input id="updateByDelivererName" type="text" placeholder="Enter a deliverer's name" name="updateByDelivererName"></input>
         <button id="button-updateByDelivererName">Display Deliverer Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
@@ -61,10 +68,12 @@
       <div id="deleteFunc" class="dark container-fluid well span6 admin">
         <h2>Delete Functions</h2>
 
+        <!-- Delete user by user name -->
         <label for="deleteByUsername">Delete A User From The Database</label>
         <input id="deleteByUsername" type="text" placeholder="Enter a user's name" name="deleteByUsername"></input>
         <button id="button-deleteByUsername"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 
+        <!-- Delete deliverer by deliverer name -->
         <label for="deleteByDelivererName">Delete A Deliverer From The Database</label>
         <input id="deleteByDelivererName" type="text" placeholder="Enter a deliverer's name" name="deleteByDelivererName"></input>
         <button id="button-deleteByDelivererName"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
@@ -76,25 +85,27 @@
       <div id="miscFunc" class="dark container-fluid well span6 admin">
         <h2>Add/Delete Database Functions</h2><br><br>
 
+        <!-- Add user to database/create user database (if nonexistent) -->
         <h4>User Database Related Functions</h4>
         <button id="button-initUser">Initialize User Info</button>
         <p>The button below submits the user info to database. If the database is nonexistent, one will be create with the user added to it.</p>
         <button id="button-createUserDB">Submit User Info</button><br>
 
+        <!-- Add deliverer to database/create deliverer database (if nonexistent) -->
         <h4>Deliverer Database Related Functions</h4>
         <button id="button-initDeliverer">Initialize Deliverer Info</button>
         <p>The button below submits the deliverer info to database. If the database is nonexistent, one will be create with the deliverer added to it.<p>
         <button id="button-createDelivererDB">Submit Deliverer info</button><br>
 
-
+        <!-- Add order to database/create order database (if nonexistent)  -->
         <h4>Order Database Related Functions</h4>
         <button id="button-initOrder">Initialize Order Info</button>
         <p>The button below submits the order info to database. If the database is nonexistent, one will be create with the order added to it.</p>
         <button id="button-createOrderDB">Submit Order Info</button><br>
 
-
+        <!-- Drop collections -->
         <h4>Delete Functions</h4>
-        <label for="deleteByUsername">WARNING: This removes all users from the specific database. Do not click unless you know what you are doing. Honestly these buttons shouldn't even exist.</label>
+        <label for="button-emptyUserDB">WARNING: This removes all users from the specific database. Do not click unless you know what you are doing. Honestly these buttons shouldn't even exist.</label>
         <button id="button-emptyUserDB">Empty the User Database</button>            
         <button id="button-emptyDelivererDB">Empty the Deliverer Database</button>
         <button id="button-emptyOrderDB">Empty the Order Database</button>    

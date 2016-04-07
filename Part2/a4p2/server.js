@@ -658,107 +658,124 @@ app.get("/get_feedback", function (req, res) {
 
 /* ADMIN ROUTES */
 
-/* SEARCH FUNCTIONS*/
+
+ /*-----------------
+// Search ROUTES //
+----------------*/
+
+//route for search all users
 app.get("/admin/search_all_users", function (req, res) {
 	console.log("Admin: Search All Users");
 	User.find({}, function (err, data) {
 		if (err) {
 			res.send("Error");
 		}
-		res.send(data);
+		res.send(data); //returns array of all users
 	});
 });
 
+//route for search all deliverers
 app.get("/admin/search_all_deliverers", function (req, res) {
 	console.log("Admin: Search All Deliverers");
 	Deliverer.find({}, function (err, data) {
 		if (err) {
 			res.send("Error");
 		}
-		res.send(data);
+		res.send(data); //return array of all deliverers
 	});
 });
 
+//route for search all orders
 app.get("/admin/search_all_orders", function (req, res) {
 	console.log("Admin: Search All Orders");
 	Order.find({}, function (err, data) {
 		if (err) {
-			res.send("Error");
+			res.send("Error"); //return array of all orders
 		}
 		res.send(data);
 	});
 });
 
+//route for search a specific user
 app.post("/admin/search_user_info", function (req, res) {
 	console.log("Admin: Searching A Certain User");
 	var body = req.body;
-	var name = Object.keys(body);
-	console.log(name[0]);
+	var name = Object.keys(body); //format to get name
+	//console.log(name[0]);
 	//console.log(User.find({'name': req.body}));
 	User.find({'name': name[0]}, function (err, data) {
 		if (err) {
 			res.send("Error");
 		}
-		console.log(data);		
-		res.send(data);
+		//console.log(data);		
+		res.send(data); //return object/array of user info
 	});
 });
 
+//route for search a specific deliverer
 app.post("/admin/search_deliverer_info", function (req, res) {
 	console.log("Admin: Searching A Certain Deliverer");
 	var body = req.body;
-	var name = Object.keys(body);
+	var name = Object.keys(body); //format to get name
 	console.log(name[0]);
 	//console.log(User.find({'name': req.body}));
 	Deliverer.find({"name": name[0]}, function (err, data) {
 		if (err) {
 			res.send("Error");
 		}
-		res.send(data);
+		res.send(data); //return deliverer info
 	});
 });
 
+//route for search a specific order given user ID
 app.post("/admin/search_user_orders", function (req, res) {
 	console.log("Admin: Searching A Certain User's Order");
 	var body = req.body;
-	var userID = Object.keys(body);
+	var userID = Object.keys(body); //format to get ID
 	console.log(userID[0]);
 	Order.find({"userID": userID[0]}, function (err, data) {
 		if (err) {
 			res.send("Error");
 		}
-		res.send(data);
+		res.send(data); //return order info for given ID
 	});
 });
 
+//route for search a specific order given deliverer ID
 app.post("/admin/search_deliverer_orders", function (req, res) {
 	console.log("Admin: Searching Orders A Certain Deliverer Made");
 	var body = req.body;
-	var delivererID = Object.keys(body);
+	var delivererID = Object.keys(body); //format to get ID
 	console.log(delivererID[0]);
 	Order.find({"delivererID": delivererID[0]}, function (err, data) {
 		if (err) {
-			res.send("Error");
+			res.send("Error"); //return order info for given ID
 		}
 		res.send(data);
 	});
 });
 
 
-/*UPDATE FUNCTIONS*/
+
+ /*-----------------
+// UPDATE ROUTES //
+----------------*/
+
+//route for updating a user given their name
 app.post("/admin/update_user_info", function (req, res) {
 	console.log("Admin: Looking To Update A User's Info");
 	var body = req.body;
-	var name = Object.keys(body);
+	var name = Object.keys(body); //format to get name
 	//console.log(name[0]);
 	User.find({'name': name[0]}, function (err, data) {
 		if (err) {
 			res.send("Error");
 		}
-		res.send(data);
+		res.send(data); //send info back to client (admin.js)
 	});
 });
 
+//route that receives newly updated user info
 app.post("/admin/updating_user_info", function (req, res) {
 	console.log("Admin: Updating A Certain User's Info");
 	//console.log(req.body.name);
@@ -768,25 +785,26 @@ app.post("/admin/updating_user_info", function (req, res) {
 		if (err) {
 			res.send("Error");
 		}
-		res.send("User's info was successfully updated.");
+		res.send("User's info was successfully updated."); //send confirmation that user info was updated
 	});
 });
 
-
+//route for updating a deliverer given their name
 app.post("/admin/update_deliverer_info", function (req, res) {
 	console.log("Admin: Looking To Update A Deliverer's Info");
 	var body = req.body;
-	var name = Object.keys(body);
+	var name = Object.keys(body); //format to get name
 	//console.log(name[0]);
 	//console.log(User.find({'name': req.body}));
 	Deliverer.find({'name': name[0]}, function (err, data) {
 		if (err) {
 			res.send("Error");
 		}
-		res.send(data);
+		res.send(data); //send info back to client (admin.js)
 	});
 });
 
+//route that receives newly updated deliverer info
 app.post("/admin/updating_deliverer_info", function (req, res) {
 	console.log("Admin: Updating A Certain Deliverer's Info");
 	//console.log(req.body.name);
@@ -796,12 +814,15 @@ app.post("/admin/updating_deliverer_info", function (req, res) {
 		if (err) {
 			res.send("Error");
 		}
-		res.send("Deliverer's info was successfully updated.");
+		res.send("Deliverer's info was successfully updated."); //send confirmation that deliverer info was updated
 	});
 });
 
 
-/*DELETE FUNCTIONS*/
+
+ /*-----------------
+// DELETE ROUTES //
+----------------*/
 
 app.post("/admin/delete_user_info", function (req, res) {
 	console.log("Admin: Deleting A Certain User's Info");
@@ -832,22 +853,23 @@ app.post("/admin/delete_deliverer_info", function (req, res) {
 });
 
 
-/*MISC FUNCTIONS */
+ /*--------------
+// MISC ROUTES //
+--------------*/
 
-//USER MISC FUNCTION
+//insert new user to users collection
 app.post("/admin/create_user_database", function (req, res) {
 	console.log("Admin: Submitting User's Info To User Database");
-
 	//console.log(req.body.name);
+
 	var info = req.body;
-	var user = new User(info);
-	//console.log(User.find({'name': req.body}));
-	user.save(function (err, data) {
+	var user = new User(info); //create new user model with given info
+	user.save(function (err, data) { //save to users collection
 		if (err) {
 			res.send("Error");
 		}
 		res.send("User\'s info was successfully updated. If the user database was non existent previous \
-				  to this action, then it has been initialized and created.");
+				  to this action, then it has been initialized and created."); //confirmation of success
 	});
 
 	/*better but not functional yet
@@ -861,20 +883,19 @@ app.post("/admin/create_user_database", function (req, res) {
 	*/
 });
 
-//DELIVERER MISC FUNCTION
+//insert new deliverer to deliverers collection
 app.post("/admin/create_deliverer_database", function (req, res) {
 	console.log("Admin: Submitting Deliverer's Info To Deliverer Database");
 
 	//console.log(req.body.name);
 	var info = req.body;
-	var deliverer = new Deliverer(info);
-	//console.log(User.find({'name': req.body}));
-	deliverer.save(function (err, data) {
+	var deliverer = new Deliverer(info); //create a new deliverer model with given info
+	deliverer.save(function (err, data) { //save to deliverers collection
 		if (err) {
 			res.send("Error");
 		}
 		res.send("Deliverer\'s info was successfully updated. If the deliverer database was non existent previous \
-				  to this action, then it has been initialized and created.");
+				  to this action, then it has been initialized and created."); //confirmation of success
 	});
 
 	/*better but not functional yet
@@ -888,20 +909,19 @@ app.post("/admin/create_deliverer_database", function (req, res) {
 	*/
 });
 
-//ORDER MISC FUNCTION
+//insert new deliverer to deliverers collection
 app.post("/admin/create_order_database", function (req, res) {
 	console.log("Admin: Submitting Order Info To Order Database");
 
 	//console.log(req.body.name);
 	var info = req.body;
-	var order = new Order(info);
-	//console.log(User.find({'name': req.body}));
-	order.save(function (err, data) {
+	var order = new Order(info);  //create a new order model with given info
+	order.save(function (err, data) { //save to orders collection
 		if (err) {
 			res.send("Error");
 		}
 		res.send("Order info was successfully updated. If the order database was non existent previous \
-				  to this action, then it has been initialized and created.");
+				  to this action, then it has been initialized and created."); //confirmation of success
 	});
 
 	/*better but not functional yet
@@ -916,8 +936,11 @@ app.post("/admin/create_order_database", function (req, res) {
 });
 
 
-//DELETE FUNCTIONS
+ /*--------------
+// DROP ROUTES //
+--------------*/
 
+//route to drop user collection
 app.get("/admin/delete_user_database", function (req, res) {
 	console.log("Admin: Deleting user database.")
 	/*
@@ -925,24 +948,27 @@ app.get("/admin/delete_user_database", function (req, res) {
 		console.log(response);
 	});*/
 
-	db.collection('users').drop();
+	db.collection('users').drop(); //drop users collection
 
-	res.send("User database was successfully dropped.");
+	res.send("User database was successfully dropped."); //send confirmation that drop was successful
 });
 
+//route to drop deliverer collection
 app.get("/admin/delete_deliverer_database", function (req, res) {
 	console.log("Admin: Deleting deliverer database.")
 
-	db.collection('deliverers').drop();
+	db.collection('deliverers').drop(); //drop deliverers collection
 
-	res.send("Deliverer database was successfully dropped.");
+	res.send("Deliverer database was successfully dropped."); //send confirmation that drop was successful
 });
 
+
+//route to drop order collection
 app.get("/admin/delete_order_database", function (req, res) {
 	console.log("Admin: Deleting order database.")
 
-	db.collection('orders').drop();
+	db.collection('orders').drop(); //drop collection
 
-	res.send("Order database was successfully dropped.");
+	res.send("Order database was successfully dropped."); //send confirmation that drop was successful
 
 });

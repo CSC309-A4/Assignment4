@@ -26,15 +26,12 @@ var deleteByDelivererNameButton = $("#button-deleteByDelivererName");
 
 //misc functions buttons
 var initUserButton = $("#button-initUser");
-var submitUserButton = $("#button-submitUser");
 var createUserDBButton = $("#button-createUserDB");
 
 var initDelivererButton = $("#button-initDeliverer");
-var submitDelivererButton = $("#button-submitDeliverer");
 var createDelivererDBButton = $("#button-createDelivererDB");
 
 var initOrderButton = $("#button-initOrder");
-var submitOrderButton = $("#button-submitOrder");
 var createOrderDBButton = $("#button-createOrderDB");
 
 var dropUserDBButton = $("#button-emptyUserDB");
@@ -44,9 +41,12 @@ var dropOrderDBButton = $("#button-emptyOrderDB");
 var output = $("#output");
 
 
+
  /*-------------------
 // Search Functions //
 -------------------*/
+
+//Button click event when user clicks Search All Users
 searchAllUsersButton.click(function (e) {
 	$.ajax({
 		type: "GET",
@@ -54,15 +54,13 @@ searchAllUsersButton.click(function (e) {
 		data: null,
 		success: function(data, textStatus, jqXHR) {
 			// Expects an array of data objects
-			//console.log(data);
-
 			// If empty
 			if (data.length <= 0) {
 				output.html("<p>No users found</p>");
 				return;
 			}	
 
-			// Otherwise 
+			// Otherwise produce an html of user info
 			var html = "<h2>All Users</h2>";
 			html += "<ol>";
 			for (var i = 0; i < data.length; i++) {
@@ -117,7 +115,7 @@ searchAllUsersButton.click(function (e) {
 			}
 			html += "</ol>";	// close ordered list
 
-			output.html(html);
+			output.html(html); //output html of user info
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			output.html("Error");
@@ -125,6 +123,7 @@ searchAllUsersButton.click(function (e) {
 	}); // end of ajax call
 });
 
+//Button click event when user clicks Search All Deliverers
 searchAllDeliverersButton.click(function (e) {
 	$.ajax({
 		type: "GET",
@@ -140,7 +139,7 @@ searchAllDeliverersButton.click(function (e) {
 				return;
 			}	
 
-			// Otherwise 
+			// Otherwise produce an html of deliverer info
 			var html = "<h2>All Deliverers</h2>";
 			html += "<ol>";
 			for (var i = 0; i < data.length; i++) {
@@ -174,7 +173,7 @@ searchAllDeliverersButton.click(function (e) {
 			}
 			html += "</ol>"; // close ordered list
 
-			output.html(html);
+			output.html(html); //output html of deliverer info
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			output.html("Error");
@@ -183,7 +182,7 @@ searchAllDeliverersButton.click(function (e) {
 
 });
 
-
+//Button click event when user clicks Search All Orders
 searchAllOrdersButton.click(function (e) {
 	$.ajax({
 		type: "GET",
@@ -199,7 +198,7 @@ searchAllOrdersButton.click(function (e) {
 				return;
 			}	
 
-			// Otherwise 
+			// Otherwise produce an html of order info
 			var html = "<h2>All Orders</h2>";
 			html += "<ol>";
 			for (var i = 0; i < data.length; i++) {
@@ -227,15 +226,14 @@ searchAllOrdersButton.click(function (e) {
 	}); // end of ajax call
 });
 
-
+//Button click event when admin searches a specific user
 searchByUsernameButton.click(function (e) {
-	//console.log($('#searchByUsername').val());
-	var $username = $('#searchByUsername').val();
-	//console.log(JSON.stringify($username));
+	var $username = $('#searchByUsername').val(); //get user's name from input
+
 	$.ajax({
 		type: "POST",
 		url: "admin/update_user_info",
-		data: $username,
+		data: $username, //pass in user's name to server and get info from database
 		success: function(data, textStatus, jqXHR) {
 			//an array of 1 user
 			//console.log(data[0])
@@ -246,7 +244,7 @@ searchByUsernameButton.click(function (e) {
 				return;
 			}
 
-			// Otherwise 
+			// Otherwise produce an html of user's info
 			var html = "<h2>" + data[0].name + "'s Info</h2>";
 			html += "<ul>";	// Start of properties list
 			html += "<li>Username: " + data[0].name + "</li>";			
@@ -304,23 +302,23 @@ searchByUsernameButton.click(function (e) {
 	}); // end of ajax call
 });
 
+//Button click event when admin searches a specific deliverer
 searchByDelivererNameButton.click(function (e) {
-	var $delivererName = $('#searchByDelivererName').val();
+	var $delivererName = $('#searchByDelivererName').val(); //get deliverer's name from input
+
 	$.ajax({
 		type: "POST",
 		url: "admin/search_deliverer_info",
-		data: $delivererName,
+		data: $delivererName, //pass in deliverer's name to server and get info from database
 		success: function(data, textStatus, jqXHR) {
 			// Expects an array of data objects
-			//console.log(data);
-
 			// If empty
 			if (data.length <= 0) {
 				output.html("<p>No deliverers found</p>");
 				return;
 			}	
 
-			// Otherwise 
+			// Otherwise produce an html of deliverers's info
 			var html = "<h2>" + data[0].name + "'s Info</h2>";
 			html += "<ul>";	// Start of properties list				
 			html += "<li>Deliverer name: " + data[0].name + "</li>";
@@ -357,23 +355,23 @@ searchByDelivererNameButton.click(function (e) {
 
 });
 
+//Button click event when admin searches orders made by a user
 searchOrderByUserButton.click(function (e) {
-	var $userID = $('#searchOrderByUser').val();
+	var $userID = $('#searchOrderByUser').val(); //get user's ID from input
+
 	$.ajax({
 		type: "POST",
 		url: "admin/search_user_orders",
-		data: $userID,
+		data: $userID, //pass in user ID to match all orders with the same id in order database
 		success: function(data, textStatus, jqXHR) {
 			// Expects an array of data objects
-			console.log(data);
-
 			// If empty
 			if (data.length <= 0) {
 				output.html("<p>No orders found</p>");
 				return;
 			}	
 
-			// Otherwise 
+			// Otherwise produce an html of all orders from this user
 			var html = "<h2>Orders from userID: " + data[0].userID + "</h2>"; //figure out how we're gonna implement order name
 			html += "<ol>";
 			for (var i = 0; i < data.length; i++) {
@@ -400,23 +398,22 @@ searchOrderByUserButton.click(function (e) {
 	}); // end of ajax call
 });
 
+//Button click event when admin searches orders delivered by deliverers
 searchOrderByDelivererButton.click(function (e) {
-	var $delivererID = $('#searchOrderByDelivery').val();
+	var $delivererID = $('#searchOrderByDelivery').val(); //get deliverer's ID from input
 	$.ajax({
 		type: "POST",
 		url: "admin/search_deliverer_orders",
-		data: $delivererID,
+		data: $delivererID, //pass in deliverer ID to match all orders with the same id in order database
 		success: function(data, textStatus, jqXHR) {
 			// Expects an array of data objects
-			//console.log(data);
-
 			// If empty
 			if (data.length <= 0) {
 				output.html("<p>No orders found</p>");
 				return;
 			}	
 
-			// Otherwise 
+			// Otherwise produce an html of all orders delivered by this deliverer
 			var html = "<h2>Orders from delivererID: " + data[0].userID + "</h2>"; //figure out how we're gonna implement order name
 			html += "<ol>";
 			for (var i = 0; i < data.length; i++) {
@@ -444,22 +441,21 @@ searchOrderByDelivererButton.click(function (e) {
 });
 
 
+
  /*-------------------
 // Update Functions //
 -------------------*/
 
-/*Create text fields that allows an admin to update user info*/
+//Button click event when admin searches a specific user to update
 updateByUsernameButton.click(function (e) { 
-
-	var $username = $('#updateByUsername').val();
+	var $username = $('#updateByUsername').val();  //get user's name from input
 
 	$.ajax({
 		type: "POST",
 		url: "admin/update_user_info",
-		data: $username,
+		data: $username,  //pass in user's name to server and get info from database
 		success: function(data, textStatus, jqXHR) {
-			//console.log(data[0])
-			user = data[0]; //store for when updating the database
+			user = data[0]; //store for when updating the database in the next function
 
 			// If empty
 			if (data[0].length <= 0) {
@@ -467,7 +463,7 @@ updateByUsernameButton.click(function (e) {
 				return;
 			}
 
-			// Otherwise create html for text input fields
+			// Otherwise create html with input
 			var html = "<h4>Enter info into the form to update. Leave the field blank to leave the data unchanged.</h4>";
 
 			html += "<label for=\'updateUserName\' >User Name</label><br>";
@@ -500,7 +496,7 @@ updateByUsernameButton.click(function (e) {
 
 				html += "<label for=\'updateUserFeedbackMsg\' >Feedback Message</label><br>";
 				html += "<input id=\'updateUserFeedbackMsg\' type=\'text\' placeholder=\'No data found.\' name=\'updateUserFeedbackMsg\'></input><br>";
-			} else if (data[0].feedback[0].madeBy == "" && data[0].feedback[0].rating == "" ) { //User has feed with empty fields
+			} else if (data[0].feedback[0].madeBy == "" && data[0].feedback[0].rating == "" ) { //User has feedback but contains empty fields
 				html += "<label for=\'updateUserFeedbackRating\' >Feedback Rating</label><br>";
 				html += "<input id=\'updateUserFeedbackRating\' type=\'text\' placeholder=\'No data found.\' name=\'updateUserFeedbackRating\'></input><br>";
 
@@ -530,9 +526,9 @@ updateByUsernameButton.click(function (e) {
 
 
 			html += "<label for=\'updateOrderHistory\' >orderHistory (Enter strings separate by commas (no space))</label><br>";
-			if (data[0].savedFood.length > 0) {			
+			if (data[0].orderHistory.length > 0) { //user has order history	
 				html += "<input id=\'updateOrderHistory\' type=\'text\' placeholder=\'" + data[0].orderHistory + "\' name=\'updateOrderHistory\'></input><br>";
-			} else {
+			} else { //no order history
 				html += "<input id=\'updateOrderHistory\' type=\'text\' placeholder=\'No data found.\' name=\'updateOrderHistory\'></input><br><br>";
 			}
 
@@ -544,9 +540,11 @@ updateByUsernameButton.click(function (e) {
 	}); // end of ajax call
 });
 
+//button event admin clicks when finished inputting information, sends it to server with JSON format
 updateUserInfoButton.click(function (e) { //when the user clicks update on the right
-	//console.log(user);
 
+	//if field is empty then the admin did not update --> use the old information
+	//otherwise replace with new information
 	var $username = ($('#updateUserName').val() == '') ? user.name : $('#updateUserName').val();
 	var $password = ($('#updateUserPassword').val() == '') ? user.password : $('#updateUserPassword').val();
 	var $email = ($('#updateUserEmail').val() == '') ? user.email : $('#updateUserEmail').val();
@@ -554,10 +552,12 @@ updateUserInfoButton.click(function (e) { //when the user clicks update on the r
 	var $address = ($('#updateUserAddress').val() == '') ? user.address : $('#updateUserAddress').val();
 	var $city = ($('#updateUserCity').val() == '') ? user.city : $('#updateUserCity').val();
 	var $creditCardNum = ($('#updateUserCCN').val() == '') ? user.creditCardNum : $('#updateUserCCN').val();
+	//this actually needs to be fixed to allow for multiple feedbacks -- not enough time though
 	var $feedbackRating = ($('#updateUserFeedbackRating').val() == '') ? '' : $('#updateUserFeedbackRating').val();
 	var $feedbackAuthor = ($('#updateUserFeedbackAuthor').val() == '') ? '' : $('#updateUserFeedbackAuthor').val();
 	var $feedbackMsg = ($('#updateUserFeedbackMsg').val() == '') ? '' : $('#updateUserFeedbackMsg').val();
 	var $savedFood = ($('#updateSavedFood').val() == '') ? [] : $('#updateSavedFood').val().split(",");
+	//this needs to be fixed (not really clear as to what order history looks like)
 	var $orderHistory = ($('#updateOrderHistory').val() == '') ? [] : $('#updateOrderHistory').val();
 
 	userInfo = {"name": $username,
@@ -581,9 +581,9 @@ updateUserInfoButton.click(function (e) { //when the user clicks update on the r
 	$.ajax({
 		type: "POST",
 		url: "admin/updating_user_info",
-		data: userInfo,
+		data: userInfo, //sends data to add to database
 		success: function(data, textStatus, jqXHR) {
-			output.html(data);
+			output.html(data); //a response message confirming update was successful
 		},
 		
 		error: function(jqXHR, textStatus, errorThrown) {
@@ -593,6 +593,7 @@ updateUserInfoButton.click(function (e) { //when the user clicks update on the r
 });
 
 
+//Button click event when admin searches a specific deliverer to update
 updateByDelivererNameButton.click(function (e) {
 
 	var $delivererName = $('#updateByDelivererName').val(); //name that is passed to server
@@ -681,9 +682,10 @@ updateByDelivererNameButton.click(function (e) {
 	}); // end of ajax call
 });
 
+//button event admin clicks when finished inputting information, sends it to server with JSON format
 updateDelivererInfoButton.click(function (e) { //when the user clicks update on the right
-	//console.log(user);
-
+	//if field is empty then the admin did not update --> use the old information
+	//otherwise replace with new information
 	var $username = ($('#updateDelivererName').val() == '') ? deliverer.name : $('#updateDelivererName').val();
 	var $password = ($('#updateDelivererPassword').val() == '') ? deliverer.password : $('#updateDelivererPassword').val();
 	var $email = ($('#updateDelivererEmail').val() == '') ? deliverer.email : $('#updateDelivererEmail').val();
@@ -728,15 +730,16 @@ updateDelivererInfoButton.click(function (e) { //when the user clicks update on 
 	}); // end of ajax call
 });
 
+
+
  /*-------------------
 // Delete Functions //
 -------------------*/
 
+//Button click event when admin deletes a user
 deleteByUsernameButton.click(function (e) {
-	//console.log($('#searchByUsername').val());
 	var $username = $('#deleteByUsername').val();
-	//console.log($('#deleteByUsername').val());
-	//console.log(JSON.stringify($username));
+
 	$.ajax({
 		type: "POST",
 		url: "admin/delete_user_info",
@@ -750,11 +753,10 @@ deleteByUsernameButton.click(function (e) {
 	}); // end of ajax call
 });
 
+//Button click event when admin deletes a user
 deleteByDelivererNameButton.click(function (e) {
-	//console.log($('#searchByUsername').val());
 	var $delivererName = $('#deleteByDelivererName').val();
-	//console.log($('#deleteByDelivererName').val());
-	//console.log(JSON.stringify($username));
+
 	$.ajax({
 		type: "POST",
 		url: "admin/delete_deliverer_info",
@@ -768,13 +770,17 @@ deleteByDelivererNameButton.click(function (e) {
 	}); // end of ajax call
 });
 
+
+
  /*-----------------
 // Misc Functions //
 -----------------*/
 
+// admin clicks a button which creates a bunch of input fields
+// admin can type in info for user
 initUserButton.click(function (e) { 
 
-	// Otherwise create html for text input fields
+	// Create html for text input fields
 	var html = "<h4>To initialize the database, it must have a least one document. Enter info into the form below. Press submit user button to create the database.</h4>";
 
 	html += "<label for=\'createUserName\' >User Name</label><br>";
@@ -816,9 +822,10 @@ initUserButton.click(function (e) {
 			output.html(html);
 });
 
+//admin clicks this button to upload the user info from previous function to the server 
 createUserDBButton.click(function (e) { //when the user clicks create on the right
-	//console.log(user);
 
+	//user info stored into variables and put into a JSON format
 	var $username = $('#createUserName').val();
 	var $password = $('#createUserPassword').val();
 	var $email = $('#createUserEmail').val();
@@ -851,7 +858,7 @@ createUserDBButton.click(function (e) { //when the user clicks create on the rig
 	$.ajax({
 		type: "POST",
 		url: "admin/create_user_database",
-		data: userInfo,
+		data: userInfo, // pass object to server
 		success: function(data, textStatus, jqXHR) {
 			output.html(data);
 		},
@@ -862,11 +869,11 @@ createUserDBButton.click(function (e) { //when the user clicks create on the rig
 	}); // end of ajax call
 });
 
-
-
+// admin clicks a button which creates a bunch of input fields
+// admin can type in info for deliverer
 initDelivererButton.click(function (e) {
 
-	// Otherwise  create html for text input fields
+	// Create html for text input fields
 	var html = "<h4>To initialize the database, it must have a least one document. Enter info into the form below. Press submit user button to create the database.</h4>";
 
 	html += "<label for=\'createDelivererName\' >User Name</label><br>";
@@ -907,9 +914,10 @@ initDelivererButton.click(function (e) {
 
 });
 
+//admin clicks this button to upload the user info from previous function to the server 
 createDelivererDBButton.click(function (e) { //when the user clicks update on the right
-	//console.log(user);
 
+	//user info stored into variables and put into a JSON format
 	var $username = $('#createDelivererName').val();
 	var $password = $('#createDelivererPassword').val();
 	var $email = $('#createDelivererEmail').val();
@@ -941,7 +949,7 @@ createDelivererDBButton.click(function (e) { //when the user clicks update on th
 	$.ajax({
 		type: "POST",
 		url: "admin/create_deliverer_database",
-		data: delivererInfo,
+		data: delivererInfo, //pass object to the server
 		success: function(data, textStatus, jqXHR) {
 			output.html(data);
 		},
@@ -952,11 +960,11 @@ createDelivererDBButton.click(function (e) { //when the user clicks update on th
 	}); // end of ajax call
 });
 
-
-
+// admin clicks a button which creates a bunch of input fields
+// admin can type in info for order
 initOrderButton.click(function (e) {
 
-	// Otherwise  create html for text input fields
+	// Create html for text input fields
 	var html = "<h4>To initialize the database, it must have a least one document. Enter info into the form below. Press submit user button to create the database.</h4>";
 
 	html += "<label for=\'createOrderFoodItem\' >Food Item</label><br>";
@@ -990,8 +998,10 @@ initOrderButton.click(function (e) {
 
 });
 
+//admin clicks this button to upload the user info from previous function to the server 
 createOrderDBButton.click(function (e) { //when the user clicks update on the right
 
+	//user info stored into variables and put into a JSON format
 	var $food = $('#createOrderFoodItem').val();
 	var $store = $('#createOrderStore').val();
 	var $foodStatus = $('#createOrderFoodStatus').val();	
@@ -1016,7 +1026,7 @@ createOrderDBButton.click(function (e) { //when the user clicks update on the ri
 	$.ajax({
 		type: "POST",
 		url: "admin/create_order_database",
-		data: orderInfo,
+		data: orderInfo, //pass object to server to store in database
 		success: function(data, textStatus, jqXHR) {
 			output.html(data);
 		},
@@ -1027,6 +1037,10 @@ createOrderDBButton.click(function (e) { //when the user clicks update on the ri
 	}); // end of ajax call
 });
 
+
+
+
+//admin clicks button the drop user collection
 dropUserDBButton.click(function (e) {
 
 	$.ajax({
@@ -1034,7 +1048,7 @@ dropUserDBButton.click(function (e) {
 		url: "admin/delete_user_database",
 		data: null,
 		success: function(data, textStatus, jqXHR) {
-			output.html(data);
+			output.html(data); //confirmation that user collection was dropped
 		},
 		
 		error: function(jqXHR, textStatus, errorThrown) {
@@ -1043,6 +1057,7 @@ dropUserDBButton.click(function (e) {
 	});
 });
 
+//admin clicks button the drop deliverer collection
 dropDelivererDBButton.click(function (e) {
 
 	$.ajax({
@@ -1050,7 +1065,7 @@ dropDelivererDBButton.click(function (e) {
 		url: "admin/delete_deliverer_database",
 		data: null,
 		success: function(data, textStatus, jqXHR) {
-			output.html(data);
+			output.html(data); //confirmation that deliverer collection was dropped
 		},
 		
 		error: function(jqXHR, textStatus, errorThrown) {
@@ -1059,6 +1074,7 @@ dropDelivererDBButton.click(function (e) {
 	});
 });
 
+//admin clicks button the drop order collection
 dropOrderDBButton.click(function (e) {
 
 	$.ajax({
@@ -1066,7 +1082,7 @@ dropOrderDBButton.click(function (e) {
 		url: "admin/delete_order_database",
 		data: null,
 		success: function(data, textStatus, jqXHR) {
-			output.html(data);
+			output.html(data); //confirmation that order collection was dropped
 		},
 		
 		error: function(jqXHR, textStatus, errorThrown) {

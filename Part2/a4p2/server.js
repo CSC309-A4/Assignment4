@@ -434,7 +434,28 @@ app.get("/get_user_info", function (req, res) {
 app.get("/get_order", function (req, res) {
 	
 	var id = req.cookies.loginUser;
+	console.log(id);
 	Order.find({userID: id}, function (err, data){
+		console.log(data);
+		if (err || !data) {
+			console.log(err);
+			res.status(400);
+			res.send("Error in retrieving deliverer data");
+			return;
+		}
+		if (!data.length){
+			data = {};
+		}
+		res.status(200);
+		res.send(data);
+	});
+});
+
+app.get("/get_order_deliverer", function (req, res) {
+	
+	var id = req.cookies.loginDeliverer;
+	console.log(id);
+	Order.find({delivererID: id}, function (err, data){
 		console.log(data);
 		if (err || !data) {
 			console.log(err);
@@ -473,7 +494,8 @@ app.post("/update_order", function (req, res){
 	console.log("Request fields:"); console.log(req.body);
 	
 	var fields = req.body;
-	Order.findOne({"_id": fields.orderID}, function (err, data){
+	Order.update({"_id": fields.orderID}, {delivererID: fields.deliverer, orderStatus: "Delivery Accepted"}, function (err, data){
+		console.log(fields.deliverer);
 		console.log(data);
 		if (err || !data) {
 			console.log(err);
@@ -487,27 +509,23 @@ app.post("/update_order", function (req, res){
 	});
 });
 
-/* Need help on this, unsure how to get something from external source, talk tommorow.
-app.get("/search_location", function (req, res){
+app.post("/cancel_order", function (req, res){
+	console.log("Request fields:"); console.log(req.body);
 	
 	var fields = req.body;
-	console.log(fields.location);
-	Order.find({location: fields.location}, function (err, data){
-	//	console.log(data);
+	Order.update({"_id": fields.orderID}, {delivererID: "", orderStatus: "Pending"}, function (err, data){
 		if (err || !data) {
 			console.log(err);
 			res.status(400);
-			res.send("Error in retrieving deliverer data");
+			res.send("Order does not exist!");
 			return;
 		}
-		if (!data.length){
-			data = {};
-		}
+
 		res.status(200);
 		res.send(data);
 	});
 });
-*/
+
 // A user submits the order form
 app.post("/make_order", function (req, res) {
 

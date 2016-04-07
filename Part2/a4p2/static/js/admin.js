@@ -37,9 +37,9 @@ var initOrderButton = $("#button-initOrder");
 var submitOrderButton = $("#button-submitOrder");
 var createOrderDBButton = $("#button-createOrderDB");
 
-var emptyUserDBButton = $("#button-emptyUserDB");
-var emptyDelivererDBButton = $("#button-emptyDelivererDB");
-var emptyOrderDBButton = $("#button-emptyOrderDB");
+var dropUserDBButton = $("#button-emptyUserDB");
+var dropDelivererDBButton = $("#button-emptyDelivererDB");
+var dropOrderDBButton = $("#button-emptyOrderDB");
 
 var output = $("#output");
 
@@ -1025,4 +1025,52 @@ createOrderDBButton.click(function (e) { //when the user clicks update on the ri
 			output.html("Error");
     }
 	}); // end of ajax call
+});
+
+dropUserDBButton.click(function (e) {
+
+	$.ajax({
+		type: "GET",
+		url: "admin/delete_user_database",
+		data: null,
+		success: function(data, textStatus, jqXHR) {
+			output.html(data);
+		},
+		
+		error: function(jqXHR, textStatus, errorThrown) {
+			output.html("Error");
+    }
+	});
+});
+
+dropDelivererDBButton.click(function (e) {
+
+	$.ajax({
+		type: "GET",
+		url: "admin/delete_deliverer_database",
+		data: null,
+		success: function(data, textStatus, jqXHR) {
+			output.html(data);
+		},
+		
+		error: function(jqXHR, textStatus, errorThrown) {
+			output.html("Error");
+    }
+	});
+});
+
+dropOrderDBButton.click(function (e) {
+
+	$.ajax({
+		type: "GET",
+		url: "admin/delete_order_database",
+		data: null,
+		success: function(data, textStatus, jqXHR) {
+			output.html(data);
+		},
+		
+		error: function(jqXHR, textStatus, errorThrown) {
+			output.html("Error");
+    }
+	});
 });

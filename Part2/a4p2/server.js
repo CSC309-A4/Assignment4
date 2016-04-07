@@ -831,53 +831,13 @@ app.post("/admin/delete_deliverer_info", function (req, res) {
 	});
 });
 
-/*MISC FUNCTIONS*/
-/*
-var mongoose = require('mongoose');
-var db = mongoose.createConnection('localhost', 'test');
 
-var schema = mongoose.Schema({ name: 'string' });
-var Cat = db.model('Cat', schema);
-
-var kitty = new Cat({ name: 'Zildjian' });
-kitty.save(function (err) {
-  if (err) // ...
-  console.log('meow');
-});
-
-// Models
-var Deliverer = mongoose.model("Deliverer", delivererSchema);
-var User = mongoose.model("User", userSchema);
-var Order = mongoose.model("Order", orderSchema);
-
-var userSchema = new mongoose.Schema({
-	name: String,
-	password: String,
-	email: String,
-	phone: String,
-	address: String,
-	city: String,
-	creditCardNum: String,
-	feedback: [
-		{
-			rating: Number,
-			madeBy: String,
-			msg: String
-		}
-	],
-	savedFood: [
-		String
-	],
-	orderHistory: [
-		String
-	]
-},
-*/
-
+/*MISC FUNCTIONS */
 
 //USER MISC FUNCTION
 app.post("/admin/create_user_database", function (req, res) {
 	console.log("Admin: Submitting User's Info To User Database");
+
 	//console.log(req.body.name);
 	var info = req.body;
 	var user = new User(info);
@@ -889,11 +849,22 @@ app.post("/admin/create_user_database", function (req, res) {
 		res.send("User\'s info was successfully updated. If the user database was non existent previous \
 				  to this action, then it has been initialized and created.");
 	});
+
+	/*better but not functional yet
+	var user = req.body;
+	var ObjectID = require('mongodb').ObjectID;
+	var user._id = new ObjectID();
+	db.collection('users').insert(user);
+
+	res.send("User\'s info was successfully updated. If the user database was non existent previous \
+			  to this action, then it has been initialized and created.");
+	*/
 });
 
 //DELIVERER MISC FUNCTION
 app.post("/admin/create_deliverer_database", function (req, res) {
 	console.log("Admin: Submitting Deliverer's Info To Deliverer Database");
+
 	//console.log(req.body.name);
 	var info = req.body;
 	var deliverer = new Deliverer(info);
@@ -905,11 +876,22 @@ app.post("/admin/create_deliverer_database", function (req, res) {
 		res.send("Deliverer\'s info was successfully updated. If the deliverer database was non existent previous \
 				  to this action, then it has been initialized and created.");
 	});
+
+	/*better but not functional yet
+	var deliverer = req.body;
+	var ObjectID = require('mongodb').ObjectID;
+	var deliverer._id = new ObjectID();
+	db.collection('deliverers').insert(deliverer);
+
+	res.send("Deliverer\'s info was successfully updated. If the deliverer database was non existent previous \
+		      to this action, then it has been initialized and created.");
+	*/
 });
 
 //ORDER MISC FUNCTION
 app.post("/admin/create_order_database", function (req, res) {
 	console.log("Admin: Submitting Order Info To Order Database");
+
 	//console.log(req.body.name);
 	var info = req.body;
 	var order = new Order(info);
@@ -921,4 +903,46 @@ app.post("/admin/create_order_database", function (req, res) {
 		res.send("Order info was successfully updated. If the order database was non existent previous \
 				  to this action, then it has been initialized and created.");
 	});
+
+	/*better but not functional yet
+	var order = req.body;
+	var ObjectID = require('mongodb').ObjectID;
+	var order._id = new ObjectID();
+	db.collection('orders').insert(order);
+
+	res.send("Order info was successfully updated. If the order database was non existent previous \
+			  to this action, then it has been initialized and created.");
+	*/
+});
+
+
+//DELETE FUNCTIONS
+
+app.get("/admin/delete_user_database", function (req, res) {
+	console.log("Admin: Deleting user database.")
+	/*
+	User.drop(function(err, response) {
+		console.log(response);
+	});*/
+
+	db.collection('users').drop();
+
+	res.send("User database was successfully dropped.");
+});
+
+app.get("/admin/delete_deliverer_database", function (req, res) {
+	console.log("Admin: Deleting deliverer database.")
+
+	db.collection('deliverers').drop();
+
+	res.send("Deliverer database was successfully dropped.");
+});
+
+app.get("/admin/delete_order_database", function (req, res) {
+	console.log("Admin: Deleting order database.")
+
+	db.collection('orders').drop();
+
+	res.send("Order database was successfully dropped.");
+
 });

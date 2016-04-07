@@ -1,7 +1,10 @@
-h1 {
+h1{
 	text-align: center;
 }
 
+h2, h3, h4, h5, h6{
+	color: black;
+}
 
 #main-content {
 	width: 90%;
@@ -16,17 +19,7 @@ h1 {
 	color: rgba(230, 250, 230, 0.9);
 }
 
-/*Trevor's old css
-#searchAll {
-	margin-top: 10px;
-}
 
-#searchAll button, #searchAll input {
-	display: block;
-	width: 40%;
-	margin-top: 2px;
-}
-*/
 .admin {
 	margin-top: 10px;
 }
@@ -60,7 +53,7 @@ label {
 	padding: 35px;
 }
 
-#output h2, #output h3, #output h4, #output p, #output li, #output ul, #output ol {
+#output h2, #output h3, #output h4, #output h5, #output p, #output li, #output ul, #output ol {
 	color: black;
 	margin-top: 4px;
 }

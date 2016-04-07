@@ -874,6 +874,8 @@ var userSchema = new mongoose.Schema({
 },
 */
 
+
+//USER MISC FUNCTION
 app.post("/admin/create_user_database", function (req, res) {
 	console.log("Admin: Submitting User's Info To User Database");
 	//console.log(req.body.name);
@@ -884,10 +886,12 @@ app.post("/admin/create_user_database", function (req, res) {
 		if (err) {
 			res.send("Error");
 		}
-		res.send("User's info was successfully created. User database initialized and created.");
+		res.send("User\'s info was successfully updated. If the user database was non existent previous \
+				  to this action, then it has been initialized and created.");
 	});
 });
 
+//DELIVERER MISC FUNCTION
 app.post("/admin/create_deliverer_database", function (req, res) {
 	console.log("Admin: Submitting Deliverer's Info To Deliverer Database");
 	//console.log(req.body.name);
@@ -898,10 +902,12 @@ app.post("/admin/create_deliverer_database", function (req, res) {
 		if (err) {
 			res.send("Error");
 		}
-		res.send("Deliverer's info was successfully updated. Deliverer database initialized and created.");
+		res.send("Deliverer\'s info was successfully updated. If the deliverer database was non existent previous \
+				  to this action, then it has been initialized and created.");
 	});
 });
 
+//ORDER MISC FUNCTION
 app.post("/admin/create_order_database", function (req, res) {
 	console.log("Admin: Submitting Order Info To Order Database");
 	//console.log(req.body.name);
@@ -912,6 +918,7 @@ app.post("/admin/create_order_database", function (req, res) {
 		if (err) {
 			res.send("Error");
 		}
-		res.send("Order info was successfully updated. Order database initialized and created.");
+		res.send("Order info was successfully updated. If the order database was non existent previous \
+				  to this action, then it has been initialized and created.");
 	});
 });

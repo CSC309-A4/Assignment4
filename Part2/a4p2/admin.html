@@ -74,24 +74,31 @@
 
 
       <div id="miscFunc" class="dark container-fluid well span6 admin">
-        <h2>Other actions</h2>
+        <h2>Add/Delete Database Functions</h2><br><br>
 
-        <button id="button-initUserDB">Initialize User Info</button>
-        <button id="button-submitUserDB">Submit User Info To The User Database</button>
-        <button id="button-createUserDB">Submit User Info To Create User Database</button><br>
+        <h4>User Database Related Functions</h4>
+        <button id="button-initUser">Initialize User Info</button>
+        <p>The button below submits the user info to database. If the database is nonexistent, one will be create with the user added to it.</p>
+        <button id="button-createUserDB">Submit User Info</button><br>
 
-        <button id="button-initDelivererDB">Initialize Deliverer Info</button>
-        <button id="button-submitDelivererDB">Add A Deliverer To The Deliverer Database</button>
-        <button id="button-createDelivererDB">Submit Document and Create Deliverer Database</button><br>
+        <h4>Deliverer Database Related Functions</h4>
+        <button id="button-initDeliverer">Initialize Deliverer Info</button>
+        <p>The button below submits the deliverer info to database. If the database is nonexistent, one will be create with the deliverer added to it.<p>
+        <button id="button-createDelivererDB">Submit Deliverer info</button><br>
 
-        <button id="button-initOrderDB">Initialize Order Info</button>
-        <button id="button-submitOrderDB">Submit Order Info To The Order Database</button>
-        <button id="button-createOrderDB">Submit Document and Create Deliverer Database</button><br>
 
-        <button id="button-emptyUserDB">Empty the User Database</button>
+        <h4>Order Database Related Functions</h4>
+        <button id="button-initOrder">Initialize Order Info</button>
+        <p>The button below submits the order info to database. If the database is nonexistent, one will be create with the order added to it.</p>
+        <button id="button-createOrderDB">Submit Order Info</button><br>
+
+
+        <h4>Delete Functions</h4>
+        <label for="deleteByUsername">WARNING: This removes all users from the specific database. Do not click unless you know what you are doing. Honestly these buttons shouldn't even exist.</label>
+        <button id="button-emptyUserDB">Empty the User Database</button>            
         <button id="button-emptyDelivererDB">Empty the Deliverer Database</button>
-        <button id="button-emptyOrderDB">Empty the Order Database</button>
-               
+        <button id="button-emptyOrderDB">Empty the Order Database</button>    
+
       </div>
 
     </div> <!-- Left Side -->

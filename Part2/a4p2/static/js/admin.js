@@ -31,7 +31,7 @@ var createUserDBButton = $("#button-createUserDB");
 
 var initDelivererButton = $("#button-initDeliverer");
 var submitDelivererButton = $("#button-submitDeliverer");
-var createDelivereDBButton = $("#button-createDelivererDB");
+var createDelivererDBButton = $("#button-createDelivererDB");
 
 var initOrderButton = $("#button-initOrder");
 var submitOrderButton = $("#button-submitOrder");
@@ -771,27 +771,7 @@ deleteByDelivererNameButton.click(function (e) {
  /*-----------------
 // Misc Functions //
 -----------------*/
-/*
 
-var initUserDBButton = $("#button-initUserDB");
-var createUserDBButton = $("#button-createUserDB");
-var initDelivererDBButton = $("#button-initDelivererDB");
-var createDelivereDBButton = $("#button-createDelivererDB");
-var initOrderDBButton = $("#button-initOrderDB");
-var createOrderDBButton = $("#button-createOrderDB");
-
-var addUserDBButton = $("#button-addUserDB");
-var submitUserDBButton = $("#button-submitUserDB");
-var addDelivererDBButton = $("#button-addDelivererDB");
-var submitDelivererDBButton = $("#button-submitDelivererDB");
-var addOrderDBButton = $("#button-addOrderDB");
-var submitOrderDBButton = $("#button-submitOrderDB");
-
-var emptyUserDBButton = $("#button-emptyUserDB");
-var emptyDelivererDBButton = $("#button-emptyDelivererDB");
-var emptyOrderDBButton = $("#button-emptyOrderDB");
-
-/*Create text fields that allows an admin to update user info*/
 initUserButton.click(function (e) { 
 
 	// Otherwise create html for text input fields
@@ -859,13 +839,11 @@ createUserDBButton.click(function (e) { //when the user clicks create on the rig
 				"address": $address,
 				"city": $city,
 				"creditCardNum": $creditCardNum,
-				"feedback": [
-					{
-						"rating": $feedbackRating,
-						"madeBy": $feedbackAuthor,
-						"msg": $feedbackMsg
-					}
-				],
+				"feedback": ($feedbackRating == null) ? [] : [{
+															   "rating": $feedbackRating,
+															   "madeBy": $feedbackAuthor,
+															   "msg": $feedbackMsg
+															  }],
 				"savedFood": $savedFood,
 				"orderHistory": $orderHistory
 			   }
@@ -883,6 +861,7 @@ createUserDBButton.click(function (e) { //when the user clicks create on the rig
     }
 	}); // end of ajax call
 });
+
 
 
 initDelivererButton.click(function (e) {
@@ -928,7 +907,7 @@ initDelivererButton.click(function (e) {
 
 });
 
-createDelivereDBButton.click(function (e) { //when the user clicks update on the right
+createDelivererDBButton.click(function (e) { //when the user clicks update on the right
 	//console.log(user);
 
 	var $username = $('#createDelivererName').val();
@@ -951,13 +930,11 @@ createDelivereDBButton.click(function (e) { //when the user clicks update on the
 				"address": $address,
 				"city": $city,
 				"creditCardNum": $creditCardNum,
-				"feedback": [
-					{
-						"rating": $feedbackRating,
-						"madeBy": $feedbackAuthor,
-						"msg": $feedbackMsg
-					}
-				],
+				"feedback": ($feedbackRating == null) ? [] : [{
+															   "rating": $feedbackRating,
+															   "madeBy": $feedbackAuthor,
+															   "msg": $feedbackMsg
+															  }],
 				"acceptedOrders": $savedFood,
 			   }
 	
@@ -974,6 +951,7 @@ createDelivereDBButton.click(function (e) { //when the user clicks update on the
     }
 	}); // end of ajax call
 });
+
 
 
 initOrderButton.click(function (e) {
@@ -1048,7 +1026,3 @@ createOrderDBButton.click(function (e) { //when the user clicks update on the ri
     }
 	}); // end of ajax call
 });
-
-
-
-

@@ -20,9 +20,26 @@ var updateDelivererInfoButton = $("button-updateDelivererInfo");
 var user; //store the user info when updating
 var deliverer; //store the deliverer info when updating
 
-//delete functions buttons
+//delete functions buffer.Buffer(arg);uttons
 var deleteByUsernameButton = $("#button-deleteByUsername");
 var deleteByDelivererNameButton = $("#button-deleteByDelivererName");
+
+//misc functions buttons
+var initUserButton = $("#button-initUser");
+var submitUserButton = $("#button-submitUser");
+var createUserDBButton = $("#button-createUserDB");
+
+var initDelivererButton = $("#button-initDeliverer");
+var submitDelivererButton = $("#button-submitDeliverer");
+var createDelivereDBButton = $("#button-createDelivererDB");
+
+var initOrderButton = $("#button-initOrder");
+var submitOrderButton = $("#button-submitOrder");
+var createOrderDBButton = $("#button-createOrderDB");
+
+var emptyUserDBButton = $("#button-emptyUserDB");
+var emptyDelivererDBButton = $("#button-emptyDelivererDB");
+var emptyOrderDBButton = $("#button-emptyOrderDB");
 
 var output = $("#output");
 
@@ -190,6 +207,7 @@ searchAllOrdersButton.click(function (e) {
 				html += "<ul>" // start of properties list
 				html += "<li>_id: " + data[i]._id + "</li>";
 				html += "<li>Food Item: " + data[i].food + "</li>";
+				html += "<li>Store: " + data[i].store + "</li>";
 				html += "<li>Food Status: " + data[i].foodStatus + "</li>";
 				html += "<li>Order Status: " + data[i].orderStatus + "</li>";
 				html += "<li>userID: " + data[i].userID + "</li>";
@@ -362,6 +380,7 @@ searchOrderByUserButton.click(function (e) {
 				html += "<li><ul>" // start of properties list
 				html += "<li>Order ID: " + data[i]._id + "</li>";
 				html += "<li>Food Item: " + data[i].food + "</li>";
+				html += "<li>Store: " + data[i].store + "</li>";
 				html += "<li>Food Status: " + data[i].foodStatus + "</li>";
 				html += "<li>Order Status: " + data[i].orderStatus + "</li>";
 				html += "<li>userID: " + data[i].userID + "</li>";
@@ -404,6 +423,7 @@ searchOrderByDelivererButton.click(function (e) {
 				html += "<li><ul>" // start of properties list
 				html += "<li>Order ID: " + data[i]._id + "</li>";
 				html += "<li>Food Item: " + data[i].food + "</li>";
+				html += "<li>Store: " + data[i].store + "</li>";
 				html += "<li>Food Status: " + data[i].foodStatus + "</li>";
 				html += "<li>Order Status: " + data[i].orderStatus + "</li>";
 				html += "<li>userID: " + data[i].userID + "</li>";
@@ -524,9 +544,6 @@ updateByUsernameButton.click(function (e) {
 	}); // end of ajax call
 });
 
-
-
-
 updateUserInfoButton.click(function (e) { //when the user clicks update on the right
 	//console.log(user);
 
@@ -618,41 +635,42 @@ updateByDelivererNameButton.click(function (e) {
 			html += "<label for=\'updateDelivererCCN\' >Credit Card Number</label><br>";
 			html += "<input id=\'updateDelivererCCN\' type=\'text\' placeholder=\'" + data[0].creditCardNum + "\' name=\'updateDelivererCCN\'></input><br>";
 
+
 			if (data[0].feedback.length <= 0) { //User has no feedback
-				html += "<label for=\'updateUserFeedbackRating\' >Feedback Rating</label><br>";
-				html += "<input id=\'updateUserFeedbackRating\' type=\'text\' placeholder=\'No data found.\' name=\'updateUserFeedbackRating\'></input><br>";
+				html += "<label for=\'updateDelivererFeedbackRating\' >Feedback Rating</label><br>";
+				html += "<input id=\'updateDelivererFeedbackRating\' type=\'text\' placeholder=\'No data found.\' name=\'updateDelivererFeedbackRating\'></input><br>";
 
-				html += "<label for=\'updateUserFeedbackAuthor\' >Feedback Author</label><br>";
-				html += "<input id=\'updateUserFeedbackAuthor\' type=\'text\' placeholder=\'No data found.\' name=\'updateUserFeedbackAuthor\'></input><br>";
+				html += "<label for=\'updateDelivererFeedbackAuthor\' >Feedback Author</label><br>";
+				html += "<input id=\'updateDelivererFeedbackAuthor\' type=\'text\' placeholder=\'No data found.\' name=\'updateDelivererFeedbackAuthor\'></input><br>";
 
-				html += "<label for=\'updateUserFeedbackMsg\' >Feedback Message</label><br>";
-				html += "<input id=\'updateUserFeedbackMsg\' type=\'text\' placeholder=\'No data found.\' name=\'updateUserFeedbackMsg\'></input><br>";
+				html += "<label for=\'updateDelivererFeedbackMsg\' >Feedback Message</label><br>";
+				html += "<input id=\'updateDelivererFeedbackMsg\' type=\'text\' placeholder=\'No data found.\' name=\'updateDelivererFeedbackMsg\'></input><br>";
 			} else if (data[0].feedback[0].madeBy == "" && data[0].feedback[0].rating == "" ) { //User has feedback
-				html += "<label for=\'updateUserFeedbackRating\' >Feedback Rating</label><br>";
-				html += "<input id=\'updateUserFeedbackRating\' type=\'text\' placeholder=\'No data found.\' name=\'updateUserFeedbackRating\'></input><br>";
+				html += "<label for=\'updateDelivererFeedbackRating\' >Feedback Rating</label><br>";
+				html += "<input id=\'updateDelivererFeedbackRating\' type=\'text\' placeholder=\'No data found.\' name=\'updateDelivererFeedbackRating\'></input><br>";
 
-				html += "<label for=\'updateUserFeedbackAuthor\' >Feedback Author</label><br>";
-				html += "<input id=\'updateUserFeedbackAuthor\' type=\'text\' placeholder=\'No data found.\' name=\'updateUserFeedbackAuthor\'></input><br>";
+				html += "<label for=\'updateDelivererFeedbackAuthor\' >Feedback Author</label><br>";
+				html += "<input id=\'updateDelivererFeedbackAuthor\' type=\'text\' placeholder=\'No data found.\' name=\'updateDelivererFeedbackAuthor\'></input><br>";
 
-				html += "<label for=\'updateUserFeedbackMsg\' >Feedback Message</label><br>";
-				html += "<input id=\'updateUserFeedbackMsg\' type=\'text\' placeholder=\'No data found.\' name=\'updateUserFeedbackMsg\'></input><br>";
+				html += "<label for=\'updateDelivererFeedbackMsg\' >Feedback Message</label><br>";
+				html += "<input id=\'updateDelivererFeedbackMsg\' type=\'text\' placeholder=\'No data found.\' name=\'updateDelivererFeedbackMsg\'></input><br>";
 			} else {
-				html += "<label for=\'updateUserFeedbackRating\' >Feedback Rating</label><br>";
-				html += "<input id=\'updateUserFeedbackRating\' type=\'text\' placeholder=\'" + data[0].feedback[0].rating + "\' name=\'updateUserFeedbackRating\'></input><br>";
+				html += "<label for=\'updateDelivererFeedbackRating\' >Feedback Rating</label><br>";
+				html += "<input id=\'updateDelivererFeedbackRating\' type=\'text\' placeholder=\'" + data[0].feedback[0].rating + "\' name=\'updateDelivererFeedbackRating\'></input><br>";
 
-				html += "<label for=\'updateUserFeedbackAuthor\' >Feedback Author</label><br>";
-				html += "<input id=\'updateUserFeedbackAuthor\' type=\'text\' placeholder=\'" + data[0].feedback[0].madeBy + "\' name=\'updateUserFeedbackAuthor\'></input><br>";
+				html += "<label for=\'updateDelivererFeedbackAuthor\' >Feedback Author</label><br>";
+				html += "<input id=\'updateDelivererFeedbackAuthor\' type=\'text\' placeholder=\'" + data[0].feedback[0].madeBy + "\' name=\'updateDelivererFeedbackAuthor\'></input><br>";
 
-				html += "<label for=\'updateUserFeedbackMsg\' >Feedback Message</label><br>";
-				html += "<input id=\'updateUserFeedbackMsg\' type=\'text\' placeholder=\'" + data[0].feedback[0].msg + "\' name=\'updateUserFeedbackMsg\'></input><br>";
+				html += "<label for=\'updateDelivererFeedbackMsg\' >Feedback Message</label><br>";
+				html += "<input id=\'updateDelivererFeedbackMsg\' type=\'text\' placeholder=\'" + data[0].feedback[0].msg + "\' name=\'updateUserFeedbackMsg\'></input><br>";
 
 			}
 
-			html += "<label for=\'updateAcceptedOrders\' >Accepted orders (Enter strings separate by commas (no space))</label><br>";
+			html += "<label for=\'updateDelivererAcceptedOrderss\' >Accepted orders (Enter strings separate by commas (no space))</label><br>";
 			if (data[0].acceptedOrders.length > 0) {
-				html += "<input id=\'updateAcceptedOrders\' type=\'text\' placeholder=\'" + data[0].acceptedOrders + "\' name=\'updateAcceptedOrders\'></input><br>";
+				html += "<input id=\'updateDelivererAcceptedOrders\' type=\'text\' placeholder=\'" + data[0].acceptedOrders + "\' name=\'updateDelivererAcceptedOrderss\'></input><br>";
 			} else {
-				html += "<input id=\'updateAcceptedOrders\' type=\'text\' placeholder=\'No data found.\' name=\'updateAcceptedOrders\'></input><br>";
+				html += "<input id=\'updateDelivererAcceptedOrderss\' type=\'text\' placeholder=\'No data found.\' name=\'updateDelivererAcceptedOrderss\'></input><br>";
 			}
 
 			output.html(html);
@@ -710,6 +728,9 @@ updateDelivererInfoButton.click(function (e) { //when the user clicks update on 
 	}); // end of ajax call
 });
 
+ /*-------------------
+// Delete Functions //
+-------------------*/
 
 deleteByUsernameButton.click(function (e) {
 	//console.log($('#searchByUsername').val());
@@ -746,3 +767,288 @@ deleteByDelivererNameButton.click(function (e) {
     }
 	}); // end of ajax call
 });
+
+ /*-----------------
+// Misc Functions //
+-----------------*/
+/*
+
+var initUserDBButton = $("#button-initUserDB");
+var createUserDBButton = $("#button-createUserDB");
+var initDelivererDBButton = $("#button-initDelivererDB");
+var createDelivereDBButton = $("#button-createDelivererDB");
+var initOrderDBButton = $("#button-initOrderDB");
+var createOrderDBButton = $("#button-createOrderDB");
+
+var addUserDBButton = $("#button-addUserDB");
+var submitUserDBButton = $("#button-submitUserDB");
+var addDelivererDBButton = $("#button-addDelivererDB");
+var submitDelivererDBButton = $("#button-submitDelivererDB");
+var addOrderDBButton = $("#button-addOrderDB");
+var submitOrderDBButton = $("#button-submitOrderDB");
+
+var emptyUserDBButton = $("#button-emptyUserDB");
+var emptyDelivererDBButton = $("#button-emptyDelivererDB");
+var emptyOrderDBButton = $("#button-emptyOrderDB");
+
+/*Create text fields that allows an admin to update user info*/
+initUserButton.click(function (e) { 
+
+	// Otherwise create html for text input fields
+	var html = "<h4>To initialize the database, it must have a least one document. Enter info into the form below. Press submit user button to create the database.</h4>";
+
+	html += "<label for=\'createUserName\' >User Name</label><br>";
+	html += "<input id=\'createUserName\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createUserName\'></input><br>";
+
+	html += "<label for=\'createUserPassword\' >Password</label><br>";
+	html += "<input id=\'createUserPassword\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createUserPassword\'></input><br>";
+
+	html += "<label for=\'createUserEmail\' >Email</label><br>";
+	html += "<input id=\'createUserEmail\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createUserEmail\'></input><br>";
+
+	html += "<label for=\'createUserPhone\' >Phone Number</label><br>";
+	html += "<input id=\'createUserPhone\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createUserPhone\'></input><br>";
+
+	html += "<label for=\'createUserAddress\' >Address</label><br>";
+	html += "<input id=\'createUserAddress\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createUserAddress\'></input><br>";
+
+	html += "<label for=\'createUserCity\' >City</label><br>";
+	html += "<input id=\'createUserCity\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createUserCity\'></input><br>";
+
+	html += "<label for=\'createUserCCN\' >Credit Card Number</label><br>";
+	html += "<input id=\'createUserCCN\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createUserCCN\'></input><br>";
+
+	html += "<label for=\'createUserFeedbackRating\' >Feedback Rating</label><br>";
+	html += "<input id=\'createUserFeedbackRating\' type=\'text\' placeholder=\'This field can be left blank.\' name=\'createUserFeedbackRating\'></input><br>";
+
+	html += "<label for=\'createUserFeedbackAuthor\' >Feedback Author</label><br>";
+	html += "<input id=\'createUserFeedbackAuthor\' type=\'text\' placeholder=\'This field can be left blank.\' name=\'createUserFeedbackAuthor\'></input><br>";
+
+	html += "<label for=\'createUserFeedbackMsg\' >Feedback Message</label><br>";
+	html += "<input id=\'createUserFeedbackMsg\' type=\'text\' placeholder=\'This field can be left blank.\' name=\'createUserFeedbackMsg\'></input><br>";
+
+	html += "<label for=\'createSavedFood\'>Saved Food (Sample format: \"Pizza,Spaghetti,Ice Cream\" (Without quotes, no spaces between commas))</label><br>";
+	html += "<input id=\'createSavedFood\' type=\'text\' placeholder=\'This field can be left blank.\' name=\'createSavedFood\'></input><br>";
+	
+	html += "<label for=\'createOrderHistory\' >orderHistory (Enter strings separate by commas. No spaces between commas)</label><br>";
+	html += "<input id=\'createOrderHistory\' type=\'text\' placeholder=\'This field can be left blank.\' name=\'createOrderHistory\'></input><br><br>";
+
+			output.html(html);
+});
+
+createUserDBButton.click(function (e) { //when the user clicks create on the right
+	//console.log(user);
+
+	var $username = $('#createUserName').val();
+	var $password = $('#createUserPassword').val();
+	var $email = $('#createUserEmail').val();
+	var $phone = $('#createUserPhone').val();
+	var $address =  $('#createUserAddress').val();
+	var $city = $('#createUserCity').val();
+	var $creditCardNum = $('#createUserCCN').val();
+	var $feedbackRating = ($('#createUserFeedbackRating').val() == '') ? '' : $('#createUserFeedbackRating').val();
+	var $feedbackAuthor = ($('#createUserFeedbackAuthor').val() == '') ? '' : $('#createUserFeedbackAuthor').val();
+	var $feedbackMsg = ($('#createUserFeedbackMsg').val() == '') ? '' : $('#createUserFeedbackMsg').val();
+	var $savedFood = ($('#createSavedFood').val() == '') ? [] : $('#createSavedFood').val().split(",");
+	var $orderHistory = ($('#createOrderHistory').val() == '') ? [] : $('#updateOrderHistory').val().split(",");
+
+	userInfo = {"name": $username,
+				"password": $password,
+				"email": $email,
+				"phone": $phone,
+				"address": $address,
+				"city": $city,
+				"creditCardNum": $creditCardNum,
+				"feedback": [
+					{
+						"rating": $feedbackRating,
+						"madeBy": $feedbackAuthor,
+						"msg": $feedbackMsg
+					}
+				],
+				"savedFood": $savedFood,
+				"orderHistory": $orderHistory
+			   }
+	
+	$.ajax({
+		type: "POST",
+		url: "admin/create_user_database",
+		data: userInfo,
+		success: function(data, textStatus, jqXHR) {
+			output.html(data);
+		},
+		
+		error: function(jqXHR, textStatus, errorThrown) {
+			output.html("Error");
+    }
+	}); // end of ajax call
+});
+
+
+initDelivererButton.click(function (e) {
+
+	// Otherwise  create html for text input fields
+	var html = "<h4>To initialize the database, it must have a least one document. Enter info into the form below. Press submit user button to create the database.</h4>";
+
+	html += "<label for=\'createDelivererName\' >User Name</label><br>";
+	html += "<input id=\'createDelivererName\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createDelivererName\'></input><br>";
+
+	html += "<label for=\'createDelivererPassword\' >Password</label><br>";
+	html += "<input id=\'createDelivererPassword\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createDelivererPassword\'></input><br>";
+
+	html += "<label for=\'createDelivererEmail\' >Email</label><br>";
+	html += "<input id=\'createDelivererEmail\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createDelivererEmail\'></input><br>";
+
+	html += "<label for=\'createDelivererPhone\' >Phone Number</label><br>";
+	html += "<input id=\'createDelivererPhone\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createDelivererPhone\'></input><br>";
+
+	html += "<label for=\'createDelivererAddress\' >Address</label><br>";
+	html += "<input id=\'createDelivererAddress\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createDelivererAddress\'></input><br>";
+
+	html += "<label for=\'createDelivererCity\' >City</label><br>";
+	html += "<input id=\'createDelivererCity\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createDelivererCity\'></input><br>";
+
+	html += "<label for=\'createDelivererCCN\' >Credit Card Number</label><br>";
+	html += "<input id=\'createDelivererCCN\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createDelivererCCN\'></input><br>";
+
+	html += "<label for=\'createDelivererFeedbackRating\' >Feedback Rating</label><br>";
+	html += "<input id=\'createDelivererFeedbackRating\' type=\'text\' placeholder=\'This field can be left blank.\' name=\'createDelivererFeedbackRating\'></input><br>";
+
+	html += "<label for=\'createDelivererFeedbackAuthor\' >Feedback Author</label><br>";
+	html += "<input id=\'createDelivererFeedbackAuthor\' type=\'text\' placeholder=\'This field can be left blank.\' name=\'createDelivererFeedbackAuthor\'></input><br>";
+
+	html += "<label for=\'createDelivererFeedbackMsg\' >Feedback Message</label><br>";
+	html += "<input id=\'createDelivererFeedbackMsg\' type=\'text\' placeholder=\'This field can be left blank.\' name=\'createDelivererFeedbackMsg\'></input><br>";
+
+	html += "<label for=\'createDelivererAcceptedOrders\' >Accepted orders (Enter strings separate by commas (no space))</label><br>";
+	html += "<input id=\'createDelivererAcceptedOrders\' type=\'text\' placeholder=\'This field can be left blank.\' name=\'createDelivererAcceptedOrders\'></input><br>";
+	
+
+	output.html(html);
+
+});
+
+createDelivereDBButton.click(function (e) { //when the user clicks update on the right
+	//console.log(user);
+
+	var $username = $('#createDelivererName').val();
+	var $password = $('#createDelivererPassword').val();
+	var $email = $('#createDelivererEmail').val();
+	var $phone = $('#createDelivererPhone').val();
+	var $address = $('#createDelivererAddress').val();
+	var $city = $('#createDelivererCity').val();
+	var $creditCardNum = $('#createDelivererCCN').val();
+	var $feedbackRating = ($('#createUserFeedbackRating').val() == '') ? '' : $('#createUserFeedbackRating').val();
+	var $feedbackAuthor = ($('#createUserFeedbackAuthor').val() == '') ? '' : $('#createUserFeedbackAuthor').val();
+	var $feedbackMsg = ($('#createUserFeedbackMsg').val() == '') ? '' : $('#createUserFeedbackMsg').val();
+	var $acceptedOrders = ($('#createDelivererAcceptedOrders').val() == '') ? [] : $('#createDelivererAcceptedOrders').val().split(",");
+
+
+	delivererInfo = {"name": $username,
+				"password": $password,
+				"email": $email,
+				"phone": $phone,
+				"address": $address,
+				"city": $city,
+				"creditCardNum": $creditCardNum,
+				"feedback": [
+					{
+						"rating": $feedbackRating,
+						"madeBy": $feedbackAuthor,
+						"msg": $feedbackMsg
+					}
+				],
+				"acceptedOrders": $savedFood,
+			   }
+	
+	$.ajax({
+		type: "POST",
+		url: "admin/create_deliverer_database",
+		data: delivererInfo,
+		success: function(data, textStatus, jqXHR) {
+			output.html(data);
+		},
+		
+		error: function(jqXHR, textStatus, errorThrown) {
+			output.html("Error");
+    }
+	}); // end of ajax call
+});
+
+
+initOrderButton.click(function (e) {
+
+	// Otherwise  create html for text input fields
+	var html = "<h4>To initialize the database, it must have a least one document. Enter info into the form below. Press submit user button to create the database.</h4>";
+
+	html += "<label for=\'createOrderFoodItem\' >Food Item</label><br>";
+	html += "<input id=\'createOrderFoodItem\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createOrderFoodItem\'></input><br>";
+
+	html += "<label for=\'createOrderStore\' >Store</label><br>";
+	html += "<input id=\'createOrderStore\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createOrderStore\'></input><br>";
+
+	html += "<label for=\'createOrderFoodStatus\' >Food Status</label><br>";
+	html += "<input id=\'createOrderFoodStatus\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createOrderFoodStatus\'></input><br>";
+
+	html += "<label for=\'createOrderStatus\' >Order Status</label><br>";
+	html += "<input id=\'createOrderStatus\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createOrderStatus\'></input><br>";
+
+	html += "<label for=\'createOrderUserID\' >User ID</label><br>";
+	html += "<input id=\'createOrderUserID\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createOrderUserID\'></input><br>";
+
+	html += "<label for=\'createOrderDelivererID\' >Deliverer ID (Can be left blank if order status is pending)</label><br>";
+	html += "<input id=\'createOrderDelivererID\' type=\'text\' placeholder=\'This field can be left blank.\' name=\'createOrderDelivererID\'></input><br>";
+
+	html += "<label for=\'createOrderLocation\' >Location</label><br>";
+	html += "<input id=\'createOrderLocation\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createOrderLocation\'></input><br>";
+
+	html += "<label for=\'createOrderDate\' >Date Order Was Placed</label><br>";
+	html += "<input id=\'createOrderDate\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createOrderDate\'></input><br>";
+
+	html += "<label for=\'createOrderAmount\' >Amount of Money Exchanged</label><br>";
+	html += "<input id=\'createOrderAmount\' type=\'text\' placeholder=\'This field must be filled in.\' name=\'createOrderAmount\'></input><br>";
+
+	output.html(html);
+
+});
+
+createOrderDBButton.click(function (e) { //when the user clicks update on the right
+
+	var $food = $('#createOrderFoodItem').val();
+	var $store = $('#createOrderStore').val();
+	var $foodStatus = $('#createOrderFoodStatus').val();	
+	var $orderStatus = $('#createOrderStatus').val();
+	var $userID = $('#createOrderUserID').val();
+	var $delivererID = ($('#createOrderDelivererID').val() == '') ? "Order still pending." : $('#createUserFeedbackAuthor').val();
+	var $userLocation = $('#createOrderLocation').val();
+	var $date = $('#createOrderDate').val();	
+	var $amount = $('#createOrderAmount').val();
+
+	orderInfo = {"food": $food,
+				 "store": $store,
+				 "foodStatus": $foodStatus,
+				 "orderStatus": $orderStatus,
+				 "userID": $userID,
+				 "delivererID": $delivererID,
+				 "userLocation": $userLocation,
+				 "date": $date,
+				 "amount": $amount,
+			    }
+	
+	$.ajax({
+		type: "POST",
+		url: "admin/create_order_database",
+		data: orderInfo,
+		success: function(data, textStatus, jqXHR) {
+			output.html(data);
+		},
+		
+		error: function(jqXHR, textStatus, errorThrown) {
+			output.html("Error");
+    }
+	}); // end of ajax call
+});
+
+
+
+

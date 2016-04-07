@@ -832,3 +832,86 @@ app.post("/admin/delete_deliverer_info", function (req, res) {
 });
 
 /*MISC FUNCTIONS*/
+/*
+var mongoose = require('mongoose');
+var db = mongoose.createConnection('localhost', 'test');
+
+var schema = mongoose.Schema({ name: 'string' });
+var Cat = db.model('Cat', schema);
+
+var kitty = new Cat({ name: 'Zildjian' });
+kitty.save(function (err) {
+  if (err) // ...
+  console.log('meow');
+});
+
+// Models
+var Deliverer = mongoose.model("Deliverer", delivererSchema);
+var User = mongoose.model("User", userSchema);
+var Order = mongoose.model("Order", orderSchema);
+
+var userSchema = new mongoose.Schema({
+	name: String,
+	password: String,
+	email: String,
+	phone: String,
+	address: String,
+	city: String,
+	creditCardNum: String,
+	feedback: [
+		{
+			rating: Number,
+			madeBy: String,
+			msg: String
+		}
+	],
+	savedFood: [
+		String
+	],
+	orderHistory: [
+		String
+	]
+},
+*/
+
+app.post("/admin/create_user_database", function (req, res) {
+	console.log("Admin: Submitting User's Info To User Database");
+	//console.log(req.body.name);
+	var info = req.body;
+	var user = new User(info);
+	//console.log(User.find({'name': req.body}));
+	user.save(function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send("User's info was successfully created. User database initialized and created.");
+	});
+});
+
+app.post("/admin/create_deliverer_database", function (req, res) {
+	console.log("Admin: Submitting Deliverer's Info To Deliverer Database");
+	//console.log(req.body.name);
+	var info = req.body;
+	var deliverer = new Deliverer(info);
+	//console.log(User.find({'name': req.body}));
+	deliverer.save(function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send("Deliverer's info was successfully updated. Deliverer database initialized and created.");
+	});
+});
+
+app.post("/admin/create_order_database", function (req, res) {
+	console.log("Admin: Submitting Order Info To Order Database");
+	//console.log(req.body.name);
+	var info = req.body;
+	var order = new Order(info);
+	//console.log(User.find({'name': req.body}));
+	order.save(function (err, data) {
+		if (err) {
+			res.send("Error");
+		}
+		res.send("Order info was successfully updated. Order database initialized and created.");
+	});
+});

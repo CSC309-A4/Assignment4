@@ -67,7 +67,7 @@ searchAllUsersButton.click(function (e) {
 				html += "<h3><li>" + data[i].name + "</li></h3>";
 				html += "<ul>";	// Start of properties list
 				html += "<li>_id: " + data[i]._id + "</li>";
-    			html += "<li>Username: " + data[0].name + "</li>";
+    			html += "<li>Username: " + data[i].name + "</li>";
 				html += "<li>Password: " + data[i].password + "</li>";
 				html += "<li>Email: " + data[i].email + "</li>";
 				html += "<li>Phone: " + data[i].phone + "</li>";

@@ -27,7 +27,7 @@ var validator = require("express-validator");
 app.use(validator());
 
 // Specify database details (database name is foodshare)
-var url = "mongodb://localhost:27017/foodshare";
+var url = "mongodb://deliverer:hungry@ds015740.mlab.com:15740/foodshare";
 var db;
 
 // Mongoose Setup and Database Connection

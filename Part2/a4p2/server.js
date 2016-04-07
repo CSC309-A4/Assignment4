@@ -431,6 +431,7 @@ app.get("/get_user_info", function (req, res) {
 	});
 });
 
+// Gets all the orders in the database where the userID is the same as the user that is logged in.
 app.get("/get_order", function (req, res) {
 	
 	var id = req.cookies.loginUser;
@@ -451,6 +452,7 @@ app.get("/get_order", function (req, res) {
 	});
 });
 
+// Gets all the orders in the database that the deliverer has accepted.(Search by delivererID).
 app.get("/get_order_deliverer", function (req, res) {
 	
 	var id = req.cookies.loginDeliverer;
@@ -471,6 +473,7 @@ app.get("/get_order_deliverer", function (req, res) {
 	});
 });
 
+// Get every order in the database
 app.get("/search_all", function (req, res){
 	
 	Order.find({}, function (err, data){
@@ -509,6 +512,7 @@ app.post("/update_order", function (req, res){
 	});
 });
 
+// Cancel the order by changing delivererID field back to empty and orderStatus to pending.
 app.post("/cancel_order", function (req, res){
 	console.log("Request fields:"); console.log(req.body);
 	
@@ -543,8 +547,10 @@ app.post("/make_order", function (req, res) {
 		res.send(toSend);
 		return;
 	} 
+	// Get the fields from the requester
 	var fields = req.body;
 	console.log(fields);
+	// Create a new Order objectt using the fields
 	var order = new Order({
 		store: fields.store,
 		food: fields.food,

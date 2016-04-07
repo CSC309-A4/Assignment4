@@ -130,7 +130,7 @@ function updateOrderHistory() {
 		data: thisUser,
 		success: function(data, textStatus, jqXHR){
 			var html = "";
-			// console.log(data);
+			// When the list from the query is returned, iterate through them all and change the corresponding html field
 			for (i = 0; i < data.length; i++){
 				html += "<form id='" + data[i]._id + "''>";
 				html += "<label for='orderID'>Order ID:</label>" 
@@ -152,7 +152,7 @@ function updateOrderHistory() {
 				html += "</form>";
 			}
 			myOrders.html(html);
-			
+			// Use the submit button to cancel the order the button is linked to
 			$(function () {
 			    $('form').on('submit', function (e) {
 
